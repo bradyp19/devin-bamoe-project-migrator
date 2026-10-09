@@ -51,20 +51,20 @@ bamoe_project_migrator/
 | `migration-workspace/scripts/` | Throwaway audit/scan helper scripts | Yes (Sub-Task 1) |
 | `docs/` | Permanent v9 service documentation | Yes (Sub-Task 10+) |
 | `demos/` | Demos, sample payloads, Canvas examples | Optional |
-| `.bob/` | Bob mode definition (`bamoe-migrator`) | No |
+| `AGENTS.md` | Devin agent instructions — do not modify | No |
 
 ---
 
-## BAMOE Migrator — Bob Mode
+## BAMOE Migrator — Devin
 
-> **Slug:** `bamoe-migrator` · **File:** `.bob/custom_modes.yaml`
+> **Instructions:** `AGENTS.md` (repo root)
 
-A purpose-built Bob mode that acts as a **guided IBM BAMOE migration engineer**.
+A purpose-built AI agent configuration that turns Devin into a **guided IBM BAMOE migration engineer**.
 It executes the structured plan in [`bamoe-v8-to-v9-migration-plan.md`](bamoe-v8-to-v9-migration-plan.md)
 sub-task by sub-task, grounding every conversion decision against the official
 **BAMOE 9.5.x documentation** on GitHub before writing a single line of code.
 
-### Why this mode exists
+### Why this configuration exists
 
 Migrating from BAMOE v8 to v9.5 is not a library version bump — it is a full
 architectural shift from a centralised Business Central / KIE Server monolith to
@@ -72,44 +72,40 @@ cloud-native Kogito microservices on Quarkus or Spring Boot. Dozens of construct
 that worked in v8 are either incompatible, renamed, or removed outright in v9.
 
 A general-purpose coding agent will make plausible-sounding but incorrect
-migrations by inferring v9 behaviour from v8 knowledge. This mode prevents that
-by:
+migrations by inferring v9 behaviour from v8 knowledge. The `AGENTS.md` in this
+repo prevents that by instructing Devin to:
 
-1. **Reading the migration plan first** on every session start.
-2. **Fetching the exact BAMOE 9.5.x doc page** for each conversion step before
+1. **Read the migration plan first** on every session start.
+2. **Fetch the exact BAMOE 9.5.x doc page** for each conversion step before
    touching any file.
-3. **Enforcing 15 non-negotiable conversion rules** derived directly from the
+3. **Enforce 17 non-negotiable conversion rules** derived directly from the
    official upgrade guides.
-4. **Working one sub-task at a time**, validating with `mvn clean package` /
+4. **Work one sub-task at a time**, validating with `mvn clean package` /
    `mvn test`, and waiting for your approval before moving on.
 
 ### Quick start
 
 1. Place your exported v8 project folder inside `v8-projects/`.
-2. Open this workspace in VS Code with Bob active.
-3. Select **BAMOE Migrator** from the mode picker (top-right of the chat panel).
-4. Type a prompt such as:
+2. Connect this repository to Devin.
+3. Open a new Devin session and type a prompt such as:
 
    ```
    Start Sub-Task 1 — audit the v8 project and produce migration-inventory.md
    ```
 
-   If you do not specify a sub-task the mode will read the plan, identify the
+   If you do not specify a sub-task, Devin will read the plan, identify the
    first pending one, and ask you to confirm before acting.
 
 ---
 
-### Mode capabilities
+### Devin capabilities used
 
-| Tool group | What it enables |
+| Capability | What it enables |
 |---|---|
-| `read` | Read project files, plan, inventory documents |
-| `edit` | Write and patch source files, `pom.xml`, `application.properties`, Java classes |
-| `execute` | Run `mvn clean package`, `mvn test`, `find`, `grep` for audit steps |
-| `mcp` | Fetch live BAMOE 9.5.x documentation from GitHub via browser MCP |
-| `skill` | Load Bob skill instructions when needed |
-| `subagent` | Spawn focused sub-agents for isolated file exploration |
-| `mode` | Switch back to Plan mode if replanning is needed |
+| File read | Read project files, plan, inventory documents |
+| File write | Write and patch source files, `pom.xml`, `application.properties`, Java classes |
+| Shell | Run `mvn clean package`, `mvn test`, `find`, `grep` for audit steps |
+| Web browsing | Fetch live BAMOE 9.5.x documentation from `raw.githubusercontent.com` |
 
 ---
 
@@ -168,13 +164,13 @@ Sub-Task 10    Runtime deployment and live-data cutover — deploy v9 service;
 
 ## Demo
 
-### BAMOE Migrator Bob Mode — Live Demo
+### BAMOE Migrator — Live Demo
 
-> Watch the BAMOE Migrator mode run Sub-Tasks 1 and 2 end-to-end: auditing a v8
+> Watch the BAMOE Migrator run Sub-Tasks 1 and 2 end-to-end: auditing a v8
 > project, producing `migration-inventory.md`, and generating a clean v9 Quarkus
 > project that builds successfully with `mvn clean package`.
 
-[![BAMOE Migrator Bob Mode Demo](https://img.youtube.com/vi/e5pNUnvGr9Y/maxresdefault.jpg)](https://www.youtube.com/watch?v=e5pNUnvGr9Y)
+[![BAMOE Migrator Demo](https://img.youtube.com/vi/e5pNUnvGr9Y/maxresdefault.jpg)](https://www.youtube.com/watch?v=e5pNUnvGr9Y)
 
 > **Local copy:** [`demos/BAMOE Project Migrator Bob Mode Demo.mp4`](demos/BAMOE%20Project%20Migrator%20Bob%20Mode%20Demo.mp4)
 
@@ -188,7 +184,7 @@ Sub-Task 10    Runtime deployment and live-data cutover — deploy v9 service;
 
 ---
 
-### How the mode works inside a session
+### How the agent works inside a session
 
 ```
 Session start
@@ -221,7 +217,7 @@ Session start
 ### Knowledge source grounding
 
 Every sub-task carries a **Knowledge Sources** table that maps each conversion
-step to the exact section of the official BAMOE 9.5.x documentation. The mode
+step to the exact section of the official BAMOE 9.5.x documentation. Devin
 fetches these URLs live before writing code. The base URL pattern is:
 
 ```
@@ -238,8 +234,8 @@ https://raw.githubusercontent.com/IBM/bamoe-docs/9.5.x/nav.adoc
 
 ### Non-negotiable conversion rules
 
-The following rules are hard-coded into the mode's `roleDefinition`. The mode
-will never produce output that violates them, regardless of what the user asks.
+The following rules are defined in `AGENTS.md`. Devin will never produce output
+that violates them, regardless of what the user asks.
 
 | Rule | v8 | v9.5 |
 |---|---|---|

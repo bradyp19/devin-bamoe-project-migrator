@@ -17,9 +17,9 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- BAMOE BOM version — matches local BAMOE Maven repository 9.5.2-ibm-0002 -->
-    <version.bamoe>9.5.2-ibm-0002</version.bamoe>
-    <!-- Quarkus version as declared inside bamoe-quarkus-bom 9.5.2-ibm-0002 -->
-    <version.quarkus>3.27.5.1</version.quarkus>
+    <version.bamoe>9.6.0-ibm-0004</version.bamoe>
+    <!-- Quarkus version as declared inside bamoe-quarkus-bom 9.6.0-ibm-0004 -->
+    <version.quarkus>3.33.3.2</version.quarkus>
     <version.maven-compiler-plugin>3.13.0</version.maven-compiler-plugin>
     <version.maven-surefire-plugin>3.3.1</version.maven-surefire-plugin>
   </properties>
@@ -95,6 +95,11 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
