@@ -3,9 +3,26 @@
 This workspace contains everything needed to migrate an IBM Business Automation
 Manager Open Editions (BAMOE) project from **v8.0.x** to **v9.5** (latest).
 
-It pairs a structured 10-sub-task migration plan with a purpose-built Bob mode
-(**BAMOE Migrator**) that executes every step grounded against the official
-BAMOE 9.5.x documentation — fetching the exact doc page before touching any file.
+It pairs a structured 10-sub-task migration plan with a Devin-compatible
+`AGENTS.md` — converted from the original Bob-mode framework by
+[@tanbt](https://github.com/boontee/bamoe_project_migrator) — that executes
+every step grounded against the official BAMOE 9.5.x documentation, fetching
+the exact doc page before touching any file.
+
+---
+
+## Acknowledgements
+
+This repository is an adaptation of the **BAMOE Project Migrator** framework
+originally created by **Boon Tee Tan ([@tanbt](https://github.com/boontee))**:
+
+> **Original repository:** [`boontee/bamoe_project_migrator`](https://github.com/boontee/bamoe_project_migrator)
+
+This repo converts the Bob custom mode (`custom_modes.yaml`) from that framework
+into a **Devin-compatible `AGENTS.md`**, so that teams using Devin (rather than Bob)
+can run the same guided, documentation-grounded BAMOE v8 → v9.5 migration workflow.
+The migration plan, conversion rules, knowledge-source discipline, and structured
+sub-task approach all originate from Boon Tee Tan's work.
 
 ---
 
@@ -58,6 +75,10 @@ bamoe_project_migrator/
 ## BAMOE Migrator — Devin
 
 > **Instructions:** `AGENTS.md` (repo root)
+
+> *This Devin configuration is a conversion of the original Bob mode created by
+> [@tanbt](https://github.com/boontee/bamoe_project_migrator). The migration
+> framework, conversion rules, and structured plan all originate from that work.*
 
 A purpose-built AI agent configuration that turns Devin into a **guided IBM BAMOE migration engineer**.
 It executes the structured plan in [`bamoe-v8-to-v9-migration-plan.md`](bamoe-v8-to-v9-migration-plan.md)
@@ -164,15 +185,19 @@ Sub-Task 10    Runtime deployment and live-data cutover — deploy v9 service;
 
 ## Demo
 
-### BAMOE Migrator — Live Demo
+### BAMOE Migrator — Demo
 
-> Watch the BAMOE Migrator run Sub-Tasks 1 and 2 end-to-end: auditing a v8
-> project, producing `migration-inventory.md`, and generating a clean v9 Quarkus
-> project that builds successfully with `mvn clean package`.
+<!-- TODO: Record and embed a Devin demo video here once available. -->
 
-[![BAMOE Migrator Demo](https://img.youtube.com/vi/e5pNUnvGr9Y/maxresdefault.jpg)](https://www.youtube.com/watch?v=e5pNUnvGr9Y)
+> **Devin demo:** Not yet recorded.
 
-> **Local copy:** [`demos/BAMOE Project Migrator Bob Mode Demo.mp4`](demos/BAMOE%20Project%20Migrator%20Bob%20Mode%20Demo.mp4)
+**Original Bob Mode Demo (reference)**
+
+> The demo below shows the same migration workflow (Sub-Tasks 1 and 2) running
+> in the original Bob mode by [@tanbt](https://github.com/boontee/bamoe_project_migrator).
+> It illustrates the expected agent behaviour until the Devin demo is available.
+
+[![BAMOE Migrator Demo (Bob Mode)](https://img.youtube.com/vi/e5pNUnvGr9Y/maxresdefault.jpg)](https://www.youtube.com/watch?v=e5pNUnvGr9Y)
 
 ---
 
@@ -212,6 +237,8 @@ Session start
     +-- User approves --> next sub-task
 ```
 
+*Adapted from [`boontee/bamoe_project_migrator`](https://github.com/boontee/bamoe_project_migrator)*
+
 ---
 
 ### Knowledge source grounding
@@ -229,6 +256,8 @@ The full documentation navigation tree is at:
 ```
 https://raw.githubusercontent.com/IBM/bamoe-docs/9.5.x/nav.adoc
 ```
+
+*Adapted from [`boontee/bamoe_project_migrator`](https://github.com/boontee/bamoe_project_migrator)*
 
 ---
 
@@ -255,6 +284,8 @@ that violates them, regardless of what the user asks.
 | Auth / identity | WildFly JAAS, `UserGroupCallback`, LDAP | **OIDC** via `IdentityProvider` |
 | Task event listener | `TaskLifeCycleEventListener` before/after callbacks | `UserTaskEventListener` single-callback `onUserTaskState` |
 | Database | Shared across versions | **New DB required** — side-by-side parallel run only |
+
+*Adapted from [`boontee/bamoe_project_migrator`](https://github.com/boontee/bamoe_project_migrator) — originally from `.bob/custom_modes.yaml` `roleDefinition`*
 
 ---
 
@@ -283,6 +314,8 @@ JAAS / LDAP authentication        OIDC (Keycloak or any compliant IdP)
 kmodule.xml + XML descriptors     pom.xml + application.properties only
 Java 8 or 11 / Maven 3.6.x        Java 21 / Maven 3.9.11+
 ```
+
+*Adapted from [`boontee/bamoe_project_migrator`](https://github.com/boontee/bamoe_project_migrator)*
 
 ---
 
