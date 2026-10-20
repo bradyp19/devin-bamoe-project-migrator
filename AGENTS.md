@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This file provides guidance to AI agents (Devin and others) working in this repository. It replaces the Bob custom mode definition and is the single authoritative instruction document for any AI assistant operating in this workspace.
+This file provides guidance to AI agents (Devin and others) working in this repository. It is the single authoritative instruction document for any AI assistant operating in this workspace.
 
 ---
 
@@ -32,101 +32,43 @@ Migrating from BAMOE v8 to v9.5 is not a library version bump — it is a full a
 
 ---
 
-## Prerequisites — BAMOE Maven Repository Access
+## Build modes
 
-> **CRITICAL:** The BAMOE Maven repository is **not on the public internet**. It is a private IBM artifact registry distributed as either:
->
-> 1. **A container image** (`quay.io/bamoe/maven-repository`) — you run it locally, it exposes a web server, and `settings.xml` points to `http://localhost:<PORT>`
-> 2. **A ZIP file** (`bamoe-{VERSION}-maven-repository.zip`) — downloaded from IBM Passport Advantage, extracted locally, and `settings.xml` points to `file:///path/to/extracted/repo`
->
-> **Devin cannot access either of these on its own** — the container image requires Docker running on the build machine, and the ZIP requires an IBM Passport Advantage login. This is a hard blocker for any cloud-hosted agent, including Devin, because there is no public URL for the artifacts.
->
-> You must configure one of the three options below before any sub-task can proceed.
+There are two build modes. Pick the first that applies — never stall on a missing Maven repo.
 
-### Option A — Run the Maven repo container locally and expose it (best for demos)
+### Convert-only (default)
 
-On the machine where Devin will build:
-```bash
-docker run -d --platform linux/amd64 -p 9999:8080 quay.io/bamoe/maven-repository:9.5.2-ibm-0002
-```
+No Maven needed. Devin performs all file conversions and records build status as `not-run` in `migration-status.md`. **Never block or stall on a missing Maven repository; never try to run Docker.**
 
-Then add a `settings.xml` to the repo pointing at your machine's IP:
-```xml
-<profile>
-  <id>ibm-bamoe-enterprise-maven-repository</id>
-  <repositories>
-    <repository>
-      <id>ibm-bamoe-enterprise-maven-repository</id>
-      <url>http://localhost:9999/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
-  <pluginRepositories>
-    <pluginRepository>
-      <id>ibm-bamoe-enterprise-maven-repository</id>
-      <url>http://localhost:9999/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </pluginRepository>
-  </pluginRepositories>
-</profile>
-```
+### Convert + verify (optional)
 
-Activate the profile:
-```xml
-<activeProfiles>
-  <activeProfile>ibm-bamoe-enterprise-maven-repository</activeProfile>
-</activeProfiles>
-```
+Only if the environment variable `BAMOE_MAVEN_REPO_URL` is set (Devin secret). Then:
 
-Devin's machine needs network access to that IP. This only works if Devin runs builds on your machine or a VM you control.
+1. Copy `templates/settings.xml` to `~/.m2/settings.xml` — it reads the repo URL from `${env.BAMOE_MAVEN_REPO_URL}`.
+2. Run `mvn clean package -DskipTests` inside `v9-projects/<name>/`.
+3. Record `pass` or `fail` on the `Build:` line in `migration-status.md`.
 
-### Option B — Deploy the Maven repo to a stable URL (best for customers)
-
-Use the Helm chart to deploy `quay.io/bamoe/maven-repository` to an OpenShift/Kubernetes cluster. It exposes a persistent HTTPS URL. Customers configure `settings.xml` to point to that URL. Devin can then reach it.
-
-```bash
-helm pull oci://quay.io/bamoe/dmoe-dev-environment-helm-chart --version=9.5.2-ibm-0002 --untar
-helm install my-bamoe-dev-env ./dmoe-dev-environment-helm-chart ...
-# Maven repo becomes available at https://maven-repository.<YOUR_DOMAIN>
-```
-
-### Option C — Pre-populate the local Maven cache (workaround)
-
-Extract the ZIP from IBM Passport Advantage into `~/.m2/repository` on the Devin build machine. No running container needed — Maven finds the JARs locally. This is the path if you don't have a cluster.
-
-### Verification
-
-Before starting any sub-task, verify Maven can resolve BAMOE dependencies:
-```bash
-mvn dependency:resolve
-```
-
-All dependencies must resolve without error before proceeding with Sub-Task 1.
+Building locally with the IBM Maven repository container (`localhost:9999` / Docker) is documented in [docs/engineers/local-maven-repo.md](docs/engineers/local-maven-repo.md) — Appendix for engineers building locally.
 
 ---
 
-## Session startup protocol
+## Run-through protocol
 
-At the start of every session, follow these steps before taking any action:
+At the start of every session, work through these steps without waiting for approval between sub-tasks:
 
-1. Read `bamoe-v8-to-v9-migration-plan.md` in full.
-2. Identify the first sub-task with status `[ ] pending`.
-3. If the user did not specify a sub-task, state which one is next and ask them to confirm before proceeding.
-4. For the confirmed sub-task, read its **Knowledge Sources** table and fetch each linked URL to verify exact v9 syntax before writing any code or config.
-5. Work through the sub-task **Todo List** in order.
-6. Validate with `mvn clean package` or `mvn test` after every logical group of changes.
-7. Once all **Expected Outcomes** for the sub-task are confirmed, update its **Status** line in `bamoe-v8-to-v9-migration-plan.md` from `[ ] pending` to `[x] done`.
-8. Summarise what changed and wait for the user to approve before moving to the next sub-task.
+1. **Find the input.** Look in `v8-projects/`.
+   - If a `*.zip` is there, unzip it into a folder named after the zip's basename, then delete the zip.
+   - If a project folder's `pom.xml` sits one level deeper (`v8-projects/X/X/pom.xml`), move the inner contents up one level.
+   - If a project folder has spaces in its name, rename it using hyphens.
+   - If there is no `pom.xml` anywhere under `v8-projects/`, stop and tell the user in plain words what a v8 export must contain (point them to the README "What goes in" section).
+   - If multiple projects are present, ask one question: which one (or all).
+2. **Create the output.** Output dir = `v9-projects/<name>` where `<name>` is the v8 folder name with the `v8-` prefix replaced by `v9-`; if there is no `v8-` prefix, keep the same name. Create `v9-projects/<name>/migration-status.md` from `templates/migration-status.md`.
+3. **Run Sub-Tasks 1 through 10 in order**, WITHOUT waiting for approval between sub-tasks. Mark each sub-task `[x] done` or `[x] skipped (reason)` in the per-project `migration-status.md` — never in the plan file. Only stop to ask when:
+   - the input is ambiguous,
+   - an asset is unsupported in v9 with no automatic replacement (PMML, scorecards needing business input), or
+   - something destructive would be needed.
+   Every question must be phrased for a non-engineer with 2–3 options.
+4. **Finish with a plain-language summary:** what was found, what changed, what the user must do by hand (e.g. forms), and where the output is.
 
 ---
 
@@ -153,8 +95,9 @@ https://raw.githubusercontent.com/IBM/bamoe-docs/9.5.x/nav.adoc
 | `v8-projects/` | Exported v8 Business Central projects — read-only reference | **Never modify** |
 | `v9-projects/` | Active v9 Quarkus migration output | Read/write |
 | `v8-to-v9-migration-samples/` | Reference tutorials with working v8 + v9 pairs | Read-only reference |
-| `migration-inventory.md` | Sub-Task 1 output — update in-place as migration progresses | Read/write |
-| `bamoe-v8-to-v9-migration-plan.md` | Migration plan + task tracker — update status lines only | Read/write (status lines only) |
+| `v9-projects/<name>/migration-inventory.md` | Sub-Task 1 output — update in-place as migration progresses | Read/write |
+| `v9-projects/<name>/migration-status.md` | Per-project sub-task tracker — update as each sub-task finishes | Read/write |
+| `bamoe-v8-to-v9-migration-plan.md` | Migration plan — read-only template; never update its status lines | Read-only |
 
 **Source folder constraint:** All v8 source reads MUST come exclusively from `v8-projects/`. If a project has not yet been copied there, stop and instruct the user to copy it before proceeding.
 
@@ -166,10 +109,10 @@ https://raw.githubusercontent.com/IBM/bamoe-docs/9.5.x/nav.adoc
 
 All Maven commands must be run from within the specific v9 project directory (e.g. `v9-projects/v9-app/`), never from the workspace root.
 
-> **NOTE:** Before running any Maven command, ensure the BAMOE Maven repository is accessible per the **Prerequisites — BAMOE Maven Repository Access** section above.
+> **NOTE:** Maven commands are only available in **Convert + verify** build mode (when `BAMOE_MAVEN_REPO_URL` is set) — see **Build modes** above. In Convert-only mode, skip all `mvn` commands and record `Build: not-run`.
 
 ```bash
-# Verify prerequisites before Sub-Task 1
+# Verify Maven repo access before building (Convert + verify mode only)
 mvn dependency:resolve
 
 # Full build skipping tests
@@ -223,10 +166,10 @@ For every sub-task, follow this loop:
 1. Read the sub-task section from `bamoe-v8-to-v9-migration-plan.md` (Intent, Expected Outcomes, Todo List, Knowledge Sources).
 2. Fetch each Knowledge Source URL to verify exact v9 syntax before writing any code.
 3. Implement each Todo List item in order.
-4. Run `mvn clean package` or `mvn test` after every logical group of changes; resolve all errors before continuing.
+4. In Convert + verify mode, run `mvn clean package` or `mvn test` after every logical group of changes; resolve all errors before continuing. In Convert-only mode, skip this step.
 5. Confirm all Expected Outcomes are met.
-6. Update the sub-task **Status** in the plan from `[ ] pending` to `[x] done`.
-7. Summarise what changed and wait for user approval before starting the next sub-task.
+6. Update the sub-task's status in `v9-projects/<name>/migration-status.md` from `[ ] pending` to `[x] done` (or `[x] skipped (reason)`).
+7. Move straight on to the next sub-task — do not wait for user approval.
 
 ---
 
@@ -256,6 +199,8 @@ The canonical v9 starting templates are in `v8-to-v9-migration-samples/tutorial-
 - `pom.xml` — reference BOM imports, dependency list, plugin configuration
 - `src/main/resources/application.properties` — reference `%dev.*` / `%prod.*` / `%container.*` profile structure
 
+All sample `v9-app` projects pin BAMOE `9.3.1` on Java 17. Use them for project *shape* only; take every version, dependency coordinate and property key from the 9.5.x docs, and never cite a sample as evidence of 9.5 behaviour. Per-tutorial defects are listed in `docs/tutorial-index.md`.
+
 Use these as the base when creating a new `v9-projects/<name>/pom.xml`. Do not import the Quarkus platform BOM separately — `bamoe-quarkus-bom` already manages Quarkus transitively.
 
 ---
@@ -266,6 +211,7 @@ The following skills are available in `.devin/skills/` to automate BAMOE migrati
 
 | Skill | Purpose | Sub-Task |
 |---|---|---|
+| `bamoe-migrate` | One-prompt end-to-end migration (runs all sub-tasks) | All |
 | `bamoe-audit-v8-project` | Audits v8 project and creates migration-inventory.md | Sub-Task 1 |
 | `bamoe-configure-maven-repository` | Configures Maven to use BAMOE Maven Repository | Prerequisite |
 | `bamoe-migrate-project-structure` | Migrates project structure and POM from v8 to v9 | Sub-Task 2 |

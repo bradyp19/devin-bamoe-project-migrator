@@ -1,3 +1,8 @@
+---
+name: bamoe-audit-v8-project
+description: Audits a BAMOE v8 project to create a migration inventory, identifying all assets that need migration, conversion, or replacement in v9.
+---
+
 # BAMOE Audit v8 Project
 
 Audits a BAMOE v8 project to create a migration inventory, identifying all assets that need migration, conversion, or replacement in v9.

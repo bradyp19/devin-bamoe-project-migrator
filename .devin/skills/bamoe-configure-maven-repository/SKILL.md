@@ -1,3 +1,8 @@
+---
+name: bamoe-configure-maven-repository
+description: Configures Maven to use the BAMOE Maven Repository for dependency resolution.
+---
+
 # BAMOE Configure Maven Repository
 
 Configures Maven to use the BAMOE Maven Repository for dependency resolution.

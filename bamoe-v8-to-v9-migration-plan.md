@@ -1,5 +1,7 @@
 # BAMOE v8 to v9.5 Migration Plan
 
+This file is a read-only template. Per-project progress lives in `v9-projects/<name>/migration-status.md`.
+
 ## Top-Level Overview
 
 This plan covers the full migration of an IBM Business Automation Manager Open Editions (BAMOE) v8.0.x
@@ -69,7 +71,7 @@ All dependencies must resolve without error before proceeding.
 
 ## Sub-Task 1 — Audit the v8 Project and Classify Assets
 
-**Status:** `[x] done`
+**Status:** `[ ] pending`
 
 ### Intent
 Before touching any code, produce a complete inventory of everything in the v8 project that must be
@@ -120,7 +122,7 @@ migrated, converted, or dropped. This surfaces blockers early and sizes the rema
 
 ## Sub-Task 2 — Migrate Project Structure and POM
 
-**Status:** `[x] done`
+**Status:** `[ ] pending`
 
 ### Intent
 Replace the v8 KJAR/Business-Central project structure with a valid v9 Maven project that compiles
@@ -169,7 +171,7 @@ cleanly before any assets are migrated.
 
 ## Sub-Task 3 — Migrate BPMN Workflow Assets
 
-**Status:** `[x] done`
+**Status:** `[ ] pending`
 
 ### Intent
 Open every BPMN model in the v9 tooling to trigger the non-destructive XML upgrade, then address
@@ -222,7 +224,7 @@ all v9-incompatible constructs identified in Sub-Task 1.
 
 ## Sub-Task 4 — Migrate DMN Decision Assets
 
-**Status:** `[x] skipped` (no DMN files in project per migration-inventory.md)
+**Status:** `[ ] pending`
 
 ### Intent
 Upgrade DMN models to DMN 1.6 via the new editor, ensuring PMML dependencies are removed and
@@ -258,7 +260,7 @@ Java-backed types are recreated using Developer Tools.
 
 ## Sub-Task 5 — Migrate DRL Rules, Decision Tables, and Test Scenarios
 
-**Status:** `[x] skipped` (no DRL files in project per migration-inventory.md)
+**Status:** `[ ] pending`
 
 ### Intent
 DRL rules are largely compatible in v9, but guided rules, DSL/DSLR, scorecards, and PMML must be
@@ -302,7 +304,7 @@ converted. Test scenario activators must be updated. Decision tables need a depe
 
 ## Sub-Task 6 — Migrate Custom WorkItemHandlers
 
-**Status:** `[x] skipped` (no custom WorkItemHandlers in project per migration-inventory.md)
+**Status:** `[ ] pending`
 
 ### Intent
 Replace the v8 `WorkItemHandler` API with the v9 Kogito phase-based API, update registration from
@@ -349,7 +351,7 @@ XML descriptors to a programmatic `DefaultWorkItemHandlerConfig` bean, and remov
 
 ## Sub-Task 7 — Migrate Security, Auth, UserGroupCallback, and AssignmentStrategy
 
-**Status:** `[x] done` (non-secured mode configured for development; no custom security classes to migrate)
+**Status:** `[ ] pending`
 
 ### Intent
 Replace WildFly/JAAS-based authentication with OIDC (Keycloak or any OIDC-compliant IdP), migrate
@@ -397,7 +399,7 @@ Replace WildFly/JAAS-based authentication with OIDC (Keycloak or any OIDC-compli
 
 ## Sub-Task 8 — Migrate Forms
 
-**Status:** `[x] done` (verified in Dev mode - all 3 forms working)
+**Status:** `[ ] pending`
 
 ### Intent
 v8 `.frm` form files are completely incompatible with v9. All forms must be regenerated using the
@@ -431,7 +433,7 @@ Developer Tools form-code-generation command.
 
 ## Sub-Task 9 — Migrate Event Streaming and Event Listeners
 
-**Status:** `[x] skipped` (no event listeners in project per migration-inventory.md)
+**Status:** `[ ] pending`
 
 ### Intent
 Replace v8 KIE Server Kafka event emission and `TaskLifeCycleEventListener` implementations
@@ -475,7 +477,7 @@ with v9 CloudEvents-based add-ons and the `UserTaskEventListener` / `ProcessEven
 
 ## Sub-Task 10 — Runtime Deployment and Live-Data Strategy
 
-**Status:** `[x] done` (deployment strategy documented in v9-projects/v9-app/DEPLOYMENT.md)
+**Status:** `[ ] pending`
 
 ### Intent
 Deploy the migrated v9 service to the target runtime (local, OpenShift, or Kubernetes) and define
@@ -490,7 +492,8 @@ the strategy for handling in-flight v8 process instances during cutover.
   - New process instances routed to v9; existing in-flight instances remain on v8 until completion.
   - v8 decommissioned once all active instances finish.
 - No automated data migration tool is available from IBM; the side-by-side approach is the
-  only supported strategy.
+  only supported strategy. The PIM add-on migrates in-flight instances **between v9 process
+  definition versions only** (same Business Service, same DB) — it does not move v8 instances.
 
 ### Todo List
 1. Configure persistence in `application.properties`:
@@ -521,6 +524,7 @@ the strategy for handling in-flight v8 process instances during cutover.
 | Management Console features vs Business Central | [`managing-monitoring/consoles.adoc`](https://raw.githubusercontent.com/IBM/bamoe-docs/9.5.x/managing-monitoring/consoles.adoc) |
 | Operational considerations post-cutover | [`upgrade/08-operation-considerations.adoc`](https://raw.githubusercontent.com/IBM/bamoe-docs/9.5.x/upgrade/08-operation-considerations.adoc) |
 | Performance considerations | [`upgrade/09-performance-considerations.adoc`](https://raw.githubusercontent.com/IBM/bamoe-docs/9.5.x/upgrade/09-performance-considerations.adoc) |
+| PIM add-on scope (v9-to-v9 instance migration, not v8-to-v9) | [`managing-monitoring/migration-with-pim.adoc`](https://raw.githubusercontent.com/IBM/bamoe-docs/9.5.x/managing-monitoring/migration-with-pim.adoc) |
 
 ---
 

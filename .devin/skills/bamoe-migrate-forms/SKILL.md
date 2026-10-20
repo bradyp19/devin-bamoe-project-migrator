@@ -1,3 +1,8 @@
+---
+name: bamoe-migrate-forms
+description: Regenerates legacy v8 .frm forms using BAMOE Developer Tools form code generation.
+---
+
 # BAMOE Migrate Forms
 
 Regenerates legacy v8 .frm forms using BAMOE Developer Tools form code generation.

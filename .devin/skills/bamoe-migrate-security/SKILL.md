@@ -1,3 +1,8 @@
+---
+name: bamoe-migrate-security
+description: Migrates v8 security (WildFly JAAS/LDAP) to v9 OIDC-based authentication.
+---
+
 # BAMOE Migrate Security and Authentication
 
 Migrates v8 security (WildFly JAAS/LDAP) to v9 OIDC-based authentication.

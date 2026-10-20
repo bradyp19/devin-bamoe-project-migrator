@@ -1,124 +1,131 @@
-# BAMOE v8 → v9.5 Migration Workspace
+# BAMOE v8 → v9.5 Project Migrator
 
-This workspace contains everything needed to migrate an IBM Business Automation
-Manager Open Editions (BAMOE) project from **v8.0.x** to **v9.5** (latest).
-
-It pairs a structured 10-sub-task migration plan with a purpose-built Bob mode
-(**BAMOE Migrator**) that executes every step grounded against the official
-BAMOE 9.5.x documentation — fetching the exact doc page before touching any file.
+Turns your old IBM BAMOE v8 project into a new BAMOE v9.5 project, automatically, using Devin.
 
 ---
 
-## Workspace folder structure
+## Three steps
 
 ```
-bamoe_project_migrator/
-│
-├── v8-projects/                  # Exported v8 Business Central project(s)
-│   └── <your-project>/           #   Read-only reference — never modify
-│
-├── v9-projects/                  # Migrated v9 Kogito / Quarkus project(s)
-│   └── <your-project>/           #   Active build target
-│
-├── migration-workspace/          # Migration process artefacts (not shipped code)
-│   ├── audit/                    #   Sub-Task 1 output: migration-inventory.md
-│   │                             #     classifying every v8 asset
-│   ├── docs/                     #   Working notes: decisions, mapping tables,
-│   │                             #     per-sub-task findings
-│   └── scripts/                  #   One-off helper scripts: scan for incompatible
-│                                 #     patterns, batch-rename files, etc.
-│
-├── docs/                         # Permanent project documentation for the v9 service
-│
-├── demos/                        # Demo projects, sample payloads, Canvas / Developer
-│                                 #   Tools examples
-│
-├── .bob/
-│   └── custom_modes.yaml         # BAMOE Migrator Bob mode definition
-│
-├── bamoe-v8-to-v9-migration-plan.md   # The structured 10-sub-task migration plan
-└── README.md                          # This file
+1. Put your v8 project folder (or .zip) into  v8-projects/
+2. Open Devin on the web → choose this repository → New session
+3. Type:   Migrate my project
 ```
 
-### Folder purposes at a glance
+That's it. Devin will do the rest and tell you when it's done.
 
-| Folder | Role | Touch during migration? |
+> **How do I "put a folder in"?** On GitHub, open the `v8-projects/` folder, click **Add file → Upload files**, drag your folder or .zip in, and click **Commit changes**. No command line needed.
+
+---
+
+## What goes in
+
+A correct input looks exactly like this:
+
+```
+v8-projects/
+└── my-project/                               ← any name; a .zip is fine too
+    ├── pom.xml                               ← MUST be right here, not one folder deeper
+    └── src/
+        └── main/
+            ├── java/                         ← your Java classes (may be empty)
+            └── resources/
+                ├── *.bpmn                    ← your process diagrams
+                ├── *.dmn  *.drl  *.frm       ← decisions, rules, forms (optional)
+                └── META-INF/
+                    ├── kmodule.xml           ← normal in v8; will be removed in v9
+                    ├── kie-deployment-descriptor.xml
+                    └── persistence.xml
+```
+
+If your folder looks like this, you're good. If you're not sure, just put it in and ask Devin: *"Is my project in the right place?"*
+
+---
+
+## What comes out
+
+```
+v9-projects/
+└── my-project/
+    ├── pom.xml                               ← new; Quarkus + Kogito
+    ├── migration-inventory.md                ← everything Devin found in your v8 project
+    ├── migration-status.md                   ← the 10 steps, ticked off as they finish
+    └── src/main/
+        ├── java/…                            ← updated Java (jakarta.*, new handlers)
+        └── resources/
+            ├── application.properties        ← replaces all the META-INF xml files
+            ├── *.bpmn                        ← upgraded diagrams, Java scripts
+            └── custom-forms-dev/*.tsx        ← regenerated forms (if you had .frm files)
+```
+
+---
+
+## What you will see
+
+Devin works through 10 steps. Here's what each one looks like in plain language:
+
+| Step | What Devin says it's doing | What appears | Typical time |
+|---|---|---|---|
+| 1 | "Auditing your v8 project" | `migration-inventory.md` — a list of everything found | 1–2 min |
+| 2 | "Creating the new v9 project structure" | `v9-projects/<name>/pom.xml` + `application.properties` | 1–2 min |
+| 3 | "Reading your process diagrams and rewriting any JavaScript inside them as Java" | upgraded `.bpmn` files | 2–5 min |
+| 4 | "Checking decision models (DMN)" | upgraded `.dmn` files, or "skipped — none found" | 0–3 min |
+| 5 | "Checking rules and test scenarios" | converted `.drl`/`.scesim` files, or "skipped" | 0–3 min |
+| 6 | "Updating your custom Java work handlers" | rewritten Java classes, or "skipped" | 0–5 min |
+| 7 | "Moving security settings to the new login system" | security lines in `application.properties` | 1–3 min |
+| 8 | "Regenerating your forms" | new `.tsx` form files under `custom-forms-dev/` | 2–5 min |
+| 9 | "Checking event listeners and messaging" | listener classes / Kafka properties, or "skipped" | 0–3 min |
+| 10 | "Writing down how to go live" | deployment notes for the new version | 1–2 min |
+
+At the end Devin posts a summary like:
+
+```
+Done! I migrated your project "my-project" from BAMOE v8 to v9.5.
+
+Found:      2 processes, 3 forms, 1 rule file, 0 decision models.
+Created:    v9-projects/my-project/  (see migration-status.md for what was done)
+To do by hand:
+  - Open the regenerated forms in BAMOE Developer Tools for VS Code and check the layout.
+  - Your v8 database cannot be reused — the deployment notes explain the side-by-side switchover.
+```
+
+On the Devin website Devin cannot run the IBM build tool, so `Build: not-run` is normal. The converted files are still complete. If you want a verified build, see [docs/engineers/local-maven-repo.md](docs/engineers/local-maven-repo.md).
+
+---
+
+## Common pitfalls
+
+| What you see | Why | Fix |
 |---|---|---|
-| `v8-projects/` | Original exported v8 project — read-only reference | No |
-| `v9-projects/` | Migrated v9 project — active development target | Yes |
-| `migration-workspace/audit/` | `migration-inventory.md` from Sub-Task 1 | Yes (Sub-Task 1) |
-| `migration-workspace/docs/` | Working notes, decision log, mapping tables | Yes (any sub-task) |
-| `migration-workspace/scripts/` | Throwaway audit/scan helper scripts | Yes (Sub-Task 1) |
-| `docs/` | Permanent v9 service documentation | Yes (Sub-Task 10+) |
-| `demos/` | Demos, sample payloads, Canvas examples | Optional |
-| `AGENTS.md` | Devin agent instructions — do not modify | No |
+| I uploaded a .zip | That's fine — Devin unzips it automatically | Nothing. If Devin says it can't find `pom.xml`, the zip probably contains a folder inside a folder; Devin fixes that too. Otherwise unzip it yourself and put the inner folder in `v8-projects/` |
+| "I can't find pom.xml" | The folder is in the wrong place (repo root, `v9-projects/`, or nested twice) | Move it so `v8-projects/<name>/pom.xml` exists |
+| Folder name has spaces ("my app copy") | Spaces break some tools | Devin renames it with hyphens; prefer no spaces next time |
+| Only a .bpmn file, no pom.xml | A single diagram is not a project export | In Business Central use **Export** (or git clone the project) so you get `pom.xml` + `src/` |
+| Two folders in `v8-projects/` | Devin doesn't know which to migrate | It will ask. Say "all" or a name |
+| "Build: not-run" | Expected on the Devin website — the IBM build repo is private | Nothing; the files are complete. See the engineers' appendix for a local verified build |
+| Forms look missing | `.frm` forms can't be converted automatically | Devin generates new ones you may need to open and tweak in BAMOE Developer Tools for VS Code |
+| Devin asks a question and waits | It only asks when it truly can't decide | Just answer in plain words |
 
 ---
 
-## BAMOE Migrator — Devin
+## Video tutorial
 
-> **Instructions:** `AGENTS.md` (repo root)
+Watch the existing demo: [BAMOE Migrator on YouTube](https://www.youtube.com/watch?v=e5pNUnvGr9Y).
 
-A purpose-built AI agent configuration that turns Devin into a **guided IBM BAMOE migration engineer**.
-It executes the structured plan in [`bamoe-v8-to-v9-migration-plan.md`](bamoe-v8-to-v9-migration-plan.md)
-sub-task by sub-task, grounding every conversion decision against the official
-**BAMOE 9.5.x documentation** on GitHub before writing a single line of code.
-
-### Why this configuration exists
-
-Migrating from BAMOE v8 to v9.5 is not a library version bump — it is a full
-architectural shift from a centralised Business Central / KIE Server monolith to
-cloud-native Kogito microservices on Quarkus or Spring Boot. Dozens of constructs
-that worked in v8 are either incompatible, renamed, or removed outright in v9.
-
-A general-purpose coding agent will make plausible-sounding but incorrect
-migrations by inferring v9 behaviour from v8 knowledge. The `AGENTS.md` in this
-repo prevents that by instructing Devin to:
-
-1. **Read the migration plan first** on every session start.
-2. **Fetch the exact BAMOE 9.5.x doc page** for each conversion step before
-   touching any file.
-3. **Enforce 17 non-negotiable conversion rules** derived directly from the
-   official upgrade guides.
-4. **Work one sub-task at a time**, validating with `mvn clean package` /
-   `mvn test`, and waiting for your approval before moving on.
-
-### Quick start
-
-1. Place your exported v8 project folder inside `v8-projects/`.
-2. Connect this repository to Devin.
-3. Open a new Devin session and type a prompt such as:
-
-   ```
-   Start Sub-Task 1 — audit the v8 project and produce migration-inventory.md
-   ```
-
-   If you do not specify a sub-task, Devin will read the plan, identify the
-   first pending one, and ask you to confirm before acting.
+A new end-to-end tutorial is in the works — see [docs/tutorial/video-script.md](docs/tutorial/video-script.md) for what it will cover.
 
 ---
-
-### Devin capabilities used
-
-| Capability | What it enables |
-|---|---|
-| File read | Read project files, plan, inventory documents |
-| File write | Write and patch source files, `pom.xml`, `application.properties`, Java classes |
-| Shell | Run `mvn clean package`, `mvn test`, `find`, `grep` for audit steps |
-| Web browsing | Fetch live BAMOE 9.5.x documentation from `raw.githubusercontent.com` |
-
 ---
+
+## Details for engineers
+
+Everything below is the technical reference. Non-engineers can stop here.
 
 ### The migration plan at a glance
 
-The full plan lives in [`bamoe-v8-to-v9-migration-plan.md`](bamoe-v8-to-v9-migration-plan.md).
-The mode works through it in this order:
+The full plan lives in [`bamoe-v8-to-v9-migration-plan.md`](bamoe-v8-to-v9-migration-plan.md) — a read-only template. Per-project progress is tracked in `v9-projects/<name>/migration-status.md`.
 
 ```
-Prerequisites  Toolchain gate — Java 21, Maven 3.9.11+, BAMOE Maven Repo,
-               BAMOE Developer Tools for VS Code. Must pass before Sub-Task 1.
-               Verification: mvn dependency:resolve must succeed.
-
 Sub-Task 1     Audit v8 project — classify every asset as Migrate as-is /
                Requires manual update / Must replace. Produce migration-inventory.md.
 
@@ -158,67 +165,43 @@ Sub-Task 10    Runtime deployment and live-data cutover — deploy v9 service;
                all in-flight instances complete.
 ```
 
-![Migration flow](img_1787716680844.png)
+![Migration flow](docs/images/migration-flow.png)
 
----
-
-## Demo
-
-### BAMOE Migrator — Live Demo
-
-> Watch the BAMOE Migrator run Sub-Tasks 1 and 2 end-to-end: auditing a v8
-> project, producing `migration-inventory.md`, and generating a clean v9 Quarkus
-> project that builds successfully with `mvn clean package`.
-
-[![BAMOE Migrator Demo](https://img.youtube.com/vi/e5pNUnvGr9Y/maxresdefault.jpg)](https://www.youtube.com/watch?v=e5pNUnvGr9Y)
-
-> **Local copy:** [`demos/BAMOE Project Migrator Bob Mode Demo.mp4`](demos/BAMOE%20Project%20Migrator%20Bob%20Mode%20Demo.mp4)
-
----
-
-> **Note:** The diagram above reflects the original flow including a standalone
-> "Set Up Dev Environment" step. In the current plan that step has been promoted
-> to the **Prerequisites** gate (it must pass before Sub-Task 1 begins), so the
-> numbered sub-tasks run from 1 to 10. The sequential and parallel structure
-> shown is otherwise identical.
-
----
-
-### How the agent works inside a session
+### Repository layout
 
 ```
-Session start
-  |
-  +-- Reads bamoe-v8-to-v9-migration-plan.md
-  |     Finds first sub-task with status [ ] pending
-  |
-  +-- If user did not specify a sub-task: asks for confirmation
-  |
-  For each sub-task
-    |
-    +-- Reads the sub-task section (Intent, Expected Outcomes, Todo List,
-    |   Knowledge Sources) from the plan
-    |
-    +-- For each conversion step:
-    |     Fetches the linked raw GitHub doc URL to verify exact v9 syntax
-    |     Implements the minimal change
-    |     Runs mvn clean package or mvn test to validate
-    |
-    +-- All Expected Outcomes confirmed?
-    |     Updates Status in plan: [ ] pending --> [x] done
-    |     Summarises changes
-    |     Waits for user approval
-    |
-    +-- User approves --> next sub-task
+bamoe_project_migrator/
+├── v8-projects/                  # Your v8 exports go here (input)
+├── v9-projects/                  # Migrated v9 projects appear here (output)
+│   └── <name>/
+│       ├── migration-inventory.md
+│       └── migration-status.md
+├── v8-to-v9-migration-samples/   # Reference tutorials with working v8 + v9 pairs
+├── docs/
+│   ├── images/                   # README diagrams
+│   ├── engineers/                # Local build / Maven repo appendix
+│   └── tutorial/                 # Video script for the walkthrough
+├── templates/                    # settings.xml + migration-status.md templates
+├── demos/                        # Recorded demo videos
+├── .devin/skills/                # Devin skills used during migration
+├── bamoe-v8-to-v9-migration-plan.md   # The 10-sub-task plan (read-only template)
+├── AGENTS.md                     # Devin's operating instructions
+└── README.md                     # This file
 ```
 
----
+### How the agent works
+
+`AGENTS.md` instructs Devin to:
+
+1. **Find and normalize the input** in `v8-projects/` (unzip, flatten nested folders, rename folders with spaces).
+2. **Fetch the exact BAMOE 9.5.x doc page** for each conversion step before touching any file — every sub-task carries a Knowledge Sources table linking the authoritative `.adoc`.
+3. **Run all 10 sub-tasks in order** without waiting for approval between them, recording each result in `v9-projects/<name>/migration-status.md`.
+4. **Never block on the private IBM Maven repository.** On Devin web the default is Convert-only (`Build: not-run`). Set the `BAMOE_MAVEN_REPO_URL` secret to switch to Convert + verify mode (see `templates/settings.xml` and `docs/engineers/local-maven-repo.md`).
+5. **Enforce 17 non-negotiable conversion rules** derived from the official upgrade guides.
 
 ### Knowledge source grounding
 
-Every sub-task carries a **Knowledge Sources** table that maps each conversion
-step to the exact section of the official BAMOE 9.5.x documentation. Devin
-fetches these URLs live before writing code. The base URL pattern is:
+The base URL pattern for the official docs is:
 
 ```
 https://raw.githubusercontent.com/IBM/bamoe-docs/9.5.x/<section>/<file>.adoc
@@ -230,12 +213,7 @@ The full documentation navigation tree is at:
 https://raw.githubusercontent.com/IBM/bamoe-docs/9.5.x/nav.adoc
 ```
 
----
-
 ### Non-negotiable conversion rules
-
-The following rules are defined in `AGENTS.md`. Devin will never produce output
-that violates them, regardless of what the user asks.
 
 | Rule | v8 | v9.5 |
 |---|---|---|
@@ -255,38 +233,50 @@ that violates them, regardless of what the user asks.
 | Auth / identity | WildFly JAAS, `UserGroupCallback`, LDAP | **OIDC** via `IdentityProvider` |
 | Task event listener | `TaskLifeCycleEventListener` before/after callbacks | `UserTaskEventListener` single-callback `onUserTaskState` |
 | Database | Shared across versions | **New DB required** — side-by-side parallel run only |
-
----
+| Java packages | `javax.*` | **`jakarta.*`** |
 
 ### Architecture: before and after
 
 ```
-BAMOE v8                          BAMOE v9.5
+BAMOE v8                              BAMOE v9.5
 ------------------------------------  ------------------------------------
-Business Central (authoring +     BAMOE Canvas (business-analyst UI)
-  internal Git + Maven)           BAMOE Developer Tools for VS Code
-                                  External Git (GitHub / GitLab / Bitbucket)
-                                  BAMOE Maven Repository (container / local)
+Business Central (authoring +         BAMOE Canvas (business-analyst UI)
+  internal Git + Maven)               BAMOE Developer Tools for VS Code
+                                      External Git (GitHub / GitLab / Bitbucket)
+                                      BAMOE Maven Repository (container / local)
 
-KIE Server (KJAR deployment,      Kogito microservice embedded in
-  centralised runtime)              Quarkus 3.x or Spring Boot 3.x
-                                    Deployed as container image / Uber-JAR
+KIE Server (KJAR deployment,          Kogito microservice embedded in
+  centralised runtime)                  Quarkus 3.x or Spring Boot 3.x
+                                        Deployed as container image / Uber-JAR
 
-Smart Router (load balancing)     Kubernetes-native load balancing
+Smart Router (load balancing)         Kubernetes-native load balancing
 
-Business Central Monitoring       BAMOE Management Console (Helm chart)
-                                  + Data-Index GraphQL API
-                                  + Prometheus / Grafana
+Business Central Monitoring           BAMOE Management Console (Helm chart)
+                                      + Data-Index GraphQL API
+                                      + Prometheus / Grafana
 
-WildFly / JBoss EAP               Standard JVM / container runtime
-JAAS / LDAP authentication        OIDC (Keycloak or any compliant IdP)
-kmodule.xml + XML descriptors     pom.xml + application.properties only
-Java 8 or 11 / Maven 3.6.x        Java 21 / Maven 3.9.11+
+WildFly / JBoss EAP                   Standard JVM / container runtime
+JAAS / LDAP authentication            OIDC (Keycloak or any compliant IdP)
+kmodule.xml + XML descriptors         pom.xml + application.properties only
+Java 8 or 11 / Maven 3.6.x            Java 21 / Maven 3.9.11+
 ```
 
----
+### Available skills
 
-## References
+The following skills live in `.devin/skills/`:
+
+| Skill | Purpose | Sub-Task |
+|---|---|---|
+| `bamoe-migrate` | One-prompt end-to-end migration (runs all sub-tasks) | All |
+| `bamoe-audit-v8-project` | Audits v8 project and creates migration-inventory.md | Sub-Task 1 |
+| `bamoe-configure-maven-repository` | Configures Maven to use BAMOE Maven Repository | Prerequisite |
+| `bamoe-migrate-project-structure` | Migrates project structure and POM from v8 to v9 | Sub-Task 2 |
+| `bamoe-migrate-bpmn` | Migrates BPMN workflow assets and upgrades XML | Sub-Task 3 |
+| `bamoe-migrate-forms` | Regenerates .frm forms using Developer Tools | Sub-Task 8 |
+| `bamoe-migrate-security` | Migrates security from JAAS to OIDC | Sub-Task 7 |
+| `bamoe-deploy-verify` | Deploys and verifies the migrated v9 service | Sub-Task 10 |
+
+### References
 
 | Resource | URL |
 |---|---|
@@ -295,4 +285,4 @@ Java 8 or 11 / Maven 3.6.x        Java 21 / Maven 3.9.11+
 | Key differences v8 vs v9 | https://raw.githubusercontent.com/IBM/bamoe-docs/9.5.x/upgrade/02-key-differences.adoc |
 | Not supported in v9.5 | https://raw.githubusercontent.com/IBM/bamoe-docs/9.5.x/upgrade/11-not-supported.adoc |
 | BAMOE Canvas Quarkus Accelerator | https://github.com/IBM/bamoe-canvas-quarkus-accelerator |
-| BAMOE v8→v9 migration tutorials | Linked from individual upgrade `.adoc` files |
+| Local build appendix (engineers) | [docs/engineers/local-maven-repo.md](docs/engineers/local-maven-repo.md) |

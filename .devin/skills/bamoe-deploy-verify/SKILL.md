@@ -1,3 +1,8 @@
+---
+name: bamoe-deploy-verify
+description: Deploys the migrated v9 service and verifies it works correctly.
+---
+
 # BAMOE Deploy and Verify
 
 Deploys the migrated v9 service and verifies it works correctly.

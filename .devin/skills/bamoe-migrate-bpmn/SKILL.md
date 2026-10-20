@@ -1,3 +1,8 @@
+---
+name: bamoe-migrate-bpmn
+description: Migrates BPMN workflow assets from v8 to v9, ensuring compatibility with the new runtime and tooling.
+---
+
 # BAMOE Migrate BPMN Workflow Assets
 
 Migrates BPMN workflow assets from v8 to v9, ensuring compatibility with the new runtime and tooling.

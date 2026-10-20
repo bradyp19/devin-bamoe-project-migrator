@@ -1,3 +1,8 @@
+---
+name: bamoe-migrate-project-structure
+description: Migrates the v8 project structure and POM to v9, replacing KJAR packaging with standard Maven JAR and updating dependencies.
+---
+
 # BAMOE Migrate Project Structure and POM
 
 Migrates the v8 project structure and POM to v9, replacing KJAR packaging with standard Maven JAR and updating dependencies.
