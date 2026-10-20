@@ -23,3 +23,6 @@ migration-workspace/
 
 # Large video source files
 *.mov
+
+# AI agent instruction files
+CLAUDE.md
