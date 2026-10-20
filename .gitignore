@@ -25,6 +25,9 @@ migration-workspace/
 *.mov
 *.mp4
 
+# AI agent instruction files
+CLAUDE.md
+
 # Tutorial video project
 docs/tutorial/remotion/node_modules/
 docs/tutorial/remotion/out/

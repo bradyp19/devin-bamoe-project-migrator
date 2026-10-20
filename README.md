@@ -4,7 +4,40 @@ Turns your old IBM BAMOE v8 project into a new BAMOE v9.5 project, automatically
 
 ---
 
-## Three steps
+## Acknowledgements
+
+This repository is an adaptation of the **BAMOE Project Migrator** framework
+originally created by **Boon Tee Tan ([@tanbt](https://github.com/boontee))**:
+
+> **Original repository:** [`boontee/bamoe_project_migrator`](https://github.com/boontee/bamoe_project_migrator)
+
+This repo converts the Bob custom mode (`custom_modes.yaml`) from that framework
+into a **Devin-compatible `AGENTS.md`**, so that teams using Devin (rather than Bob)
+can run the same guided, documentation-grounded BAMOE v8 → v9.5 migration workflow.
+The migration plan, conversion rules, knowledge-source discipline, and structured
+sub-task approach all originate from Boon Tee Tan's work. It is now also packaged
+as a Devin plugin so the same workflow can be installed and run from any project.
+
+---
+
+## Quick start: install as a Devin plugin
+
+```
+devin plugins install bradyp19/devin-bamoe-project-migrator
+```
+
+Then, in **any** folder on your machine:
+
+1. Put your v8 project folder (or .zip) in `v8-projects/`.
+2. Open Devin there and run `/bamoe-migrator:bamoe-migrate` (or just say "Migrate my project").
+
+The migrated project appears in `v9-projects/<name>/` in that same folder — no need to clone this repo.
+
+Working on the plugin itself? `devin plugins install --local .` from a checkout links it live.
+
+---
+
+## No install? Use this repository directly
 
 ```
 1. Put your v8 project folder (or .zip) into  v8-projects/
@@ -15,23 +48,6 @@ Turns your old IBM BAMOE v8 project into a new BAMOE v9.5 project, automatically
 That's it. Devin will do the rest and tell you when it's done.
 
 > **How do I "put a folder in"?** On GitHub, open the `v8-projects/` folder, click **Add file → Upload files**, drag your folder or .zip in, and click **Commit changes**. No command line needed.
-
----
-
-## Use it anywhere as a Devin plugin
-
-```
-devin plugins install bradyp19/devin-bamoe-project-migrator
-```
-
-Then, in **any** folder on your machine:
-
-1. Put your v8 project export in `v8-projects/` inside that folder.
-2. Open Devin there and run `/bamoe-migrator:bamoe-migrate`.
-
-The migrated project appears in `v9-projects/<name>/` in that same folder — no need to clone this repo.
-
-Working on the plugin itself? From a checkout, run `devin plugins install --local .` to install it for authoring.
 
 ---
 
