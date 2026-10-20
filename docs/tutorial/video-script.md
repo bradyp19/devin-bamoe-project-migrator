@@ -23,3 +23,10 @@ Shot-by-shot script for the end-to-end walkthrough video. Target audience: non-e
 - [ ] Pre-stage a second repo tab with the finished `v9-projects/` output so the ending isn't time-lapsed through the full run.
 - [ ] Record narration separately; each shot is ≤ 30 seconds of screen time.
 - [ ] Show `Build: not-run` in `migration-status.md` and say the line out loud: "Not-run is normal on the website — the files are still complete."
+
+## Producing the video
+
+The video is produced programmatically with [Remotion](https://www.remotion.dev) — see
+[`remotion/README.md`](remotion/README.md). Synthetic shots are generated as animations;
+shots 3–6 are real screen recordings you drop into `remotion/public/raw/` (the video
+renders "Recording pending" placeholders until those files exist).
