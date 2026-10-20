@@ -128,7 +128,7 @@ Use these as the base when creating a new `v9-projects/<name>/pom.xml`. Do not i
 
 ## Available skills
 
-This plugin provides the following skills, invocable as slash commands:
+This plugin provides the following skills, invocable as slash commands. Skill definitions live in `skills/<name>/SKILL.md`; when slash commands are unavailable (e.g. Devin in the browser), read and follow that file directly:
 
 - `/bamoe-migrator:bamoe-migrate` — One-prompt end-to-end migration (runs all sub-tasks)
 - `/bamoe-migrator:bamoe-audit-v8-project` — Audits v8 project and creates migration-inventory.md
