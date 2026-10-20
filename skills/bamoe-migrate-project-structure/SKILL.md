@@ -7,6 +7,12 @@ description: Migrates the v8 project structure and POM to v9, replacing KJAR pac
 
 Migrates the v8 project structure and POM to v9, replacing KJAR packaging with standard Maven JAR and updating dependencies.
 
+## Where things live
+
+- `<plugin-root>` — the folder containing `.devin-plugin/plugin.json`, i.e. two levels above this `SKILL.md`. Holds `bamoe-v8-to-v9-migration-plan.md`, `templates/`, `v8-to-v9-migration-samples/`, and `docs/tutorial-index.md`. Resolve these with the skill's source path; never assume they are in the current directory.
+- `<work-dir>` — the user's current working directory. Input is `<work-dir>/v8-projects/<name>/`, or a path the user named explicitly; output is always `<work-dir>/v9-projects/<name>/`.
+- When this plugin repo itself is the working directory, the two are the same folder.
+
 ## When to Use
 
 Use this skill to:
@@ -18,7 +24,7 @@ Use this skill to:
 
 ## Prerequisites
 
-- v8 project must be in `v8-projects/<project-name>/`
+- v8 project must be in `<work-dir>/v8-projects/<project-name>/` (or a user-named path)
 - Java 21+ installed
 - Maven 3.9.11+ installed
 - BAMOE Maven Repository configured in `~/.m2/settings.xml`
@@ -26,7 +32,7 @@ Use this skill to:
 
 ## What This Skill Does
 
-1. Creates v9 output directory: `v9-projects/<v9-name>/` (replaces `v8-` prefix with `v9-`)
+1. Creates v9 output directory: `<work-dir>/v9-projects/<v9-name>/` (replaces `v8-` prefix with `v9-`)
 2. Copies BPMN and SVG files from v8 to v9
 3. Creates new `pom.xml` with:
    - Packaging changed from `kjar` to `jar`
@@ -51,7 +57,7 @@ Use this skill to:
 
 ## Expected Output
 
-- v9 project structure created at `v9-projects/<v9-name>/`
+- v9 project structure created at `<work-dir>/v9-projects/<v9-name>/`
 - Build succeeds with `mvn clean package -DskipTests`
 - All v8 configuration files removed
 - application.properties created with v9 skeleton

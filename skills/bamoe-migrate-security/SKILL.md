@@ -7,6 +7,12 @@ description: Migrates v8 security (WildFly JAAS/LDAP) to v9 OIDC-based authentic
 
 Migrates v8 security (WildFly JAAS/LDAP) to v9 OIDC-based authentication.
 
+## Where things live
+
+- `<plugin-root>` — the folder containing `.devin-plugin/plugin.json`, i.e. two levels above this `SKILL.md`. Holds `bamoe-v8-to-v9-migration-plan.md`, `templates/`, `v8-to-v9-migration-samples/`, and `docs/tutorial-index.md`. Resolve these with the skill's source path; never assume they are in the current directory.
+- `<work-dir>` — the user's current working directory. Input is `<work-dir>/v8-projects/<name>/`, or a path the user named explicitly; output is always `<work-dir>/v9-projects/<name>/`.
+- When this plugin repo itself is the working directory, the two are the same folder.
+
 ## When to Use
 
 Use this skill to:

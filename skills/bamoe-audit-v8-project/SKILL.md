@@ -7,6 +7,12 @@ description: Audits a BAMOE v8 project to create a migration inventory, identify
 
 Audits a BAMOE v8 project to create a migration inventory, identifying all assets that need migration, conversion, or replacement in v9.
 
+## Where things live
+
+- `<plugin-root>` — the folder containing `.devin-plugin/plugin.json`, i.e. two levels above this `SKILL.md`. Holds `bamoe-v8-to-v9-migration-plan.md`, `templates/`, `v8-to-v9-migration-samples/`, and `docs/tutorial-index.md`. Resolve these with the skill's source path; never assume they are in the current directory.
+- `<work-dir>` — the user's current working directory. Input is `<work-dir>/v8-projects/<name>/`, or a path the user named explicitly; output is always `<work-dir>/v9-projects/<name>/`.
+- When this plugin repo itself is the working directory, the two are the same folder.
+
 ## When to Use
 
 Use this skill when starting a BAMOE v8 to v9 migration to:
@@ -17,7 +23,7 @@ Use this skill when starting a BAMOE v8 to v9 migration to:
 
 ## Prerequisites
 
-- v8 project must be exported to `v8-projects/<project-name>/`
+- v8 project must be exported to `<work-dir>/v8-projects/<project-name>/` (or a user-named path)
 - Java 21+ installed
 - Maven 3.9.11+ installed
 - BAMOE Maven Repository configured in `~/.m2/settings.xml`
@@ -46,11 +52,11 @@ Use this skill when starting a BAMOE v8 to v9 migration to:
    - v9 incompatibility flags
    - Current Java/Maven versions
    - v8 source path and v9 output path
-   - Reference tutorial per finding, looked up in `docs/tutorial-index.md`
+   - Reference tutorial per finding, looked up in `<plugin-root>/docs/tutorial-index.md`
 
 ## Expected Output
 
-A `migration-inventory.md` file at the workspace root containing:
+A `migration-inventory.md` file in `<work-dir>/v9-projects/<name>/` containing:
 - Asset summary table
 - Detailed BPMN analysis
 - Configuration files to delete

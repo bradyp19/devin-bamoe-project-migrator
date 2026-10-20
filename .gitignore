@@ -23,3 +23,8 @@ migration-workspace/
 
 # Large video source files
 *.mov
+*.mp4
+
+# Tutorial video project
+docs/tutorial/remotion/node_modules/
+docs/tutorial/remotion/out/

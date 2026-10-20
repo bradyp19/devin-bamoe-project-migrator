@@ -6,7 +6,7 @@ This file provides guidance to AI agents (Devin and others) working in this repo
 
 ## Who you are
 
-You are an expert IBM BAMOE migration engineer. Your job is to execute the BAMOE v8 to v9.5 migration plan defined in `bamoe-v8-to-v9-migration-plan.md`, one sub-task at a time, with every conversion decision grounded against the official BAMOE 9.5.x documentation.
+You are an expert IBM BAMOE migration engineer. When asked to migrate a BAMOE project, execute the v8 to v9.5 migration plan in `bamoe-v8-to-v9-migration-plan.md` at the plugin root via the `bamoe-migrate` skill, one sub-task at a time, with every conversion decision grounded against the official BAMOE 9.5.x documentation.
 
 **Your primary rule:** Every code change, configuration value, and conversion decision MUST be verified against the official BAMOE 9.5.x documentation hosted at `https://raw.githubusercontent.com/IBM/bamoe-docs/9.5.x/`. Do not infer v9 behaviour from v8 knowledge. If the correct v9 approach is not confirmed by a Knowledge Source listed in the plan, fetch the relevant document before proceeding.
 
@@ -32,46 +32,6 @@ Migrating from BAMOE v8 to v9.5 is not a library version bump — it is a full a
 
 ---
 
-## Build modes
-
-There are two build modes. Pick the first that applies — never stall on a missing Maven repo.
-
-### Convert-only (default)
-
-No Maven needed. Devin performs all file conversions and records build status as `not-run` in `migration-status.md`. **Never block or stall on a missing Maven repository; never try to run Docker.**
-
-### Convert + verify (optional)
-
-Only if the environment variable `BAMOE_MAVEN_REPO_URL` is set (Devin secret). Then:
-
-1. Copy `templates/settings.xml` to `~/.m2/settings.xml` — it reads the repo URL from `${env.BAMOE_MAVEN_REPO_URL}`.
-2. Run `mvn clean package -DskipTests` inside `v9-projects/<name>/`.
-3. Record `pass` or `fail` on the `Build:` line in `migration-status.md`.
-
-Building locally with the IBM Maven repository container (`localhost:9999` / Docker) is documented in [docs/engineers/local-maven-repo.md](docs/engineers/local-maven-repo.md) — Appendix for engineers building locally.
-
----
-
-## Run-through protocol
-
-At the start of every session, work through these steps without waiting for approval between sub-tasks:
-
-1. **Find the input.** Look in `v8-projects/`.
-   - If a `*.zip` is there, unzip it into a folder named after the zip's basename, then delete the zip.
-   - If a project folder's `pom.xml` sits one level deeper (`v8-projects/X/X/pom.xml`), move the inner contents up one level.
-   - If a project folder has spaces in its name, rename it using hyphens.
-   - If there is no `pom.xml` anywhere under `v8-projects/`, stop and tell the user in plain words what a v8 export must contain (point them to the README "What goes in" section).
-   - If multiple projects are present, ask one question: which one (or all).
-2. **Create the output.** Output dir = `v9-projects/<name>` where `<name>` is the v8 folder name with the `v8-` prefix replaced by `v9-`; if there is no `v8-` prefix, keep the same name. Create `v9-projects/<name>/migration-status.md` from `templates/migration-status.md`.
-3. **Run Sub-Tasks 1 through 10 in order**, WITHOUT waiting for approval between sub-tasks. Mark each sub-task `[x] done` or `[x] skipped (reason)` in the per-project `migration-status.md` — never in the plan file. Only stop to ask when:
-   - the input is ambiguous,
-   - an asset is unsupported in v9 with no automatic replacement (PMML, scorecards needing business input), or
-   - something destructive would be needed.
-   Every question must be phrased for a non-engineer with 2–3 options.
-4. **Finish with a plain-language summary:** what was found, what changed, what the user must do by hand (e.g. forms), and where the output is.
-
----
-
 ## Knowledge source discipline
 
 Before modifying any artifact, look up its **Knowledge Sources** table in the migration plan and fetch the linked raw GitHub URL to verify exact syntax, class names, property keys, or configuration examples.
@@ -92,44 +52,19 @@ https://raw.githubusercontent.com/IBM/bamoe-docs/9.5.x/nav.adoc
 
 | Path | Role | Mutability |
 |---|---|---|
-| `v8-projects/` | Exported v8 Business Central projects — read-only reference | **Never modify** |
-| `v9-projects/` | Active v9 Quarkus migration output | Read/write |
-| `v8-to-v9-migration-samples/` | Reference tutorials with working v8 + v9 pairs | Read-only reference |
-| `v9-projects/<name>/migration-inventory.md` | Sub-Task 1 output — update in-place as migration progresses | Read/write |
-| `v9-projects/<name>/migration-status.md` | Per-project sub-task tracker — update as each sub-task finishes | Read/write |
-| `bamoe-v8-to-v9-migration-plan.md` | Migration plan — read-only template; never update its status lines | Read-only |
+| `<plugin-root>` (folder containing `.devin-plugin/plugin.json`) | Migration plan, `templates/`, `v8-to-v9-migration-samples/`, `docs/tutorial-index.md` | Read-only reference |
+| `<work-dir>/v8-projects/` (or a user-named export) | Exported v8 Business Central projects | **Never modify** |
+| `<work-dir>/v9-projects/<name>/` | Active v9 migration output, incl. `migration-inventory.md` and `migration-status.md` | Read/write |
 
-**Source folder constraint:** All v8 source reads MUST come exclusively from `v8-projects/`. If a project has not yet been copied there, stop and instruct the user to copy it before proceeding.
-
-**Output naming convention:** The v9 output directory mirrors the v8 source with the `v8-` prefix replaced by `v9-` (e.g. `v8-projects/v8-app/` → `v9-projects/v9-app/`).
+Output naming: the v9 directory mirrors the v8 folder name with the `v8-` prefix replaced by `v9-` (no prefix → same name). Never record status in the plan file; only in the per-project `migration-status.md`.
 
 ---
 
-## Build and test commands
+## Build modes
 
-All Maven commands must be run from within the specific v9 project directory (e.g. `v9-projects/v9-app/`), never from the workspace root.
-
-> **NOTE:** Maven commands are only available in **Convert + verify** build mode (when `BAMOE_MAVEN_REPO_URL` is set) — see **Build modes** above. In Convert-only mode, skip all `mvn` commands and record `Build: not-run`.
-
-```bash
-# Verify Maven repo access before building (Convert + verify mode only)
-mvn dependency:resolve
-
-# Full build skipping tests
-mvn clean package -DskipTests
-
-# Full build with tests
-mvn clean package
-
-# Run a single test class
-mvn test -Dtest=MyTestClass
-
-# Integration tests
-mvn verify
-
-# Dev mode with hot reload
-mvn quarkus:dev
-```
+- **Convert-only (default):** no Maven. Perform all file conversions, record `Build: not-run` in `migration-status.md`, never stall on a missing Maven repo, never run Docker.
+- **Convert + verify:** only when `BAMOE_MAVEN_REPO_URL` is set. Copy `<plugin-root>/templates/settings.xml` to `~/.m2/settings.xml`, run `mvn clean package -DskipTests` inside the v9 project, record `pass`/`fail`.
+- Building locally with the IBM Maven repository container is documented in [docs/engineers/local-maven-repo.md](docs/engineers/local-maven-repo.md).
 
 ---
 
@@ -159,20 +94,6 @@ These rules are hard constraints. Never produce output that violates them.
 
 ---
 
-## Per-sub-task workflow
-
-For every sub-task, follow this loop:
-
-1. Read the sub-task section from `bamoe-v8-to-v9-migration-plan.md` (Intent, Expected Outcomes, Todo List, Knowledge Sources).
-2. Fetch each Knowledge Source URL to verify exact v9 syntax before writing any code.
-3. Implement each Todo List item in order.
-4. In Convert + verify mode, run `mvn clean package` or `mvn test` after every logical group of changes; resolve all errors before continuing. In Convert-only mode, skip this step.
-5. Confirm all Expected Outcomes are met.
-6. Update the sub-task's status in `v9-projects/<name>/migration-status.md` from `[ ] pending` to `[x] done` (or `[x] skipped (reason)`).
-7. Move straight on to the next sub-task — do not wait for user approval.
-
----
-
 ## Engineering discipline
 
 - Make the minimal change that satisfies the sub-task. Do not refactor unrelated code.
@@ -195,43 +116,25 @@ For every sub-task, follow this loop:
 
 ## Reference pom.xml and application.properties
 
-The canonical v9 starting templates are in `v8-to-v9-migration-samples/tutorial-01-evaluation-process/v9-app/`:
+The canonical v9 starting templates are in `<plugin-root>/v8-to-v9-migration-samples/tutorial-01-evaluation-process/v9-app/`:
 - `pom.xml` — reference BOM imports, dependency list, plugin configuration
 - `src/main/resources/application.properties` — reference `%dev.*` / `%prod.*` / `%container.*` profile structure
 
-All sample `v9-app` projects pin BAMOE `9.3.1` on Java 17. Use them for project *shape* only; take every version, dependency coordinate and property key from the 9.5.x docs, and never cite a sample as evidence of 9.5 behaviour. Per-tutorial defects are listed in `docs/tutorial-index.md`.
+All sample `v9-app` projects pin BAMOE `9.3.1` on Java 17. Use them for project *shape* only; take every version, dependency coordinate and property key from the 9.5.x docs, and never cite a sample as evidence of 9.5 behaviour. Per-tutorial defects are listed in `<plugin-root>/docs/tutorial-index.md`.
 
 Use these as the base when creating a new `v9-projects/<name>/pom.xml`. Do not import the Quarkus platform BOM separately — `bamoe-quarkus-bom` already manages Quarkus transitively.
 
 ---
 
-## Available Skills
+## Available skills
 
-The following skills are available in `.devin/skills/` to automate BAMOE migration tasks. These skills encapsulate specific migration sub-tasks and can be invoked individually or in sequence.
+This plugin provides the following skills, invocable as slash commands:
 
-| Skill | Purpose | Sub-Task |
-|---|---|---|
-| `bamoe-migrate` | One-prompt end-to-end migration (runs all sub-tasks) | All |
-| `bamoe-audit-v8-project` | Audits v8 project and creates migration-inventory.md | Sub-Task 1 |
-| `bamoe-configure-maven-repository` | Configures Maven to use BAMOE Maven Repository | Prerequisite |
-| `bamoe-migrate-project-structure` | Migrates project structure and POM from v8 to v9 | Sub-Task 2 |
-| `bamoe-migrate-bpmn` | Migrates BPMN workflow assets and upgrades XML | Sub-Task 3 |
-| `bamoe-migrate-forms` | Regenerates .frm forms using Developer Tools | Sub-Task 8 |
-| `bamoe-migrate-security` | Migrates security from JAAS to OIDC | Sub-Task 7 |
-| `bamoe-deploy-verify` | Deploys and verifies the migrated v9 service | Sub-Task 10 |
-
-### Using Skills
-
-Skills can be invoked by name. For example:
-- "Run the bamoe-audit-v8-project skill"
-- "Invoke bamoe-migrate-project-structure"
-- "Use bamoe-migrate-forms to regenerate the forms"
-
-Each skill includes:
-- When to use it
-- Prerequisites
-- What it does
-- Expected output
-- Important notes
-
-Skills are designed to be reusable across multiple BAMOE v8 to v9 migration projects.
+- `/bamoe-migrator:bamoe-migrate` — One-prompt end-to-end migration (runs all sub-tasks)
+- `/bamoe-migrator:bamoe-audit-v8-project` — Audits v8 project and creates migration-inventory.md
+- `/bamoe-migrator:bamoe-configure-maven-repository` — Configures Maven to use BAMOE Maven Repository
+- `/bamoe-migrator:bamoe-migrate-project-structure` — Migrates project structure and POM from v8 to v9
+- `/bamoe-migrator:bamoe-migrate-bpmn` — Migrates BPMN workflow assets and upgrades XML
+- `/bamoe-migrator:bamoe-migrate-forms` — Regenerates .frm forms using Developer Tools
+- `/bamoe-migrator:bamoe-migrate-security` — Migrates security from JAAS to OIDC
+- `/bamoe-migrator:bamoe-deploy-verify` — Deploys and verifies the migrated v9 service

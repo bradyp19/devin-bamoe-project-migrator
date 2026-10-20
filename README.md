@@ -18,6 +18,23 @@ That's it. Devin will do the rest and tell you when it's done.
 
 ---
 
+## Use it anywhere as a Devin plugin
+
+```
+devin plugins install bradyp19/devin-bamoe-project-migrator
+```
+
+Then, in **any** folder on your machine:
+
+1. Put your v8 project export in `v8-projects/` inside that folder.
+2. Open Devin there and run `/bamoe-migrator:bamoe-migrate`.
+
+The migrated project appears in `v9-projects/<name>/` in that same folder — no need to clone this repo.
+
+Working on the plugin itself? From a checkout, run `devin plugins install --local .` to install it for authoring.
+
+---
+
 ## What goes in
 
 A correct input looks exactly like this:
@@ -183,7 +200,8 @@ bamoe_project_migrator/
 │   └── tutorial/                 # Video script for the walkthrough
 ├── templates/                    # settings.xml + migration-status.md templates
 ├── demos/                        # Recorded demo videos
-├── .devin/skills/                # Devin skills used during migration
+├── skills/                       # Devin plugin skills used during migration
+├── .devin-plugin/                # Devin plugin manifest (plugin.json)
 ├── bamoe-v8-to-v9-migration-plan.md   # The 10-sub-task plan (read-only template)
 ├── AGENTS.md                     # Devin's operating instructions
 └── README.md                     # This file
@@ -263,7 +281,7 @@ Java 8 or 11 / Maven 3.6.x            Java 21 / Maven 3.9.11+
 
 ### Available skills
 
-The following skills live in `.devin/skills/`:
+The following skills live in `skills/` and are installed with the plugin (invoke them as `/bamoe-migrator:<skill-name>` when installed):
 
 | Skill | Purpose | Sub-Task |
 |---|---|---|

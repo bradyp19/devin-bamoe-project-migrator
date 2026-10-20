@@ -1,0 +1,6 @@
+{
+  "name": "bamoe-migrator",
+  "version": "1.0.0",
+  "description": "Migrates IBM BAMOE v8 (Business Central / KIE Server) projects to BAMOE v9.5 Kogito-on-Quarkus services, grounded in the official 9.5.x docs.",
+  "keywords": ["bamoe", "kogito", "quarkus", "migration", "bpmn", "dmn", "drl"]
+}
