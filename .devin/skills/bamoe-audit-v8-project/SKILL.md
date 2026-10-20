@@ -41,6 +41,7 @@ Use this skill when starting a BAMOE v8 to v9 migration to:
    - v9 incompatibility flags
    - Current Java/Maven versions
    - v8 source path and v9 output path
+   - Reference tutorial per finding, looked up in `docs/tutorial-index.md`
 
 ## Expected Output
 

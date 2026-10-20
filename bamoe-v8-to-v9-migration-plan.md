@@ -114,6 +114,7 @@ migrated, converted, or dropped. This surfaces blockers early and sizes the rema
 | Project file differences (files to remove vs keep) | [`upgrade/05-01-upgrading-structure-differences.adoc`](https://raw.githubusercontent.com/IBM/bamoe-docs/9.5.x/upgrade/05-01-upgrading-structure-differences.adoc) |
 | Sample projects and asset matrix | [`upgrade/12-sample-project-references.adoc`](https://raw.githubusercontent.com/IBM/bamoe-docs/9.5.x/upgrade/12-sample-project-references.adoc) |
 | Frequently asked migration questions | [`upgrade/13-faq.adoc`](https://raw.githubusercontent.com/IBM/bamoe-docs/9.5.x/upgrade/13-faq.adoc) |
+| Which local tutorial to open per inventory finding (offline) | [`docs/tutorial-index.md`](docs/tutorial-index.md) |
 
 ---
 
