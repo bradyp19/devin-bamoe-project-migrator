@@ -1,0 +1,36 @@
+package com.fictionalbank.mortgage.rules;
+
+import com.fictionalbank.model.TreasuryAccount0001;
+
+// Fictional mortgage rules (synthetic pilot fixture)
+
+rule "Mortgage R0002 High Value"
+    ruleflow-group "mortgage-rules-0002"
+    salience 10
+when
+    $o : TreasuryAccount0001(amount > 1500, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+end
+
+rule "Mortgage R0002 Low Score"
+    ruleflow-group "mortgage-rules-0002"
+    salience 5
+when
+    $o : TreasuryAccount0001(score < 580, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Mortgage R0002 Standard"
+    ruleflow-group "mortgage-rules-0002"
+    salience 1
+when
+    $o : TreasuryAccount0001(amount <= 1500, score >= 580, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

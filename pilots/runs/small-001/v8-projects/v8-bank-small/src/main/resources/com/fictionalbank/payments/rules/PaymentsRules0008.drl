@@ -1,0 +1,36 @@
+package com.fictionalbank.payments.rules;
+
+import com.fictionalbank.model.TreasuryAccount0001;
+
+// Fictional payments rules (synthetic pilot fixture)
+
+rule "Payments R0008 High Value"
+    ruleflow-group "payments-rules-0008"
+    salience 10
+when
+    $o : TreasuryAccount0001(amount > 1750, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+end
+
+rule "Payments R0008 Low Score"
+    ruleflow-group "payments-rules-0008"
+    salience 5
+when
+    $o : TreasuryAccount0001(score < 580, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Payments R0008 Standard"
+    ruleflow-group "payments-rules-0008"
+    salience 1
+when
+    $o : TreasuryAccount0001(amount <= 1750, score >= 580, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

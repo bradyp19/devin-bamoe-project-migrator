@@ -1,0 +1,1049 @@
+{
+  "assets": [
+    {
+      "business": false,
+      "bytes": 21,
+      "dependencies": [],
+      "expected_disposition": "remove",
+      "identity": "config:package-names-white-list",
+      "kind": "config",
+      "path": "package-names-white-list",
+      "scenario": {
+        "archetype": "bc-metadata"
+      },
+      "sha256": "9ddd2af5b4531ba32435f585b1a2bedc23dddee4cbb26cd39e7144e73b42ce8a"
+    },
+    {
+      "business": false,
+      "bytes": 1708,
+      "dependencies": [],
+      "expected_disposition": "migrate-with-update",
+      "identity": "config:pom.xml",
+      "kind": "config",
+      "path": "pom.xml",
+      "scenario": {
+        "archetype": "maven-pom"
+      },
+      "sha256": "817098bd44dc4186f3ae41ae877bb9957d428f3ebcc1026e43f0cd5fce6cd59a"
+    },
+    {
+      "business": false,
+      "bytes": 98,
+      "dependencies": [],
+      "expected_disposition": "remove",
+      "identity": "config:project.imports",
+      "kind": "config",
+      "path": "project.imports",
+      "scenario": {
+        "archetype": "bc-metadata"
+      },
+      "sha256": "68d9c16cf9eea10e1776c3accfa4ce3209d3519347a15fef218081cbabe42be5"
+    },
+    {
+      "business": false,
+      "bytes": 320,
+      "dependencies": [],
+      "expected_disposition": "remove",
+      "identity": "config:project.repositories",
+      "kind": "config",
+      "path": "project.repositories",
+      "scenario": {
+        "archetype": "bc-metadata"
+      },
+      "sha256": "170b3c4a5294281114d30b397092e81f976dfc50b7f0245caaa332e1a43348ae"
+    },
+    {
+      "business": false,
+      "bytes": 886,
+      "dependencies": [
+        "wid:com.fictionalbank.kyc"
+      ],
+      "details": {
+        "fqcn": "com.fictionalbank.handler.LedgerPosting0002WorkItemHandler",
+        "wid_name": "LedgerPosting0002"
+      },
+      "expected_disposition": "migrate-with-update",
+      "identity": "java:com.fictionalbank.handler.LedgerPosting0002WorkItemHandler",
+      "kind": "java_handler",
+      "path": "src/main/java/com/fictionalbank/handler/LedgerPosting0002WorkItemHandler.java",
+      "scenario": {
+        "archetype": "work-item-handler",
+        "wid_annotation": false
+      },
+      "sha256": "9be0b949463b746f939d3a9c7c039f6ecbdedc002475c57963e863e14216ffd9"
+    },
+    {
+      "business": false,
+      "bytes": 1048,
+      "dependencies": [
+        "wid:com.fictionalbank.payments"
+      ],
+      "details": {
+        "fqcn": "com.fictionalbank.handler.SanctionsScreen0001WorkItemHandler",
+        "wid_name": "SanctionsScreen0001"
+      },
+      "expected_disposition": "migrate-with-update",
+      "identity": "java:com.fictionalbank.handler.SanctionsScreen0001WorkItemHandler",
+      "kind": "java_handler",
+      "path": "src/main/java/com/fictionalbank/handler/SanctionsScreen0001WorkItemHandler.java",
+      "scenario": {
+        "archetype": "work-item-handler",
+        "wid_annotation": true
+      },
+      "sha256": "acf87d326a70524145b4c1485076f52837fd89917701696f759a47cff7ceb0b5"
+    },
+    {
+      "business": false,
+      "bytes": 446,
+      "dependencies": [],
+      "details": {
+        "fqcn": "com.fictionalbank.listener.ProcessAuditListener0001"
+      },
+      "expected_disposition": "migrate-with-update",
+      "identity": "java:com.fictionalbank.listener.ProcessAuditListener0001",
+      "kind": "java_listener",
+      "path": "src/main/java/com/fictionalbank/listener/ProcessAuditListener0001.java",
+      "scenario": {
+        "archetype": "process-event-listener"
+      },
+      "sha256": "7c189f3dc8d0d8c57ff4e8efd65195fe9d8e99d700d42369316cf2952abaa726"
+    },
+    {
+      "business": false,
+      "bytes": 766,
+      "dependencies": [],
+      "details": {
+        "fqcn": "com.fictionalbank.listener.TaskAuditListener0002"
+      },
+      "expected_disposition": "migrate-with-update",
+      "identity": "java:com.fictionalbank.listener.TaskAuditListener0002",
+      "kind": "java_listener",
+      "path": "src/main/java/com/fictionalbank/listener/TaskAuditListener0002.java",
+      "scenario": {
+        "archetype": "task-lifecycle-listener"
+      },
+      "sha256": "e5302e560305ad828d5eb952d5b64b6d875548b5f9233ad67db43a85e1cc8609"
+    },
+    {
+      "business": false,
+      "bytes": 1031,
+      "dependencies": [],
+      "details": {
+        "fqcn": "com.fictionalbank.model.KycCase0004"
+      },
+      "expected_disposition": "migrate",
+      "identity": "java:com.fictionalbank.model.KycCase0004",
+      "kind": "java_model",
+      "path": "src/main/java/com/fictionalbank/model/KycCase0004.java",
+      "scenario": {
+        "archetype": "domain-model",
+        "persistent": false
+      },
+      "sha256": "10f0fe461a215c937e833dd82e91d1532477f317afbe1bb830b03846ac13de36"
+    },
+    {
+      "business": false,
+      "bytes": 1032,
+      "dependencies": [],
+      "details": {
+        "fqcn": "com.fictionalbank.model.KycParty0005"
+      },
+      "expected_disposition": "migrate",
+      "identity": "java:com.fictionalbank.model.KycParty0005",
+      "kind": "java_model",
+      "path": "src/main/java/com/fictionalbank/model/KycParty0005.java",
+      "scenario": {
+        "archetype": "domain-model",
+        "persistent": false
+      },
+      "sha256": "9e6670b45084e6e56f16f92eda03ccc996ac684055a24d23e42d921ef98365c3"
+    },
+    {
+      "business": false,
+      "bytes": 1118,
+      "dependencies": [],
+      "details": {
+        "fqcn": "com.fictionalbank.model.LoansApplicant0006"
+      },
+      "expected_disposition": "migrate-with-update",
+      "identity": "java:com.fictionalbank.model.LoansApplicant0006",
+      "kind": "java_model",
+      "path": "src/main/java/com/fictionalbank/model/LoansApplicant0006.java",
+      "scenario": {
+        "archetype": "domain-model",
+        "persistent": true
+      },
+      "sha256": "f04c2042d25c3eb17644c35691c40f3e97473a11b941816348042d77b07bd1d1"
+    },
+    {
+      "business": false,
+      "bytes": 1044,
+      "dependencies": [],
+      "details": {
+        "fqcn": "com.fictionalbank.model.PaymentsPayment0002"
+      },
+      "expected_disposition": "migrate",
+      "identity": "java:com.fictionalbank.model.PaymentsPayment0002",
+      "kind": "java_model",
+      "path": "src/main/java/com/fictionalbank/model/PaymentsPayment0002.java",
+      "scenario": {
+        "archetype": "domain-model",
+        "persistent": false
+      },
+      "sha256": "0671971bb9339cf572bde098e2bac669370a377444d97973c64665ec3707ed47"
+    },
+    {
+      "business": false,
+      "bytes": 1044,
+      "dependencies": [],
+      "details": {
+        "fqcn": "com.fictionalbank.model.TreasuryAccount0001"
+      },
+      "expected_disposition": "migrate",
+      "identity": "java:com.fictionalbank.model.TreasuryAccount0001",
+      "kind": "java_model",
+      "path": "src/main/java/com/fictionalbank/model/TreasuryAccount0001.java",
+      "scenario": {
+        "archetype": "domain-model",
+        "persistent": false
+      },
+      "sha256": "a65d381a63250b8e1cf279840334c8d474da1825bd4f6a5c7e2e51d28515f783"
+    },
+    {
+      "business": false,
+      "bytes": 1119,
+      "dependencies": [],
+      "details": {
+        "fqcn": "com.fictionalbank.model.TreasuryCard0003"
+      },
+      "expected_disposition": "migrate-with-update",
+      "identity": "java:com.fictionalbank.model.TreasuryCard0003",
+      "kind": "java_model",
+      "path": "src/main/java/com/fictionalbank/model/TreasuryCard0003.java",
+      "scenario": {
+        "archetype": "domain-model",
+        "persistent": true
+      },
+      "sha256": "03e3e11a6614d108eae3eda23fad3c7828e05090f2c21c1be35fdd0f6973cb30"
+    },
+    {
+      "business": false,
+      "bytes": 692,
+      "dependencies": [],
+      "details": {
+        "fqcn": "com.fictionalbank.security.BranchUserGroupCallback0001"
+      },
+      "expected_disposition": "replace",
+      "identity": "java:com.fictionalbank.security.BranchUserGroupCallback0001",
+      "kind": "java_security",
+      "path": "src/main/java/com/fictionalbank/security/BranchUserGroupCallback0001.java",
+      "scenario": {
+        "archetype": "user-group-callback"
+      },
+      "sha256": "6fd74fcb182661b41ece76cf9188a7f63c13681833bb87ac60fcee2a2428baa5"
+    },
+    {
+      "business": false,
+      "bytes": 1560,
+      "dependencies": [
+        "java:com.fictionalbank.handler.LedgerPosting0002WorkItemHandler",
+        "java:com.fictionalbank.handler.SanctionsScreen0001WorkItemHandler",
+        "java:com.fictionalbank.listener.ProcessAuditListener0001",
+        "java:com.fictionalbank.listener.TaskAuditListener0002"
+      ],
+      "expected_disposition": "remove",
+      "identity": "config:src/main/resources/META-INF/kie-deployment-descriptor.xml",
+      "kind": "config",
+      "path": "src/main/resources/META-INF/kie-deployment-descriptor.xml",
+      "scenario": {
+        "archetype": "deployment-descriptor"
+      },
+      "sha256": "0776b28374819c6881c85b12a2b9b37a722d5c3417fcb89c1a2b26bb7459a998"
+    },
+    {
+      "business": false,
+      "bytes": 317,
+      "dependencies": [],
+      "expected_disposition": "remove",
+      "identity": "config:src/main/resources/META-INF/kmodule.xml",
+      "kind": "config",
+      "path": "src/main/resources/META-INF/kmodule.xml",
+      "scenario": {
+        "archetype": "kmodule"
+      },
+      "sha256": "5ae96c8b7b9b34ebb11e7e8d7f27581776fa147b50094e6d953a22cb6ac1b8f2"
+    },
+    {
+      "business": false,
+      "bytes": 602,
+      "dependencies": [
+        "java:com.fictionalbank.model.LoansApplicant0006",
+        "java:com.fictionalbank.model.TreasuryCard0003"
+      ],
+      "expected_disposition": "remove",
+      "identity": "config:src/main/resources/META-INF/persistence.xml",
+      "kind": "config",
+      "path": "src/main/resources/META-INF/persistence.xml",
+      "scenario": {
+        "archetype": "persistence-unit"
+      },
+      "sha256": "0667dfc4a727cc2c002656d121f8cadc65d11544e6cfdebfaa14579b21837071"
+    },
+    {
+      "business": true,
+      "bytes": 2986,
+      "dependencies": [
+        "java:com.fictionalbank.model.TreasuryCard0003"
+      ],
+      "details": {
+        "nodes": 4,
+        "process_id": "cardsScript0008"
+      },
+      "expected_disposition": "migrate-with-update",
+      "identity": "bpmn:cardsScript0008",
+      "kind": "bpmn",
+      "path": "src/main/resources/com/fictionalbank/cards/CardsScript0008.bpmn",
+      "scenario": {
+        "archetype": "script",
+        "exception": "javascript-script"
+      },
+      "sha256": "61009bd9a1ec70579f6165aad45eaef08442b0cd37eebd7aff307ec13e0763ab"
+    },
+    {
+      "business": true,
+      "bytes": 764,
+      "dependencies": [
+        "java:com.fictionalbank.model.KycCase0004"
+      ],
+      "details": {
+        "group": "cards-rules-0006",
+        "package": "com.fictionalbank.cards.rules",
+        "rule_names": [
+          "Cards R0006 High Value",
+          "Cards R0006 Low Score",
+          "Cards R0006 Standard"
+        ]
+      },
+      "expected_disposition": "migrate",
+      "identity": "drl:com.fictionalbank.cards.rules/cards-rules-0006",
+      "kind": "drl",
+      "path": "src/main/resources/com/fictionalbank/cards/rules/CardsRules0006.drl",
+      "scenario": {
+        "archetype": "ruleflow-group"
+      },
+      "sha256": "5ed1d6c7a41ae410a19f8cb16f2660682c2bca79f6ba3397663fb2af3ac9826d"
+    },
+    {
+      "business": true,
+      "bytes": 4381,
+      "dependencies": [
+        "dmn:https://fictionalbank.example/dmn/loans/eligibility0002#Loans Eligibility 0002",
+        "java:com.fictionalbank.model.TreasuryAccount0001"
+      ],
+      "details": {
+        "nodes": 4,
+        "process_id": "depositsDecisionTask0013"
+      },
+      "expected_disposition": "migrate",
+      "identity": "bpmn:depositsDecisionTask0013",
+      "kind": "bpmn",
+      "path": "src/main/resources/com/fictionalbank/deposits/DepositsDecisionTask0013.bpmn",
+      "scenario": {
+        "archetype": "decision-task"
+      },
+      "sha256": "ab547f81363e7d70eb98d9bc2190af2b6fc3d90c70b49f39b62b533d727660a8"
+    },
+    {
+      "business": true,
+      "bytes": 2901,
+      "dependencies": [
+        "bpmn:com.fictionalbank.payments.manual-review-0003",
+        "java:com.fictionalbank.model.KycCase0004"
+      ],
+      "details": {
+        "nodes": 4,
+        "process_id": "depositsSubprocess0007"
+      },
+      "expected_disposition": "migrate",
+      "identity": "bpmn:depositsSubprocess0007",
+      "kind": "bpmn",
+      "path": "src/main/resources/com/fictionalbank/deposits/DepositsSubprocess0007.bpmn",
+      "scenario": {
+        "archetype": "subprocess"
+      },
+      "sha256": "29228bb9ea030b1cc024400d4315bb6a8f1b6a16d0c7eb88d71362133ae42c11"
+    },
+    {
+      "business": true,
+      "bytes": 788,
+      "dependencies": [
+        "java:com.fictionalbank.model.KycCase0004"
+      ],
+      "details": {
+        "group": "deposits-rules-0007",
+        "package": "com.fictionalbank.deposits.rules",
+        "rule_names": [
+          "Deposits R0007 High Value",
+          "Deposits R0007 Low Score",
+          "Deposits R0007 Standard"
+        ]
+      },
+      "expected_disposition": "migrate",
+      "identity": "drl:com.fictionalbank.deposits.rules/deposits-rules-0007",
+      "kind": "drl",
+      "path": "src/main/resources/com/fictionalbank/deposits/rules/DepositsRules0007.drl",
+      "scenario": {
+        "archetype": "ruleflow-group"
+      },
+      "sha256": "bb58408f7a6405282e727ed431c4be276aac76ce9d677b01870d6be63c3c8a24"
+    },
+    {
+      "business": true,
+      "bytes": 2356,
+      "dependencies": [],
+      "details": {
+        "decision": "Eligible",
+        "name": "Fraud Eligibility 0005",
+        "namespace": "https://fictionalbank.example/dmn/fraud/eligibility0005"
+      },
+      "expected_disposition": "migrate-with-update",
+      "identity": "dmn:https://fictionalbank.example/dmn/fraud/eligibility0005#Fraud Eligibility 0005",
+      "kind": "dmn",
+      "path": "src/main/resources/com/fictionalbank/fraud/Fraud Eligibility 0005.dmn",
+      "scenario": {
+        "archetype": "decision-table",
+        "exception": "dmn-1-1-namespace"
+      },
+      "sha256": "f38f12ff356610718e760d30c9713c027d18abd857b2a7efbdd06d205ae034c4"
+    },
+    {
+      "business": true,
+      "bytes": 4375,
+      "dependencies": [
+        "dmn:https://fictionalbank.example/dmn/treasury/eligibility0001#Treasury Eligibility 0001",
+        "java:com.fictionalbank.model.PaymentsPayment0002"
+      ],
+      "details": {
+        "nodes": 4,
+        "process_id": "fraudDecisionTask0012"
+      },
+      "expected_disposition": "migrate",
+      "identity": "bpmn:fraudDecisionTask0012",
+      "kind": "bpmn",
+      "path": "src/main/resources/com/fictionalbank/fraud/FraudDecisionTask0012.bpmn",
+      "scenario": {
+        "archetype": "decision-task"
+      },
+      "sha256": "9cb1cf6ffaea5cc097aac0c00da12ba62ec6892c52903590b7ba21923a94549a"
+    },
+    {
+      "business": true,
+      "bytes": 2915,
+      "dependencies": [
+        "java:com.fictionalbank.model.TreasuryCard0003"
+      ],
+      "details": {
+        "nodes": 4,
+        "process_id": "fraudScript0009"
+      },
+      "expected_disposition": "migrate",
+      "identity": "bpmn:fraudScript0009",
+      "kind": "bpmn",
+      "path": "src/main/resources/com/fictionalbank/fraud/FraudScript0009.bpmn",
+      "scenario": {
+        "archetype": "script"
+      },
+      "sha256": "1be7df9f1ce0abda45e4797d4601f6c7a8203c9a496a06378739e2af9f993018"
+    },
+    {
+      "business": true,
+      "bytes": 2348,
+      "dependencies": [],
+      "details": {
+        "decision": "Eligible",
+        "name": "Kyc Eligibility 0004",
+        "namespace": "https://fictionalbank.example/dmn/kyc/eligibility0004"
+      },
+      "expected_disposition": "migrate",
+      "identity": "dmn:https://fictionalbank.example/dmn/kyc/eligibility0004#Kyc Eligibility 0004",
+      "kind": "dmn",
+      "path": "src/main/resources/com/fictionalbank/kyc/Kyc Eligibility 0004.dmn",
+      "scenario": {
+        "archetype": "decision-table"
+      },
+      "sha256": "baa40da61dea2593fb7602ae89a03462b7e1e2bddf21f71c4567b38e728fbd5c"
+    },
+    {
+      "business": true,
+      "bytes": 5173,
+      "dependencies": [
+        "java:com.fictionalbank.model.PaymentsPayment0002"
+      ],
+      "details": {
+        "nodes": 7,
+        "process_id": "kycGateway0005"
+      },
+      "expected_disposition": "migrate",
+      "identity": "bpmn:kycGateway0005",
+      "kind": "bpmn",
+      "path": "src/main/resources/com/fictionalbank/kyc/KycGateway0005.bpmn",
+      "scenario": {
+        "archetype": "gateway"
+      },
+      "sha256": "1a365a53dd3a82c810799520a4a293e45bedf0fc627f5fcbee7325c7a23457c8"
+    },
+    {
+      "business": true,
+      "bytes": 2845,
+      "dependencies": [
+        "java:com.fictionalbank.model.KycCase0004",
+        "wid:com.fictionalbank.kyc"
+      ],
+      "details": {
+        "nodes": 4,
+        "process_id": "kycServiceHandler0015"
+      },
+      "expected_disposition": "migrate",
+      "identity": "bpmn:kycServiceHandler0015",
+      "kind": "bpmn",
+      "path": "src/main/resources/com/fictionalbank/kyc/KycServiceHandler0015.bpmn",
+      "scenario": {
+        "archetype": "service-handler"
+      },
+      "sha256": "255f1131f22a874864ac54a4c6ee25a618f880d0e0680f8988af490716ec9bf1"
+    },
+    {
+      "business": false,
+      "bytes": 306,
+      "dependencies": [],
+      "details": {
+        "names": [
+          "LedgerPosting0002"
+        ]
+      },
+      "expected_disposition": "migrate",
+      "identity": "wid:com.fictionalbank.kyc",
+      "kind": "wid",
+      "path": "src/main/resources/com/fictionalbank/kyc/WorkDefinitions.wid",
+      "scenario": {
+        "archetype": "work-definitions"
+      },
+      "sha256": "cdb7472b741ace69108175d56bbaa6766470a0b24a763dacc2925c6a9afaf5d5"
+    },
+    {
+      "business": true,
+      "bytes": 776,
+      "dependencies": [
+        "java:com.fictionalbank.model.LoansApplicant0006"
+      ],
+      "details": {
+        "group": "kyc-rules-0003",
+        "package": "com.fictionalbank.kyc.rules",
+        "rule_names": [
+          "Kyc R0003 High Value",
+          "Kyc R0003 Low Score",
+          "Kyc R0003 Standard"
+        ]
+      },
+      "expected_disposition": "migrate",
+      "identity": "drl:com.fictionalbank.kyc.rules/kyc-rules-0003",
+      "kind": "drl",
+      "path": "src/main/resources/com/fictionalbank/kyc/rules/KycRules0003.drl",
+      "scenario": {
+        "archetype": "ruleflow-group"
+      },
+      "sha256": "93c6d80b1fd673e37b81968e33e6f7265eb80a976a2d38729225b615da398e50"
+    },
+    {
+      "business": true,
+      "bytes": 750,
+      "dependencies": [
+        "java:com.fictionalbank.model.KycParty0005"
+      ],
+      "details": {
+        "group": "kyc-rules-0005",
+        "package": "com.fictionalbank.kyc.rules",
+        "rule_names": [
+          "Kyc R0005 High Value",
+          "Kyc R0005 Low Score",
+          "Kyc R0005 Standard"
+        ]
+      },
+      "expected_disposition": "migrate",
+      "identity": "drl:com.fictionalbank.kyc.rules/kyc-rules-0005",
+      "kind": "drl",
+      "path": "src/main/resources/com/fictionalbank/kyc/rules/KycRules0005.drl",
+      "scenario": {
+        "archetype": "ruleflow-group"
+      },
+      "sha256": "a2b2618a938baa9c80deab0f597ee01b6ca826222b9a00fb1fcd6af527568014"
+    },
+    {
+      "business": true,
+      "bytes": 2355,
+      "dependencies": [],
+      "details": {
+        "decision": "Eligible",
+        "name": "Loans Eligibility 0002",
+        "namespace": "https://fictionalbank.example/dmn/loans/eligibility0002"
+      },
+      "expected_disposition": "migrate",
+      "identity": "dmn:https://fictionalbank.example/dmn/loans/eligibility0002#Loans Eligibility 0002",
+      "kind": "dmn",
+      "path": "src/main/resources/com/fictionalbank/loans/Loans Eligibility 0002.dmn",
+      "scenario": {
+        "archetype": "decision-table"
+      },
+      "sha256": "d0a4f11e7a35f0ecce02ff74587cb61951f38bf2a5034c64e6e5e9467fca54c9"
+    },
+    {
+      "business": true,
+      "bytes": 4332,
+      "dependencies": [
+        "java:com.fictionalbank.model.TreasuryCard0003"
+      ],
+      "details": {
+        "nodes": 4,
+        "process_id": "loansHumanTask0002"
+      },
+      "expected_disposition": "migrate",
+      "identity": "bpmn:loansHumanTask0002",
+      "kind": "bpmn",
+      "path": "src/main/resources/com/fictionalbank/loans/LoansHumanTask0002.bpmn",
+      "scenario": {
+        "archetype": "human-task"
+      },
+      "sha256": "26fd3460333160594314835791649235211cc019c7d0a3bc7758d655dac7440b"
+    },
+    {
+      "business": true,
+      "bytes": 2880,
+      "dependencies": [
+        "drl:com.fictionalbank.mortgage.rules/mortgage-rules-0002",
+        "java:com.fictionalbank.model.KycCase0004"
+      ],
+      "details": {
+        "nodes": 4,
+        "process_id": "loansRuleTask0011"
+      },
+      "expected_disposition": "migrate",
+      "identity": "bpmn:loansRuleTask0011",
+      "kind": "bpmn",
+      "path": "src/main/resources/com/fictionalbank/loans/LoansRuleTask0011.bpmn",
+      "scenario": {
+        "archetype": "rule-task"
+      },
+      "sha256": "50bf3f5a3339afac2ed72c53ce2a2380d88a2bbc1b4e037acaedb0a845aa45a1"
+    },
+    {
+      "business": false,
+      "bytes": 1380,
+      "dependencies": [
+        "bpmn:loansHumanTask0002"
+      ],
+      "details": {
+        "process_id": "loansHumanTask0002",
+        "task_name": "VerifyIdentity0002"
+      },
+      "expected_disposition": "regenerate",
+      "identity": "form:loansHumanTask0002:VerifyIdentity0002",
+      "kind": "form",
+      "path": "src/main/resources/com/fictionalbank/loans/VerifyIdentity0002-taskform.frm",
+      "scenario": {
+        "archetype": "task-form"
+      },
+      "sha256": "50a1167222cf8c15ac0bc9234f4575312b514eee7df2ad8dc93b346f6cda3fea"
+    },
+    {
+      "business": true,
+      "bytes": 768,
+      "dependencies": [
+        "java:com.fictionalbank.model.KycParty0005"
+      ],
+      "details": {
+        "group": "loans-rules-0009",
+        "package": "com.fictionalbank.loans.rules",
+        "rule_names": [
+          "Loans R0009 High Value",
+          "Loans R0009 Low Score",
+          "Loans R0009 Standard"
+        ]
+      },
+      "expected_disposition": "migrate",
+      "identity": "drl:com.fictionalbank.loans.rules/loans-rules-0009",
+      "kind": "drl",
+      "path": "src/main/resources/com/fictionalbank/loans/rules/LoansRules0009.drl",
+      "scenario": {
+        "archetype": "ruleflow-group"
+      },
+      "sha256": "f41789b32c7eb008152484f26a07e01f2d79836f2d56f2138b2ea202cee597dc"
+    },
+    {
+      "business": true,
+      "bytes": 5124,
+      "dependencies": [
+        "java:com.fictionalbank.model.PaymentsPayment0002"
+      ],
+      "details": {
+        "nodes": 7,
+        "process_id": "mortgageGateway0004"
+      },
+      "expected_disposition": "migrate-with-update",
+      "identity": "bpmn:mortgageGateway0004",
+      "kind": "bpmn",
+      "path": "src/main/resources/com/fictionalbank/mortgage/MortgageGateway0004.bpmn",
+      "scenario": {
+        "archetype": "gateway",
+        "exception": "drools-gateway-dialect"
+      },
+      "sha256": "444923fc30987fa9637698fb688655501bd2a826b353d6a583117f9a0e099c46"
+    },
+    {
+      "business": true,
+      "bytes": 2899,
+      "dependencies": [
+        "drl:com.fictionalbank.payments.rules/payments-rules-0001",
+        "java:com.fictionalbank.model.LoansApplicant0006"
+      ],
+      "details": {
+        "nodes": 4,
+        "process_id": "mortgageRuleTask0010"
+      },
+      "expected_disposition": "migrate",
+      "identity": "bpmn:mortgageRuleTask0010",
+      "kind": "bpmn",
+      "path": "src/main/resources/com/fictionalbank/mortgage/MortgageRuleTask0010.bpmn",
+      "scenario": {
+        "archetype": "rule-task"
+      },
+      "sha256": "bb4a511e90084222141783dd43386cf4807ea6be1f9cc4eca935ea65f79ca956"
+    },
+    {
+      "business": true,
+      "bytes": 820,
+      "dependencies": [
+        "java:com.fictionalbank.model.TreasuryAccount0001"
+      ],
+      "details": {
+        "group": "mortgage-rules-0002",
+        "package": "com.fictionalbank.mortgage.rules",
+        "rule_names": [
+          "Mortgage R0002 High Value",
+          "Mortgage R0002 Low Score",
+          "Mortgage R0002 Standard"
+        ]
+      },
+      "expected_disposition": "migrate",
+      "identity": "drl:com.fictionalbank.mortgage.rules/mortgage-rules-0002",
+      "kind": "drl",
+      "path": "src/main/resources/com/fictionalbank/mortgage/rules/MortgageRules0002.drl",
+      "scenario": {
+        "archetype": "ruleflow-group"
+      },
+      "sha256": "38dea4cb4746831df7bc556b97fae15d98e35522397fe116789992391d9ad9b1"
+    },
+    {
+      "business": true,
+      "bytes": 792,
+      "dependencies": [
+        "java:com.fictionalbank.model.KycParty0005"
+      ],
+      "details": {
+        "group": "mortgage-rules-0004",
+        "package": "com.fictionalbank.mortgage.rules",
+        "rule_names": [
+          "Mortgage R0004 High Value",
+          "Mortgage R0004 Low Score",
+          "Mortgage R0004 Standard"
+        ]
+      },
+      "expected_disposition": "migrate",
+      "identity": "drl:com.fictionalbank.mortgage.rules/mortgage-rules-0004",
+      "kind": "drl",
+      "path": "src/main/resources/com/fictionalbank/mortgage/rules/MortgageRules0004.drl",
+      "scenario": {
+        "archetype": "ruleflow-group"
+      },
+      "sha256": "86b7e80210af718d49c0f60520ee444f86ed05b14af1331a3a44f3c7d77efeca"
+    },
+    {
+      "business": true,
+      "bytes": 820,
+      "dependencies": [
+        "java:com.fictionalbank.model.TreasuryAccount0001"
+      ],
+      "details": {
+        "group": "mortgage-rules-0010",
+        "package": "com.fictionalbank.mortgage.rules",
+        "rule_names": [
+          "Mortgage R0010 High Value",
+          "Mortgage R0010 Low Score",
+          "Mortgage R0010 Standard"
+        ]
+      },
+      "expected_disposition": "migrate",
+      "identity": "drl:com.fictionalbank.mortgage.rules/mortgage-rules-0010",
+      "kind": "drl",
+      "path": "src/main/resources/com/fictionalbank/mortgage/rules/MortgageRules0010.drl",
+      "scenario": {
+        "archetype": "ruleflow-group"
+      },
+      "sha256": "9969d89e21a7543d5559c9dcd8c9f9cd77e48a39b06d95dc6a57d9ecb8e974d5"
+    },
+    {
+      "business": false,
+      "bytes": 1434,
+      "dependencies": [
+        "bpmn:com.fictionalbank.payments.manual-review-0003"
+      ],
+      "details": {
+        "process_id": "com.fictionalbank.payments.manual-review-0003",
+        "task_name": "ConfirmPayment0003"
+      },
+      "expected_disposition": "regenerate",
+      "identity": "form:com.fictionalbank.payments.manual-review-0003:ConfirmPayment0003",
+      "kind": "form",
+      "path": "src/main/resources/com/fictionalbank/payments/ConfirmPayment0003-taskform.frm",
+      "scenario": {
+        "archetype": "task-form"
+      },
+      "sha256": "199cf31939aecbc1a47f2f36b090cc36eb4de33b13473c3293498643bc0bf27d"
+    },
+    {
+      "business": true,
+      "bytes": 2363,
+      "dependencies": [],
+      "details": {
+        "decision": "Eligible",
+        "name": "Payments Eligibility 0003",
+        "namespace": "https://fictionalbank.example/dmn/payments/eligibility0003"
+      },
+      "expected_disposition": "migrate",
+      "identity": "dmn:https://fictionalbank.example/dmn/payments/eligibility0003#Payments Eligibility 0003",
+      "kind": "dmn",
+      "path": "src/main/resources/com/fictionalbank/payments/Payments Eligibility 0003.dmn",
+      "scenario": {
+        "archetype": "decision-table"
+      },
+      "sha256": "aba14699bc203d1d6c49bf49f010b1069f7c1368211e53eec0a5b829c7252e66"
+    },
+    {
+      "business": true,
+      "bytes": 4393,
+      "dependencies": [
+        "java:com.fictionalbank.model.TreasuryCard0003"
+      ],
+      "details": {
+        "nodes": 4,
+        "process_id": "com.fictionalbank.payments.manual-review-0003"
+      },
+      "expected_disposition": "migrate-with-update",
+      "identity": "bpmn:com.fictionalbank.payments.manual-review-0003",
+      "kind": "bpmn",
+      "path": "src/main/resources/com/fictionalbank/payments/PaymentsHumanTask0003.bpmn",
+      "scenario": {
+        "archetype": "human-task",
+        "exception": "dotted-hyphenated-process-id"
+      },
+      "sha256": "89b13d2bee1a8a0cc839cb114bbdddffb58dc83735ad8aa34d1bd2a20ffc371d"
+    },
+    {
+      "business": true,
+      "bytes": 2877,
+      "dependencies": [
+        "java:com.fictionalbank.model.TreasuryAccount0001",
+        "wid:com.fictionalbank.payments"
+      ],
+      "details": {
+        "nodes": 4,
+        "process_id": "paymentsServiceHandler0014"
+      },
+      "expected_disposition": "migrate",
+      "identity": "bpmn:paymentsServiceHandler0014",
+      "kind": "bpmn",
+      "path": "src/main/resources/com/fictionalbank/payments/PaymentsServiceHandler0014.bpmn",
+      "scenario": {
+        "archetype": "service-handler"
+      },
+      "sha256": "88b61c11e161f60b3dfe58040becd780fa8e0f5fb4804dd392816ca34b0248a7"
+    },
+    {
+      "business": false,
+      "bytes": 310,
+      "dependencies": [],
+      "details": {
+        "names": [
+          "SanctionsScreen0001"
+        ]
+      },
+      "expected_disposition": "migrate",
+      "identity": "wid:com.fictionalbank.payments",
+      "kind": "wid",
+      "path": "src/main/resources/com/fictionalbank/payments/WorkDefinitions.wid",
+      "scenario": {
+        "archetype": "work-definitions"
+      },
+      "sha256": "9f02cdaa4c567a133d7b240e4743af19d581fc1e6030d269572a2a70715d5202"
+    },
+    {
+      "business": true,
+      "bytes": 875,
+      "dependencies": [
+        "java:com.fictionalbank.model.TreasuryAccount0001"
+      ],
+      "details": {
+        "group": "payments-rules-0001",
+        "package": "com.fictionalbank.payments.rules",
+        "rule_names": [
+          "Payments R0001 High Value",
+          "Payments R0001 Low Score",
+          "Payments R0001 Standard"
+        ]
+      },
+      "expected_disposition": "migrate-with-update",
+      "identity": "drl:com.fictionalbank.payments.rules/payments-rules-0001",
+      "kind": "drl",
+      "path": "src/main/resources/com/fictionalbank/payments/rules/PaymentsRules0001.drl",
+      "scenario": {
+        "archetype": "ruleflow-group",
+        "exception": "shared-session-insert"
+      },
+      "sha256": "281edd76c077bbdbc74a31bae4a48ad55bfdf2596e9cfbb332cdb50c975a5295"
+    },
+    {
+      "business": true,
+      "bytes": 820,
+      "dependencies": [
+        "java:com.fictionalbank.model.TreasuryAccount0001"
+      ],
+      "details": {
+        "group": "payments-rules-0008",
+        "package": "com.fictionalbank.payments.rules",
+        "rule_names": [
+          "Payments R0008 High Value",
+          "Payments R0008 Low Score",
+          "Payments R0008 Standard"
+        ]
+      },
+      "expected_disposition": "migrate",
+      "identity": "drl:com.fictionalbank.payments.rules/payments-rules-0008",
+      "kind": "drl",
+      "path": "src/main/resources/com/fictionalbank/payments/rules/PaymentsRules0008.drl",
+      "scenario": {
+        "archetype": "ruleflow-group"
+      },
+      "sha256": "1f298ccf0284d0e4c9f1cb1b7eda5a829745d2a413598817545a497d601e2116"
+    },
+    {
+      "business": false,
+      "bytes": 1380,
+      "dependencies": [
+        "bpmn:treasuryHumanTask0001"
+      ],
+      "details": {
+        "process_id": "treasuryHumanTask0001",
+        "task_name": "ApproveLimit0001"
+      },
+      "expected_disposition": "regenerate",
+      "identity": "form:treasuryHumanTask0001:ApproveLimit0001",
+      "kind": "form",
+      "path": "src/main/resources/com/fictionalbank/treasury/ApproveLimit0001-taskform.frm",
+      "scenario": {
+        "archetype": "task-form"
+      },
+      "sha256": "908db0f2898317df6d1dec01e86a29e69eedb52af1eb1fd5b4e42b9ab0791a19"
+    },
+    {
+      "business": true,
+      "bytes": 2364,
+      "dependencies": [],
+      "details": {
+        "decision": "Eligible",
+        "name": "Treasury Eligibility 0001",
+        "namespace": "https://fictionalbank.example/dmn/treasury/eligibility0001"
+      },
+      "expected_disposition": "migrate",
+      "identity": "dmn:https://fictionalbank.example/dmn/treasury/eligibility0001#Treasury Eligibility 0001",
+      "kind": "dmn",
+      "path": "src/main/resources/com/fictionalbank/treasury/Treasury Eligibility 0001.dmn",
+      "scenario": {
+        "archetype": "decision-table"
+      },
+      "sha256": "3592ed213482ff3a9d34cb745f49ff17b6f0550a50b4a290b79040052ba987d4"
+    },
+    {
+      "business": true,
+      "bytes": 4301,
+      "dependencies": [
+        "java:com.fictionalbank.model.PaymentsPayment0002"
+      ],
+      "details": {
+        "nodes": 4,
+        "process_id": "treasuryHumanTask0001"
+      },
+      "expected_disposition": "migrate",
+      "identity": "bpmn:treasuryHumanTask0001",
+      "kind": "bpmn",
+      "path": "src/main/resources/com/fictionalbank/treasury/TreasuryHumanTask0001.bpmn",
+      "scenario": {
+        "archetype": "human-task"
+      },
+      "sha256": "ee83e8d79a8070a533d3f19539663174ce635a7fa6903e77e41b871454f39ff6"
+    },
+    {
+      "business": true,
+      "bytes": 2883,
+      "dependencies": [
+        "bpmn:depositsSubprocess0007",
+        "java:com.fictionalbank.model.TreasuryCard0003"
+      ],
+      "details": {
+        "nodes": 4,
+        "process_id": "treasurySubprocess0006"
+      },
+      "expected_disposition": "migrate",
+      "identity": "bpmn:treasurySubprocess0006",
+      "kind": "bpmn",
+      "path": "src/main/resources/com/fictionalbank/treasury/TreasurySubprocess0006.bpmn",
+      "scenario": {
+        "archetype": "subprocess"
+      },
+      "sha256": "34fb0c4f260652bae92c6df8ca56a072016bf0a7aa5d2fdca99cac1cf0457b53"
+    }
+  ],
+  "generator_version": "1.0.0",
+  "manifest_sha256": "b3950c0e55d70a567c181b02503d85e34e31c834d6b61b635461871dcc0c517a",
+  "project_dir": "v8-projects/v8-bank-small",
+  "schema_version": 1,
+  "seed": 20261021,
+  "summary": {
+    "business": {
+      "bpmn": 15,
+      "dmn": 5,
+      "drl": 10
+    },
+    "dependency_edges": 44,
+    "exception_breakdown": {
+      "dmn-1-1-namespace": 1,
+      "dotted-hyphenated-process-id": 1,
+      "drools-gateway-dialect": 1,
+      "javascript-script": 1,
+      "shared-session-insert": 1
+    },
+    "exceptions": 5,
+    "max_call_chain_depth": 3,
+    "process_nodes": 66,
+    "support": {
+      "config": 7,
+      "form": 3,
+      "java_handler": 2,
+      "java_listener": 2,
+      "java_model": 6,
+      "java_security": 1,
+      "wid": 2
+    },
+    "total_bytes": 94686,
+    "total_files": 53
+  },
+  "tier": "small"
+}
