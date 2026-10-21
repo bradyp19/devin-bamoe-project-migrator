@@ -1,0 +1,38 @@
+package com.fictionalbank.fraud.rules;
+
+import com.fictionalbank.model.DepositsApplicant0186;
+
+// Fictional fraud rules (synthetic pilot fixture)
+
+rule "Fraud R0301 High Value"
+    ruleflow-group "fraud-rules-0301"
+    salience 10
+when
+    $o : DepositsApplicant0186(amount > 3550, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+    insert(new DepositsApplicant0186());
+    update($o);
+end
+
+rule "Fraud R0301 Low Score"
+    ruleflow-group "fraud-rules-0301"
+    salience 5
+when
+    $o : DepositsApplicant0186(score < 580, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Fraud R0301 Standard"
+    ruleflow-group "fraud-rules-0301"
+    salience 1
+when
+    $o : DepositsApplicant0186(amount <= 3550, score >= 580, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

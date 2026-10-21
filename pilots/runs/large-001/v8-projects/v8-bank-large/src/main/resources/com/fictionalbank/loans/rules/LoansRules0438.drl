@@ -1,0 +1,36 @@
+package com.fictionalbank.loans.rules;
+
+import com.fictionalbank.model.CardsParty0263;
+
+// Fictional loans rules (synthetic pilot fixture)
+
+rule "Loans R0438 High Value"
+    ruleflow-group "loans-rules-0438"
+    salience 10
+when
+    $o : CardsParty0263(amount > 4950, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+end
+
+rule "Loans R0438 Low Score"
+    ruleflow-group "loans-rules-0438"
+    salience 5
+when
+    $o : CardsParty0263(score < 690, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Loans R0438 Standard"
+    ruleflow-group "loans-rules-0438"
+    salience 1
+when
+    $o : CardsParty0263(amount <= 4950, score >= 690, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

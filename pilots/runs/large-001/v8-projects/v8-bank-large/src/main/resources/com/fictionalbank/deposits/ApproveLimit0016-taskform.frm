@@ -1,0 +1,69 @@
+{
+  "fields": [
+    {
+      "binding": "reference",
+      "code": "TextBox",
+      "name": "reference"
+    },
+    {
+      "binding": "status",
+      "code": "TextBox",
+      "name": "status"
+    },
+    {
+      "binding": "amount",
+      "code": "TextBox",
+      "name": "amount"
+    },
+    {
+      "binding": "approved",
+      "code": "TextBox",
+      "name": "approved"
+    }
+  ],
+  "id": "form-depositsHumanTask0016-ApproveLimit0016",
+  "layoutTemplate": {
+    "rows": [],
+    "version": 2
+  },
+  "model": {
+    "name": "task",
+    "processId": "depositsHumanTask0016",
+    "properties": [
+      {
+        "name": "reference",
+        "typeInfo": {
+          "className": "java.lang.String",
+          "multiple": false,
+          "type": "BASE"
+        }
+      },
+      {
+        "name": "status",
+        "typeInfo": {
+          "className": "java.lang.String",
+          "multiple": false,
+          "type": "BASE"
+        }
+      },
+      {
+        "name": "amount",
+        "typeInfo": {
+          "className": "java.math.BigDecimal",
+          "multiple": false,
+          "type": "BASE"
+        }
+      },
+      {
+        "name": "approved",
+        "typeInfo": {
+          "className": "java.lang.Boolean",
+          "multiple": false,
+          "type": "BASE"
+        }
+      }
+    ],
+    "taskName": "ApproveLimit0016"
+  },
+  "name": "ApproveLimit0016-taskform.frm"
+}

@@ -1,0 +1,36 @@
+package com.fictionalbank.payments.rules;
+
+import com.fictionalbank.model.CardsCard0081;
+
+// Fictional payments rules (synthetic pilot fixture)
+
+rule "Payments R0132 High Value"
+    ruleflow-group "payments-rules-0132"
+    salience 10
+when
+    $o : CardsCard0081(amount > 4350, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+end
+
+rule "Payments R0132 Low Score"
+    ruleflow-group "payments-rules-0132"
+    salience 5
+when
+    $o : CardsCard0081(score < 660, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Payments R0132 Standard"
+    ruleflow-group "payments-rules-0132"
+    salience 1
+when
+    $o : CardsCard0081(amount <= 4350, score >= 660, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

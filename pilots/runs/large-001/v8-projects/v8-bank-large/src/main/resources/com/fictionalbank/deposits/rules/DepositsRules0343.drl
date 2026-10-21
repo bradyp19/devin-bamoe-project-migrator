@@ -1,0 +1,36 @@
+package com.fictionalbank.deposits.rules;
+
+import com.fictionalbank.model.MortgageParty0209;
+
+// Fictional deposits rules (synthetic pilot fixture)
+
+rule "Deposits R0343 High Value"
+    ruleflow-group "deposits-rules-0343"
+    salience 10
+when
+    $o : MortgageParty0209(amount > 700, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+end
+
+rule "Deposits R0343 Low Score"
+    ruleflow-group "deposits-rules-0343"
+    salience 5
+when
+    $o : MortgageParty0209(score < 660, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Deposits R0343 Standard"
+    ruleflow-group "deposits-rules-0343"
+    salience 1
+when
+    $o : MortgageParty0209(amount <= 700, score >= 660, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

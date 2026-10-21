@@ -1,0 +1,36 @@
+package com.fictionalbank.payments.rules;
+
+import com.fictionalbank.model.TreasuryApplicant0228;
+
+// Fictional payments rules (synthetic pilot fixture)
+
+rule "Payments R0375 High Value"
+    ruleflow-group "payments-rules-0375"
+    salience 10
+when
+    $o : TreasuryApplicant0228(amount > 4200, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+end
+
+rule "Payments R0375 Low Score"
+    ruleflow-group "payments-rules-0375"
+    salience 5
+when
+    $o : TreasuryApplicant0228(score < 620, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Payments R0375 Standard"
+    ruleflow-group "payments-rules-0375"
+    salience 1
+when
+    $o : TreasuryApplicant0228(amount <= 4200, score >= 620, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

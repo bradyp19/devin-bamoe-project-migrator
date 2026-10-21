@@ -1,0 +1,95 @@
+import org.jbpm.process.core.datatype.impl.type.StringDataType;
+
+[
+  [
+    "name" : "SanctionsScreen0001",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "SanctionsScreen0001",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "SmsNotify0008",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "SmsNotify0008",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "SanctionsScreen0011",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "SanctionsScreen0011",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "SanctionsScreen0046",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "SanctionsScreen0046",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "LedgerPosting0047",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "LedgerPosting0047",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "SmsNotify0048",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "SmsNotify0048",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "DocumentArchive0054",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "DocumentArchive0054",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "SanctionsScreen0056",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "SanctionsScreen0056",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "DocumentArchive0059",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "DocumentArchive0059",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "SanctionsScreen0061",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "SanctionsScreen0061",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "CreditBureauLookup0075",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "CreditBureauLookup0075",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "SanctionsScreen0081",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "SanctionsScreen0081",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "LedgerPosting0097",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "LedgerPosting0097",
+    "icon" : "defaultservicenodeicon.png"
+  ]
+]

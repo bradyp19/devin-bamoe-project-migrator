@@ -1,0 +1,36 @@
+package com.fictionalbank.deposits.rules;
+
+import com.fictionalbank.model.DepositsCase0004;
+
+// Fictional deposits rules (synthetic pilot fixture)
+
+rule "Deposits R0010 High Value"
+    ruleflow-group "deposits-rules-0010"
+    salience 10
+when
+    $o : DepositsCase0004(amount > 4150, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+end
+
+rule "Deposits R0010 Low Score"
+    ruleflow-group "deposits-rules-0010"
+    salience 5
+when
+    $o : DepositsCase0004(score < 680, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Deposits R0010 Standard"
+    ruleflow-group "deposits-rules-0010"
+    salience 1
+when
+    $o : DepositsCase0004(amount <= 4150, score >= 680, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

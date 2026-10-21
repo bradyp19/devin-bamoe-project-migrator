@@ -1,0 +1,53 @@
+import org.jbpm.process.core.datatype.impl.type.StringDataType;
+
+[
+  [
+    "name" : "DocumentArchive0019",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "DocumentArchive0019",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "CreditBureauLookup0025",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "CreditBureauLookup0025",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "SmsNotify0038",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "SmsNotify0038",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "CreditBureauLookup0060",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "CreditBureauLookup0060",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "SanctionsScreen0066",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "SanctionsScreen0066",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "SmsNotify0088",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "SmsNotify0088",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "SmsNotify0098",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "SmsNotify0098",
+    "icon" : "defaultservicenodeicon.png"
+  ]
+]

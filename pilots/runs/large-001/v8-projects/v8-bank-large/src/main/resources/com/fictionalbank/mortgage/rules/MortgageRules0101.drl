@@ -1,0 +1,38 @@
+package com.fictionalbank.mortgage.rules;
+
+import com.fictionalbank.model.DepositsAccount0061;
+
+// Fictional mortgage rules (synthetic pilot fixture)
+
+rule "Mortgage R0101 High Value"
+    ruleflow-group "mortgage-rules-0101"
+    salience 10
+when
+    $o : DepositsAccount0061(amount > 3550, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+    insert(new DepositsAccount0061());
+    update($o);
+end
+
+rule "Mortgage R0101 Low Score"
+    ruleflow-group "mortgage-rules-0101"
+    salience 5
+when
+    $o : DepositsAccount0061(score < 640, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Mortgage R0101 Standard"
+    ruleflow-group "mortgage-rules-0101"
+    salience 1
+when
+    $o : DepositsAccount0061(amount <= 3550, score >= 640, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

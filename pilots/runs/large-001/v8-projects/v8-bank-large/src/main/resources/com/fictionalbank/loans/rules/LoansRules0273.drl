@@ -1,0 +1,36 @@
+package com.fictionalbank.loans.rules;
+
+import com.fictionalbank.model.FraudAccount0163;
+
+// Fictional loans rules (synthetic pilot fixture)
+
+rule "Loans R0273 High Value"
+    ruleflow-group "loans-rules-0273"
+    salience 10
+when
+    $o : FraudAccount0163(amount > 3050, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+end
+
+rule "Loans R0273 Low Score"
+    ruleflow-group "loans-rules-0273"
+    salience 5
+when
+    $o : FraudAccount0163(score < 630, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Loans R0273 Standard"
+    ruleflow-group "loans-rules-0273"
+    salience 1
+when
+    $o : FraudAccount0163(amount <= 3050, score >= 630, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

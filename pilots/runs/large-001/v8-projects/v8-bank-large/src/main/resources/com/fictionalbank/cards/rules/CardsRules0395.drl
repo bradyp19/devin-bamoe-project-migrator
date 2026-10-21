@@ -1,0 +1,36 @@
+package com.fictionalbank.cards.rules;
+
+import com.fictionalbank.model.DepositsParty0239;
+
+// Fictional cards rules (synthetic pilot fixture)
+
+rule "Cards R0395 High Value"
+    ruleflow-group "cards-rules-0395"
+    salience 10
+when
+    $o : DepositsParty0239(amount > 2200, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+end
+
+rule "Cards R0395 Low Score"
+    ruleflow-group "cards-rules-0395"
+    salience 5
+when
+    $o : DepositsParty0239(score < 620, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Cards R0395 Standard"
+    ruleflow-group "cards-rules-0395"
+    salience 1
+when
+    $o : DepositsParty0239(amount <= 2200, score >= 620, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

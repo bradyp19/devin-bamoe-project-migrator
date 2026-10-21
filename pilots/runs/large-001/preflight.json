@@ -1,0 +1,55 @@
+{
+  "checks": {
+    "broken_source_references": [],
+    "index_parse_errors": [],
+    "indexed_counts": {
+      "bpmn": 750,
+      "dmn": 250,
+      "drl": 500,
+      "frm": 150,
+      "imports": 1,
+      "java": 550,
+      "package-names-white-list": 1,
+      "repositories": 1,
+      "wid": 8,
+      "xml": 4
+    },
+    "manifest_integrity_problems": [],
+    "unresolved_manifest_dependencies": [],
+    "xml_parse_errors": []
+  },
+  "manifest_sha256": "25d6a0743a60e7e70529693d81578681fd503bbc101cfe3258babf0ecdbc7156",
+  "notes": "Mechanical preflight only: inputs are uncompiled and not established as v8-runtime-valid.",
+  "seed": 20261021,
+  "status": "pass",
+  "summary": {
+    "business": {
+      "bpmn": 750,
+      "dmn": 250,
+      "drl": 500
+    },
+    "dependency_edges": 2200,
+    "exception_breakdown": {
+      "dmn-1-1-namespace": 50,
+      "dotted-hyphenated-process-id": 50,
+      "drools-gateway-dialect": 50,
+      "javascript-script": 50,
+      "shared-session-insert": 50
+    },
+    "exceptions": 250,
+    "max_call_chain_depth": 3,
+    "process_nodes": 3300,
+    "support": {
+      "config": 7,
+      "form": 150,
+      "java_handler": 100,
+      "java_listener": 100,
+      "java_model": 300,
+      "java_security": 50,
+      "wid": 8
+    },
+    "total_bytes": 4551643,
+    "total_files": 2215
+  },
+  "tier": "large"
+}

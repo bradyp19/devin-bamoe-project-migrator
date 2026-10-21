@@ -1,0 +1,38 @@
+package com.fictionalbank.kyc.rules;
+
+import com.fictionalbank.model.TreasuryApplicant0156;
+
+// Fictional kyc rules (synthetic pilot fixture)
+
+rule "Kyc R0251 High Value"
+    ruleflow-group "kyc-rules-0251"
+    salience 10
+when
+    $o : TreasuryApplicant0156(amount > 4150, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+    insert(new TreasuryApplicant0156());
+    update($o);
+end
+
+rule "Kyc R0251 Low Score"
+    ruleflow-group "kyc-rules-0251"
+    salience 5
+when
+    $o : TreasuryApplicant0156(score < 690, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Kyc R0251 Standard"
+    ruleflow-group "kyc-rules-0251"
+    salience 1
+when
+    $o : TreasuryApplicant0156(amount <= 4150, score >= 690, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

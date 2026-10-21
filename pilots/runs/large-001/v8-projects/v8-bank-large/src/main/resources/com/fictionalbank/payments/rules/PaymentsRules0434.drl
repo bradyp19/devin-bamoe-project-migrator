@@ -1,0 +1,36 @@
+package com.fictionalbank.payments.rules;
+
+import com.fictionalbank.model.KycCase0262;
+
+// Fictional payments rules (synthetic pilot fixture)
+
+rule "Payments R0434 High Value"
+    ruleflow-group "payments-rules-0434"
+    salience 10
+when
+    $o : KycCase0262(amount > 4750, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+end
+
+rule "Payments R0434 Low Score"
+    ruleflow-group "payments-rules-0434"
+    salience 5
+when
+    $o : KycCase0262(score < 640, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Payments R0434 Standard"
+    ruleflow-group "payments-rules-0434"
+    salience 1
+when
+    $o : KycCase0262(amount <= 4750, score >= 640, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

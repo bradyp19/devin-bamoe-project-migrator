@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="https://fictionalbank.example/dmn/cards/eligibility0168" xmlns:feel="http://www.omg.org/spec/FEEL/20140401" id="_def0168" name="Cards Eligibility 0168" namespace="https://fictionalbank.example/dmn/cards/eligibility0168">
+  <dmn:inputData id="_in0168_age" name="Age">
+    <dmn:variable id="_in0168_age_v" name="Age" typeRef="number"/>
+  </dmn:inputData>
+  <dmn:inputData id="_in0168_amount" name="Amount">
+    <dmn:variable id="_in0168_amount_v" name="Amount" typeRef="number"/>
+  </dmn:inputData>
+  <dmn:decision id="_dec0168" name="Eligible">
+    <dmn:variable id="_dec0168_v" name="Eligible" typeRef="boolean"/>
+    <dmn:informationRequirement id="_ir0168a">
+      <dmn:requiredInput href="#_in0168_age"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_ir0168b">
+      <dmn:requiredInput href="#_in0168_amount"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_dt0168" hitPolicy="FIRST">
+      <dmn:input id="_dt0168_i1"><dmn:inputExpression id="_dt0168_e1" typeRef="number"><dmn:text>Age</dmn:text></dmn:inputExpression></dmn:input>
+      <dmn:input id="_dt0168_i2"><dmn:inputExpression id="_dt0168_e2" typeRef="number"><dmn:text>Amount</dmn:text></dmn:inputExpression></dmn:input>
+      <dmn:output id="_dt0168_o1"/>
+      <dmn:rule id="_dt0168_r1">
+        <dmn:inputEntry id="_dt0168_r1a"><dmn:text>&lt; 19</dmn:text></dmn:inputEntry>
+        <dmn:inputEntry id="_dt0168_r1b"><dmn:text>-</dmn:text></dmn:inputEntry>
+        <dmn:outputEntry id="_dt0168_r1o"><dmn:text>false</dmn:text></dmn:outputEntry>
+      </dmn:rule>
+      <dmn:rule id="_dt0168_r2">
+        <dmn:inputEntry id="_dt0168_r2a"><dmn:text>-</dmn:text></dmn:inputEntry>
+        <dmn:inputEntry id="_dt0168_r2b"><dmn:text>&lt;= 1500</dmn:text></dmn:inputEntry>
+        <dmn:outputEntry id="_dt0168_r2o"><dmn:text>true</dmn:text></dmn:outputEntry>
+      </dmn:rule>
+      <dmn:rule id="_dt0168_r3">
+        <dmn:inputEntry id="_dt0168_r3a"><dmn:text>-</dmn:text></dmn:inputEntry>
+        <dmn:inputEntry id="_dt0168_r3b"><dmn:text>-</dmn:text></dmn:inputEntry>
+        <dmn:outputEntry id="_dt0168_r3o"><dmn:text>false</dmn:text></dmn:outputEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+</dmn:definitions>

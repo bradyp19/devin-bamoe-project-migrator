@@ -1,0 +1,36 @@
+package com.fictionalbank.fraud.rules;
+
+import com.fictionalbank.model.KycCard0201;
+
+// Fictional fraud rules (synthetic pilot fixture)
+
+rule "Fraud R0335 High Value"
+    ruleflow-group "fraud-rules-0335"
+    salience 10
+when
+    $o : KycCard0201(amount > 4300, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+end
+
+rule "Fraud R0335 Low Score"
+    ruleflow-group "fraud-rules-0335"
+    salience 5
+when
+    $o : KycCard0201(score < 550, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Fraud R0335 Standard"
+    ruleflow-group "fraud-rules-0335"
+    salience 1
+when
+    $o : KycCard0201(amount <= 4300, score >= 550, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

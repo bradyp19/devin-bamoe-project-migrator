@@ -1,0 +1,109 @@
+import org.jbpm.process.core.datatype.impl.type.StringDataType;
+
+[
+  [
+    "name" : "LedgerPosting0002",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "LedgerPosting0002",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "DocumentArchive0004",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "DocumentArchive0004",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "LedgerPosting0007",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "LedgerPosting0007",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "DocumentArchive0014",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "DocumentArchive0014",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "CreditBureauLookup0015",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "CreditBureauLookup0015",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "LedgerPosting0022",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "LedgerPosting0022",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "DocumentArchive0039",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "DocumentArchive0039",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "SmsNotify0043",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "SmsNotify0043",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "CreditBureauLookup0045",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "CreditBureauLookup0045",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "CreditBureauLookup0050",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "CreditBureauLookup0050",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "CreditBureauLookup0080",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "CreditBureauLookup0080",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "LedgerPosting0082",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "LedgerPosting0082",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "CreditBureauLookup0085",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "CreditBureauLookup0085",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "LedgerPosting0087",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "LedgerPosting0087",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "SanctionsScreen0096",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "SanctionsScreen0096",
+    "icon" : "defaultservicenodeicon.png"
+  ]
+]

@@ -1,0 +1,36 @@
+package com.fictionalbank.deposits.rules;
+
+import com.fictionalbank.model.PaymentsAccount0193;
+
+// Fictional deposits rules (synthetic pilot fixture)
+
+rule "Deposits R0322 High Value"
+    ruleflow-group "deposits-rules-0322"
+    salience 10
+when
+    $o : PaymentsAccount0193(amount > 4650, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+end
+
+rule "Deposits R0322 Low Score"
+    ruleflow-group "deposits-rules-0322"
+    salience 5
+when
+    $o : PaymentsAccount0193(score < 550, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Deposits R0322 Standard"
+    ruleflow-group "deposits-rules-0322"
+    salience 1
+when
+    $o : PaymentsAccount0193(amount <= 4650, score >= 550, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

@@ -1,0 +1,38 @@
+package com.fictionalbank.fraud.rules;
+
+import com.fictionalbank.model.TreasuryCase0280;
+
+// Fictional fraud rules (synthetic pilot fixture)
+
+rule "Fraud R0461 High Value"
+    ruleflow-group "fraud-rules-0461"
+    salience 10
+when
+    $o : TreasuryCase0280(amount > 2450, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+    insert(new TreasuryCase0280());
+    update($o);
+end
+
+rule "Fraud R0461 Low Score"
+    ruleflow-group "fraud-rules-0461"
+    salience 5
+when
+    $o : TreasuryCase0280(score < 580, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Fraud R0461 Standard"
+    ruleflow-group "fraud-rules-0461"
+    salience 1
+when
+    $o : TreasuryCase0280(amount <= 2450, score >= 580, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

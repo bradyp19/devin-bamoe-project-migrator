@@ -1,0 +1,36 @@
+package com.fictionalbank.mortgage.rules;
+
+import com.fictionalbank.model.MortgageApplicant0036;
+
+// Fictional mortgage rules (synthetic pilot fixture)
+
+rule "Mortgage R0059 High Value"
+    ruleflow-group "mortgage-rules-0059"
+    salience 10
+when
+    $o : MortgageApplicant0036(amount > 1700, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+end
+
+rule "Mortgage R0059 Low Score"
+    ruleflow-group "mortgage-rules-0059"
+    salience 5
+when
+    $o : MortgageApplicant0036(score < 600, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Mortgage R0059 Standard"
+    ruleflow-group "mortgage-rules-0059"
+    salience 1
+when
+    $o : MortgageApplicant0036(amount <= 1700, score >= 600, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

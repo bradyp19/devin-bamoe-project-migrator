@@ -1,0 +1,36 @@
+package com.fictionalbank.cards.rules;
+
+import com.fictionalbank.model.KycParty0203;
+
+// Fictional cards rules (synthetic pilot fixture)
+
+rule "Cards R0336 High Value"
+    ruleflow-group "cards-rules-0336"
+    salience 10
+when
+    $o : KycParty0203(amount > 2450, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+end
+
+rule "Cards R0336 Low Score"
+    ruleflow-group "cards-rules-0336"
+    salience 5
+when
+    $o : KycParty0203(score < 560, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Cards R0336 Standard"
+    ruleflow-group "cards-rules-0336"
+    salience 1
+when
+    $o : KycParty0203(amount <= 2450, score >= 560, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

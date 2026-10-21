@@ -1,0 +1,67 @@
+import org.jbpm.process.core.datatype.impl.type.StringDataType;
+
+[
+  [
+    "name" : "SmsNotify0013",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "SmsNotify0013",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "SmsNotify0018",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "SmsNotify0018",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "SanctionsScreen0021",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "SanctionsScreen0021",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "DocumentArchive0024",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "DocumentArchive0024",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "DocumentArchive0034",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "DocumentArchive0034",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "CreditBureauLookup0035",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "CreditBureauLookup0035",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "CreditBureauLookup0040",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "CreditBureauLookup0040",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "LedgerPosting0077",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "LedgerPosting0077",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "DocumentArchive0079",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "DocumentArchive0079",
+    "icon" : "defaultservicenodeicon.png"
+  ]
+]

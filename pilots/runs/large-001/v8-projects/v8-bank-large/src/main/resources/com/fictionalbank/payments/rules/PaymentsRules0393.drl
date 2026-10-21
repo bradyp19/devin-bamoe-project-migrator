@@ -1,0 +1,36 @@
+package com.fictionalbank.payments.rules;
+
+import com.fictionalbank.model.FraudCase0238;
+
+// Fictional payments rules (synthetic pilot fixture)
+
+rule "Payments R0393 High Value"
+    ruleflow-group "payments-rules-0393"
+    salience 10
+when
+    $o : FraudCase0238(amount > 4950, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+end
+
+rule "Payments R0393 Low Score"
+    ruleflow-group "payments-rules-0393"
+    salience 5
+when
+    $o : FraudCase0238(score < 600, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Payments R0393 Standard"
+    ruleflow-group "payments-rules-0393"
+    salience 1
+when
+    $o : FraudCase0238(amount <= 4950, score >= 600, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

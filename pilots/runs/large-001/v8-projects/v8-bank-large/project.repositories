@@ -1,0 +1,12 @@
+<project-repositories>
+  <repositories>
+    <repository>
+      <include>true</include>
+      <metadata>
+        <id>fictional-bank-internal</id>
+        <url>https://maven.fictionalbank.example/releases</url>
+        <source>PROJECT</source>
+      </metadata>
+    </repository>
+  </repositories>
+</project-repositories>

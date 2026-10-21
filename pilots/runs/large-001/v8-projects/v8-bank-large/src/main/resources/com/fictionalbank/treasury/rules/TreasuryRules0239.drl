@@ -1,0 +1,36 @@
+package com.fictionalbank.treasury.rules;
+
+import com.fictionalbank.model.CardsAccount0139;
+
+// Fictional treasury rules (synthetic pilot fixture)
+
+rule "Treasury R0239 High Value"
+    ruleflow-group "treasury-rules-0239"
+    salience 10
+when
+    $o : CardsAccount0139(amount > 3600, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+end
+
+rule "Treasury R0239 Low Score"
+    ruleflow-group "treasury-rules-0239"
+    salience 5
+when
+    $o : CardsAccount0139(score < 560, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Treasury R0239 Standard"
+    ruleflow-group "treasury-rules-0239"
+    salience 1
+when
+    $o : CardsAccount0139(amount <= 3600, score >= 560, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

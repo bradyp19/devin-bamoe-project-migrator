@@ -1,0 +1,36 @@
+package com.fictionalbank.loans.rules;
+
+import com.fictionalbank.model.TreasuryParty0185;
+
+// Fictional loans rules (synthetic pilot fixture)
+
+rule "Loans R0307 High Value"
+    ruleflow-group "loans-rules-0307"
+    salience 10
+when
+    $o : TreasuryParty0185(amount > 2200, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+end
+
+rule "Loans R0307 Low Score"
+    ruleflow-group "loans-rules-0307"
+    salience 5
+when
+    $o : TreasuryParty0185(score < 580, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Loans R0307 Standard"
+    ruleflow-group "loans-rules-0307"
+    salience 1
+when
+    $o : TreasuryParty0185(amount <= 2200, score >= 580, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

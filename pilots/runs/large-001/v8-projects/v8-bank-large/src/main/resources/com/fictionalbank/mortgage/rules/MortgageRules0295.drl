@@ -1,0 +1,36 @@
+package com.fictionalbank.mortgage.rules;
+
+import com.fictionalbank.model.PaymentsParty0179;
+
+// Fictional mortgage rules (synthetic pilot fixture)
+
+rule "Mortgage R0295 High Value"
+    ruleflow-group "mortgage-rules-0295"
+    salience 10
+when
+    $o : PaymentsParty0179(amount > 3550, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+end
+
+rule "Mortgage R0295 Low Score"
+    ruleflow-group "mortgage-rules-0295"
+    salience 5
+when
+    $o : PaymentsParty0179(score < 560, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Mortgage R0295 Standard"
+    ruleflow-group "mortgage-rules-0295"
+    salience 1
+when
+    $o : PaymentsParty0179(amount <= 3550, score >= 560, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

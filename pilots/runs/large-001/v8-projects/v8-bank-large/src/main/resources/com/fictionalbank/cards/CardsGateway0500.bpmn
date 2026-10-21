@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_defs_0500" targetNamespace="http://www.omg.org/bpmn20">
+  <bpmn2:itemDefinition id="_subjectItem" structureRef="com.fictionalbank.model.KycParty0203"/>
+  <bpmn2:itemDefinition id="_statusItem" structureRef="String"/>
+  <bpmn2:process id="cardsGateway0500" name="Cards gateway 0500" isExecutable="true" drools:packageName="com.fictionalbank.cards" drools:version="1.0">
+    <bpmn2:property id="subject" itemSubjectRef="_subjectItem" name="subject"/>
+    <bpmn2:property id="status" itemSubjectRef="_statusItem" name="status"/>
+    <bpmn2:startEvent id="Start" name="Start"><bpmn2:outgoing>F_Start_Init</bpmn2:outgoing></bpmn2:startEvent>
+    <bpmn2:scriptTask id="Init" name="Initialise" scriptFormat="http://www.java.com/java"><bpmn2:incoming>F_Start_Init</bpmn2:incoming><bpmn2:outgoing>F_Init_Split</bpmn2:outgoing><bpmn2:script>kcontext.setVariable("status", "started");</bpmn2:script></bpmn2:scriptTask>
+    <bpmn2:exclusiveGateway id="Split" name="Amount?" gatewayDirection="Diverging"><bpmn2:incoming>F_Init_Split</bpmn2:incoming><bpmn2:outgoing>F_Split_High</bpmn2:outgoing><bpmn2:outgoing>F_Split_Low</bpmn2:outgoing></bpmn2:exclusiveGateway>
+    <bpmn2:scriptTask id="HighPath" name="High path" scriptFormat="http://www.java.com/java"><bpmn2:incoming>F_Split_High</bpmn2:incoming><bpmn2:outgoing>F_High_Join</bpmn2:outgoing><bpmn2:script>kcontext.setVariable("status", "high");</bpmn2:script></bpmn2:scriptTask>
+    <bpmn2:scriptTask id="LowPath" name="Low path" scriptFormat="http://www.java.com/java"><bpmn2:incoming>F_Split_Low</bpmn2:incoming><bpmn2:outgoing>F_Low_Join</bpmn2:outgoing><bpmn2:script>kcontext.setVariable("status", "low");</bpmn2:script></bpmn2:scriptTask>
+    <bpmn2:exclusiveGateway id="Join" name="Join" gatewayDirection="Converging"><bpmn2:incoming>F_High_Join</bpmn2:incoming><bpmn2:incoming>F_Low_Join</bpmn2:incoming><bpmn2:outgoing>F_Join_End</bpmn2:outgoing></bpmn2:exclusiveGateway>
+    <bpmn2:endEvent id="End" name="End"><bpmn2:incoming>F_Join_End</bpmn2:incoming></bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="F_Start_Init" sourceRef="Start" targetRef="Init"></bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="F_Init_Split" sourceRef="Init" targetRef="Split"></bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="F_Split_High" sourceRef="Split" targetRef="HighPath"><bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return subject != null &amp;&amp; subject.getAmount() != null &amp;&amp; subject.getAmount().intValue() &gt; 10000;</bpmn2:conditionExpression></bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="F_Split_Low" sourceRef="Split" targetRef="LowPath"><bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return subject == null || subject.getAmount() == null || subject.getAmount().intValue() &lt;= 10000;</bpmn2:conditionExpression></bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="F_High_Join" sourceRef="HighPath" targetRef="Join"></bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="F_Low_Join" sourceRef="LowPath" targetRef="Join"></bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="F_Join_End" sourceRef="Join" targetRef="End"></bpmn2:sequenceFlow>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="_diagram_0500">
+    <bpmndi:BPMNPlane id="_plane_0500" bpmnElement="cardsGateway0500">
+      <bpmndi:BPMNShape id="Start_di" bpmnElement="Start"><dc:Bounds x="100" y="100" width="100" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Init_di" bpmnElement="Init"><dc:Bounds x="250" y="100" width="100" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Split_di" bpmnElement="Split"><dc:Bounds x="400" y="100" width="100" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="HighPath_di" bpmnElement="HighPath"><dc:Bounds x="550" y="100" width="100" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="LowPath_di" bpmnElement="LowPath"><dc:Bounds x="700" y="100" width="100" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Join_di" bpmnElement="Join"><dc:Bounds x="850" y="100" width="100" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_di" bpmnElement="End"><dc:Bounds x="1000" y="100" width="100" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="F_Start_Init_di" bpmnElement="F_Start_Init"/>
+      <bpmndi:BPMNEdge id="F_Init_Split_di" bpmnElement="F_Init_Split"/>
+      <bpmndi:BPMNEdge id="F_Split_High_di" bpmnElement="F_Split_High"/>
+      <bpmndi:BPMNEdge id="F_Split_Low_di" bpmnElement="F_Split_Low"/>
+      <bpmndi:BPMNEdge id="F_High_Join_di" bpmnElement="F_High_Join"/>
+      <bpmndi:BPMNEdge id="F_Low_Join_di" bpmnElement="F_Low_Join"/>
+      <bpmndi:BPMNEdge id="F_Join_End_di" bpmnElement="F_Join_End"/>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

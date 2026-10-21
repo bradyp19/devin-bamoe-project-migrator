@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns="https://fictionalbank.example/dmn/kyc/eligibility0090" xmlns:feel="http://www.omg.org/spec/FEEL/20140401" id="_def0090" name="Kyc Eligibility 0090" namespace="https://fictionalbank.example/dmn/kyc/eligibility0090">
+  <dmn:inputData id="_in0090_age" name="Age">
+    <dmn:variable id="_in0090_age_v" name="Age" typeRef="number"/>
+  </dmn:inputData>
+  <dmn:inputData id="_in0090_amount" name="Amount">
+    <dmn:variable id="_in0090_amount_v" name="Amount" typeRef="number"/>
+  </dmn:inputData>
+  <dmn:decision id="_dec0090" name="Eligible">
+    <dmn:variable id="_dec0090_v" name="Eligible" typeRef="boolean"/>
+    <dmn:informationRequirement id="_ir0090a">
+      <dmn:requiredInput href="#_in0090_age"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_ir0090b">
+      <dmn:requiredInput href="#_in0090_amount"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_dt0090" hitPolicy="FIRST">
+      <dmn:input id="_dt0090_i1"><dmn:inputExpression id="_dt0090_e1" typeRef="number"><dmn:text>Age</dmn:text></dmn:inputExpression></dmn:input>
+      <dmn:input id="_dt0090_i2"><dmn:inputExpression id="_dt0090_e2" typeRef="number"><dmn:text>Amount</dmn:text></dmn:inputExpression></dmn:input>
+      <dmn:output id="_dt0090_o1"/>
+      <dmn:rule id="_dt0090_r1">
+        <dmn:inputEntry id="_dt0090_r1a"><dmn:text>&lt; 20</dmn:text></dmn:inputEntry>
+        <dmn:inputEntry id="_dt0090_r1b"><dmn:text>-</dmn:text></dmn:inputEntry>
+        <dmn:outputEntry id="_dt0090_r1o"><dmn:text>false</dmn:text></dmn:outputEntry>
+      </dmn:rule>
+      <dmn:rule id="_dt0090_r2">
+        <dmn:inputEntry id="_dt0090_r2a"><dmn:text>-</dmn:text></dmn:inputEntry>
+        <dmn:inputEntry id="_dt0090_r2b"><dmn:text>&lt;= 3500</dmn:text></dmn:inputEntry>
+        <dmn:outputEntry id="_dt0090_r2o"><dmn:text>true</dmn:text></dmn:outputEntry>
+      </dmn:rule>
+      <dmn:rule id="_dt0090_r3">
+        <dmn:inputEntry id="_dt0090_r3a"><dmn:text>-</dmn:text></dmn:inputEntry>
+        <dmn:inputEntry id="_dt0090_r3b"><dmn:text>-</dmn:text></dmn:inputEntry>
+        <dmn:outputEntry id="_dt0090_r3o"><dmn:text>false</dmn:text></dmn:outputEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+</dmn:definitions>

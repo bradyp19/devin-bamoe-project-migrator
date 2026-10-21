@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_defs_0021" targetNamespace="http://www.omg.org/bpmn20">
+  <bpmn2:itemDefinition id="_subjectItem" structureRef="com.fictionalbank.model.KycAccount0007"/>
+  <bpmn2:itemDefinition id="_statusItem" structureRef="String"/>
+  <bpmn2:process id="kycSubprocess0021" name="Kyc subprocess 0021" isExecutable="true" drools:packageName="com.fictionalbank.kyc" drools:version="1.0">
+    <bpmn2:property id="subject" itemSubjectRef="_subjectItem" name="subject"/>
+    <bpmn2:property id="status" itemSubjectRef="_statusItem" name="status"/>
+    <bpmn2:startEvent id="Start" name="Start"><bpmn2:outgoing>F_Start_Init</bpmn2:outgoing></bpmn2:startEvent>
+    <bpmn2:scriptTask id="Init" name="Initialise" scriptFormat="http://www.java.com/java"><bpmn2:incoming>F_Start_Init</bpmn2:incoming><bpmn2:outgoing>F_Init_Call</bpmn2:outgoing><bpmn2:script>kcontext.setVariable("status", "started");</bpmn2:script></bpmn2:scriptTask>
+    <bpmn2:callActivity id="Call" name="Call child" calledElement="cardsSubprocess0022" drools:independent="false" drools:waitForCompletion="true"><bpmn2:incoming>F_Init_Call</bpmn2:incoming><bpmn2:outgoing>F_Call_End</bpmn2:outgoing></bpmn2:callActivity>
+    <bpmn2:endEvent id="End" name="End"><bpmn2:incoming>F_Call_End</bpmn2:incoming></bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="F_Start_Init" sourceRef="Start" targetRef="Init"></bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="F_Init_Call" sourceRef="Init" targetRef="Call"></bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="F_Call_End" sourceRef="Call" targetRef="End"></bpmn2:sequenceFlow>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="_diagram_0021">
+    <bpmndi:BPMNPlane id="_plane_0021" bpmnElement="kycSubprocess0021">
+      <bpmndi:BPMNShape id="Start_di" bpmnElement="Start"><dc:Bounds x="100" y="100" width="100" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Init_di" bpmnElement="Init"><dc:Bounds x="250" y="100" width="100" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Call_di" bpmnElement="Call"><dc:Bounds x="400" y="100" width="100" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_di" bpmnElement="End"><dc:Bounds x="550" y="100" width="100" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="F_Start_Init_di" bpmnElement="F_Start_Init"/>
+      <bpmndi:BPMNEdge id="F_Init_Call_di" bpmnElement="F_Init_Call"/>
+      <bpmndi:BPMNEdge id="F_Call_End_di" bpmnElement="F_Call_End"/>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

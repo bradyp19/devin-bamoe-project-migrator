@@ -1,0 +1,38 @@
+package com.fictionalbank.treasury.rules;
+
+import com.fictionalbank.model.CardsParty0113;
+
+// Fictional treasury rules (synthetic pilot fixture)
+
+rule "Treasury R0181 High Value"
+    ruleflow-group "treasury-rules-0181"
+    salience 10
+when
+    $o : CardsParty0113(amount > 3300, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+    insert(new CardsParty0113());
+    update($o);
+end
+
+rule "Treasury R0181 Low Score"
+    ruleflow-group "treasury-rules-0181"
+    salience 5
+when
+    $o : CardsParty0113(score < 640, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Treasury R0181 Standard"
+    ruleflow-group "treasury-rules-0181"
+    salience 1
+when
+    $o : CardsParty0113(amount <= 3300, score >= 640, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

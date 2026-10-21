@@ -1,0 +1,36 @@
+package com.fictionalbank.cards.rules;
+
+import com.fictionalbank.model.KycAccount0205;
+
+// Fictional cards rules (synthetic pilot fixture)
+
+rule "Cards R0348 High Value"
+    ruleflow-group "cards-rules-0348"
+    salience 10
+when
+    $o : KycAccount0205(amount > 1750, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+end
+
+rule "Cards R0348 Low Score"
+    ruleflow-group "cards-rules-0348"
+    salience 5
+when
+    $o : KycAccount0205(score < 710, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Cards R0348 Standard"
+    ruleflow-group "cards-rules-0348"
+    salience 1
+when
+    $o : KycAccount0205(amount <= 1750, score >= 710, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

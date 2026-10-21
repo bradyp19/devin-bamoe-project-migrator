@@ -1,0 +1,36 @@
+package com.fictionalbank.kyc.rules;
+
+import com.fictionalbank.model.MortgageCase0118;
+
+// Fictional kyc rules (synthetic pilot fixture)
+
+rule "Kyc R0196 High Value"
+    ruleflow-group "kyc-rules-0196"
+    salience 10
+when
+    $o : MortgageCase0118(amount > 2400, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+end
+
+rule "Kyc R0196 Low Score"
+    ruleflow-group "kyc-rules-0196"
+    salience 5
+when
+    $o : MortgageCase0118(score < 690, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Kyc R0196 Standard"
+    ruleflow-group "kyc-rules-0196"
+    salience 1
+when
+    $o : MortgageCase0118(amount <= 2400, score >= 690, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+
