@@ -1,8 +1,10 @@
 # Tutorial video (Remotion)
 
-Renders the ~2.5 minute tutorial defined in `../video-script.md` as a hybrid video:
-animated "synthetic" shots for everything except the four real screen recordings,
-which are dropped in as `public/raw/shot-0N.mp4` files.
+Renders the ~2.5 minute tutorial defined in `../video-script.md` as a fully
+programmatic video: every shot is an animated "synthetic" component, including
+shots 3–6, which simulate the Devin web UI (see below).
+
+**Rendered video:** [https://youtu.be/hioFbZQwGvo](https://youtu.be/hioFbZQwGvo)
 
 ## Requirements
 
@@ -31,23 +33,24 @@ npm run build
 
 Writes `out/tutorial.mp4` (H.264, 1920×1080, 30 fps).
 
-## Recording the 4 real shots
+## Shots 3–6: simulated Devin UI
 
-Shots 3–6 are placeholders until you drop real screen recordings into
-`public/raw/`. Record at **1920×1080** — no audio needed (there is no audio track).
+Shots 3–6 were originally planned as real screen recordings. They are now
+**simulated in Remotion** — synthetic components that mimic the Devin web UI,
+matching the style of the other animated shots:
 
-| Shot | Save as | What to show | Target length |
-|---|---|---|---|
-| 3 | `public/raw/shot-03.mp4` | Empty Devin session chat box; type `Migrate my project` and hit Enter | ~8 s |
-| 4 | `public/raw/shot-04.mp4` | Devin's terminal / file view; time-lapse of Devin unzipping, listing `v8-projects/`, finding `pom.xml` | ~20 s |
-| 5 | `public/raw/shot-05.mp4` | `v9-projects/v9-app/migration-status.md` open; rows flipping `[ ] pending` → `[x] done` / `[x] skipped` | ~20 s |
-| 6 | `public/raw/shot-06.mp4` | Devin chat showing the final summary message; scroll through it | ~15 s |
+| Shot | Component | What it shows |
+|---|---|---|
+| 3 | `src/shots/TypePrompt.tsx` | Chat input typing `Migrate my project`, send, message bubble |
+| 4 | `src/shots/DevinTerminal.tsx` | Time-lapse terminal: unzip, `ls v8-projects/`, `find pom.xml` |
+| 5 | `src/shots/StatusTable.tsx` | `migration-status.md` rows flipping `[ ] pending` → `[x] done` / `[x] skipped` |
+| 6 | `src/shots/FinalSummary.tsx` | Assistant summary bubble revealing what was found/changed and manual follow-ups |
 
-**Placeholder behaviour:** if a `raw/shot-0N.mp4` file is missing, the video
-renders a "Recording pending — shot N" card (with the shot's Screen + Action
-notes) instead of crashing — so you can render the whole video before recording
-anything. The check uses `getStaticFiles()` at render time, so just drop the file
-in and re-render; no code changes needed.
+**Real-footage fallback:** the `Footage` component and `public/raw/` mechanism
+are still in place. To swap a real recording back in, set the shot's
+`kind: 'footage'` and `rawFile: 'raw/shot-0N.mp4'` in `src/script.ts` and drop
+the file into `public/raw/` — missing files render a "Recording pending" card
+instead of crashing.
 
 ## Preview
 

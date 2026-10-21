@@ -9,6 +9,10 @@ import {Intro} from './shots/Intro';
 import {UploadToGitHub} from './shots/UploadToGitHub';
 import {OpenDevin} from './shots/OpenDevin';
 import {Footage} from './shots/Footage';
+import {TypePrompt} from './shots/TypePrompt';
+import {DevinTerminal} from './shots/DevinTerminal';
+import {StatusTable} from './shots/StatusTable';
+import {FinalSummary} from './shots/FinalSummary';
 import {OutputTree} from './shots/OutputTree';
 import {NestedZipFix} from './shots/NestedZipFix';
 import {Outro} from './shots/Outro';
@@ -22,6 +26,14 @@ const ShotContent: React.FC<{shot: Shot}> = ({shot}) => {
       return <UploadToGitHub />;
     case 2:
       return <OpenDevin />;
+    case 3:
+      return <TypePrompt />;
+    case 4:
+      return <DevinTerminal />;
+    case 5:
+      return <StatusTable />;
+    case 6:
+      return <FinalSummary />;
     case 7:
       return <OutputTree />;
     case 8:

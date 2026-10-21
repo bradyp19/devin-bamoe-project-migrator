@@ -35,42 +35,28 @@ export const shots: Shot[] = [
   },
   {
     id: 3,
-    kind: 'footage',
+    kind: 'synthetic',
     durationSec: 8,
-    rawFile: 'raw/shot-03.mp4',
-    screen: 'Empty Devin session chat box',
-    action: "Type the prompt 'Migrate my project' and hit Enter",
     caption: "Type exactly this: 'Migrate my project'. That's the whole instruction.",
   },
   {
     id: 4,
-    kind: 'footage',
+    kind: 'synthetic',
     durationSec: 20,
-    rawFile: 'raw/shot-04.mp4',
-    screen: "Devin's terminal / file view",
-    action:
-      'Time-lapse: Devin unzips the file, lists v8-projects/, finds pom.xml',
     caption:
       'Devin unpacks the zip, finds your project, and fixes small packaging problems — like a folder nested inside a folder — by itself.',
   },
   {
     id: 5,
-    kind: 'footage',
+    kind: 'synthetic',
     durationSec: 20,
-    rawFile: 'raw/shot-05.mp4',
-    screen: 'v9-projects/v9-app/migration-status.md open',
-    action:
-      'Watch rows flip from [ ] pending to [x] done / [x] skipped',
     caption:
       "You can literally watch the progress: this file has the ten migration steps and ticks them off one by one. 'Skipped' just means that kind of file wasn't in your project.",
   },
   {
     id: 6,
-    kind: 'footage',
+    kind: 'synthetic',
     durationSec: 15,
-    rawFile: 'raw/shot-06.mp4',
-    screen: 'Devin chat, final summary message',
-    action: 'Scroll through the summary',
     caption:
       "When it's finished, Devin tells you in plain words what it found, what it changed, and the few things only a person can do — like checking the regenerated forms.",
   },
