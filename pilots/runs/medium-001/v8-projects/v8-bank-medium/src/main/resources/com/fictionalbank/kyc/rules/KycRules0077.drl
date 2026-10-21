@@ -1,0 +1,36 @@
+package com.fictionalbank.kyc.rules;
+
+import com.fictionalbank.model.FraudApplicant0048;
+
+// Fictional kyc rules (synthetic pilot fixture)
+
+rule "Kyc R0077 High Value"
+    ruleflow-group "kyc-rules-0077"
+    salience 10
+when
+    $o : FraudApplicant0048(amount > 4550, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+end
+
+rule "Kyc R0077 Low Score"
+    ruleflow-group "kyc-rules-0077"
+    salience 5
+when
+    $o : FraudApplicant0048(score < 570, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Kyc R0077 Standard"
+    ruleflow-group "kyc-rules-0077"
+    salience 1
+when
+    $o : FraudApplicant0048(amount <= 4550, score >= 570, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

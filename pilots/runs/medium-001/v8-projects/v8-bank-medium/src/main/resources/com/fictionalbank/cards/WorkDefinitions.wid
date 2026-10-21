@@ -1,0 +1,25 @@
+import org.jbpm.process.core.datatype.impl.type.StringDataType;
+
+[
+  [
+    "name" : "SmsNotify0008",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "SmsNotify0008",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "DocumentArchive0014",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "DocumentArchive0014",
+    "icon" : "defaultservicenodeicon.png"
+  ],
+  [
+    "name" : "LedgerPosting0017",
+    "parameters" : [ "Reference" : new StringDataType() ],
+    "results" : [ "Result" : new StringDataType() ],
+    "displayName" : "LedgerPosting0017",
+    "icon" : "defaultservicenodeicon.png"
+  ]
+]

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<deployment-descriptor xsi:schemaLocation="http://www.jboss.org/jbpm deployment-descriptor.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <persistence-unit>org.jbpm.domain</persistence-unit>
+  <audit-persistence-unit>org.jbpm.domain</audit-persistence-unit>
+  <audit-mode>JPA</audit-mode>
+  <persistence-mode>JPA</persistence-mode>
+  <runtime-strategy>PER_PROCESS_INSTANCE</runtime-strategy>
+  <event-listeners>
+    <event-listener>
+      <resolver>reflection</resolver>
+      <identifier>com.fictionalbank.listener.ProcessAuditListener0001</identifier>
+      <parameters/>
+    </event-listener>
+    <event-listener>
+      <resolver>reflection</resolver>
+      <identifier>com.fictionalbank.listener.ProcessAuditListener0003</identifier>
+      <parameters/>
+    </event-listener>
+    <event-listener>
+      <resolver>reflection</resolver>
+      <identifier>com.fictionalbank.listener.ProcessAuditListener0005</identifier>
+      <parameters/>
+    </event-listener>
+    <event-listener>
+      <resolver>reflection</resolver>
+      <identifier>com.fictionalbank.listener.ProcessAuditListener0007</identifier>
+      <parameters/>
+    </event-listener>
+    <event-listener>
+      <resolver>reflection</resolver>
+      <identifier>com.fictionalbank.listener.ProcessAuditListener0009</identifier>
+      <parameters/>
+    </event-listener>
+    <event-listener>
+      <resolver>reflection</resolver>
+      <identifier>com.fictionalbank.listener.ProcessAuditListener0011</identifier>
+      <parameters/>
+    </event-listener>
+    <event-listener>
+      <resolver>reflection</resolver>
+      <identifier>com.fictionalbank.listener.ProcessAuditListener0013</identifier>
+      <parameters/>
+    </event-listener>
+    <event-listener>
+      <resolver>reflection</resolver>
+      <identifier>com.fictionalbank.listener.ProcessAuditListener0015</identifier>
+      <parameters/>
+    </event-listener>
+    <event-listener>
+      <resolver>reflection</resolver>
+      <identifier>com.fictionalbank.listener.ProcessAuditListener0017</identifier>
+      <parameters/>
+    </event-listener>
+    <event-listener>
+      <resolver>reflection</resolver>
+      <identifier>com.fictionalbank.listener.ProcessAuditListener0019</identifier>
+      <parameters/>
+    </event-listener>
+  </event-listeners>
+  <task-event-listeners>
+    <task-event-listener>
+      <resolver>reflection</resolver>
+      <identifier>com.fictionalbank.listener.TaskAuditListener0002</identifier>
+      <parameters/>
+    </task-event-listener>
+    <task-event-listener>
+      <resolver>reflection</resolver>
+      <identifier>com.fictionalbank.listener.TaskAuditListener0004</identifier>
+      <parameters/>
+    </task-event-listener>
+    <task-event-listener>
+      <resolver>reflection</resolver>
+      <identifier>com.fictionalbank.listener.TaskAuditListener0006</identifier>
+      <parameters/>
+    </task-event-listener>
+    <task-event-listener>
+      <resolver>reflection</resolver>
+      <identifier>com.fictionalbank.listener.TaskAuditListener0008</identifier>
+      <parameters/>
+    </task-event-listener>
+    <task-event-listener>
+      <resolver>reflection</resolver>
+      <identifier>com.fictionalbank.listener.TaskAuditListener0010</identifier>
+      <parameters/>
+    </task-event-listener>
+    <task-event-listener>
+      <resolver>reflection</resolver>
+      <identifier>com.fictionalbank.listener.TaskAuditListener0012</identifier>
+      <parameters/>
+    </task-event-listener>
+    <task-event-listener>
+      <resolver>reflection</resolver>
+      <identifier>com.fictionalbank.listener.TaskAuditListener0014</identifier>
+      <parameters/>
+    </task-event-listener>
+    <task-event-listener>
+      <resolver>reflection</resolver>
+      <identifier>com.fictionalbank.listener.TaskAuditListener0016</identifier>
+      <parameters/>
+    </task-event-listener>
+    <task-event-listener>
+      <resolver>reflection</resolver>
+      <identifier>com.fictionalbank.listener.TaskAuditListener0018</identifier>
+      <parameters/>
+    </task-event-listener>
+    <task-event-listener>
+      <resolver>reflection</resolver>
+      <identifier>com.fictionalbank.listener.TaskAuditListener0020</identifier>
+      <parameters/>
+    </task-event-listener>
+  </task-event-listeners>
+  <work-item-handlers>
+    <work-item-handler>
+      <resolver>mvel</resolver>
+      <identifier>new com.fictionalbank.handler.SanctionsScreen0001WorkItemHandler()</identifier>
+      <parameters/>
+      <name>SanctionsScreen0001</name>
+    </work-item-handler>
+    <work-item-handler>
+      <resolver>mvel</resolver>
+      <identifier>new com.fictionalbank.handler.LedgerPosting0002WorkItemHandler()</identifier>
+      <parameters/>
+      <name>LedgerPosting0002</name>
+    </work-item-handler>
+    <work-item-handler>
+      <resolver>mvel</resolver>
+      <identifier>new com.fictionalbank.handler.SmsNotify0003WorkItemHandler()</identifier>
+      <parameters/>
+      <name>SmsNotify0003</name>
+    </work-item-handler>
+    <work-item-handler>
+      <resolver>mvel</resolver>
+      <identifier>new com.fictionalbank.handler.DocumentArchive0004WorkItemHandler()</identifier>
+      <parameters/>
+      <name>DocumentArchive0004</name>
+    </work-item-handler>
+    <work-item-handler>
+      <resolver>mvel</resolver>
+      <identifier>new com.fictionalbank.handler.CreditBureauLookup0005WorkItemHandler()</identifier>
+      <parameters/>
+      <name>CreditBureauLookup0005</name>
+    </work-item-handler>
+    <work-item-handler>
+      <resolver>mvel</resolver>
+      <identifier>new com.fictionalbank.handler.SanctionsScreen0006WorkItemHandler()</identifier>
+      <parameters/>
+      <name>SanctionsScreen0006</name>
+    </work-item-handler>
+    <work-item-handler>
+      <resolver>mvel</resolver>
+      <identifier>new com.fictionalbank.handler.LedgerPosting0007WorkItemHandler()</identifier>
+      <parameters/>
+      <name>LedgerPosting0007</name>
+    </work-item-handler>
+    <work-item-handler>
+      <resolver>mvel</resolver>
+      <identifier>new com.fictionalbank.handler.SmsNotify0008WorkItemHandler()</identifier>
+      <parameters/>
+      <name>SmsNotify0008</name>
+    </work-item-handler>
+    <work-item-handler>
+      <resolver>mvel</resolver>
+      <identifier>new com.fictionalbank.handler.DocumentArchive0009WorkItemHandler()</identifier>
+      <parameters/>
+      <name>DocumentArchive0009</name>
+    </work-item-handler>
+    <work-item-handler>
+      <resolver>mvel</resolver>
+      <identifier>new com.fictionalbank.handler.CreditBureauLookup0010WorkItemHandler()</identifier>
+      <parameters/>
+      <name>CreditBureauLookup0010</name>
+    </work-item-handler>
+    <work-item-handler>
+      <resolver>mvel</resolver>
+      <identifier>new com.fictionalbank.handler.SanctionsScreen0011WorkItemHandler()</identifier>
+      <parameters/>
+      <name>SanctionsScreen0011</name>
+    </work-item-handler>
+    <work-item-handler>
+      <resolver>mvel</resolver>
+      <identifier>new com.fictionalbank.handler.LedgerPosting0012WorkItemHandler()</identifier>
+      <parameters/>
+      <name>LedgerPosting0012</name>
+    </work-item-handler>
+    <work-item-handler>
+      <resolver>mvel</resolver>
+      <identifier>new com.fictionalbank.handler.SmsNotify0013WorkItemHandler()</identifier>
+      <parameters/>
+      <name>SmsNotify0013</name>
+    </work-item-handler>
+    <work-item-handler>
+      <resolver>mvel</resolver>
+      <identifier>new com.fictionalbank.handler.DocumentArchive0014WorkItemHandler()</identifier>
+      <parameters/>
+      <name>DocumentArchive0014</name>
+    </work-item-handler>
+    <work-item-handler>
+      <resolver>mvel</resolver>
+      <identifier>new com.fictionalbank.handler.CreditBureauLookup0015WorkItemHandler()</identifier>
+      <parameters/>
+      <name>CreditBureauLookup0015</name>
+    </work-item-handler>
+    <work-item-handler>
+      <resolver>mvel</resolver>
+      <identifier>new com.fictionalbank.handler.SanctionsScreen0016WorkItemHandler()</identifier>
+      <parameters/>
+      <name>SanctionsScreen0016</name>
+    </work-item-handler>
+    <work-item-handler>
+      <resolver>mvel</resolver>
+      <identifier>new com.fictionalbank.handler.LedgerPosting0017WorkItemHandler()</identifier>
+      <parameters/>
+      <name>LedgerPosting0017</name>
+    </work-item-handler>
+    <work-item-handler>
+      <resolver>mvel</resolver>
+      <identifier>new com.fictionalbank.handler.SmsNotify0018WorkItemHandler()</identifier>
+      <parameters/>
+      <name>SmsNotify0018</name>
+    </work-item-handler>
+    <work-item-handler>
+      <resolver>mvel</resolver>
+      <identifier>new com.fictionalbank.handler.DocumentArchive0019WorkItemHandler()</identifier>
+      <parameters/>
+      <name>DocumentArchive0019</name>
+    </work-item-handler>
+    <work-item-handler>
+      <resolver>mvel</resolver>
+      <identifier>new com.fictionalbank.handler.CreditBureauLookup0020WorkItemHandler()</identifier>
+      <parameters/>
+      <name>CreditBureauLookup0020</name>
+    </work-item-handler>
+  </work-item-handlers>
+  <required-roles/>
+  <limit-serialization-classes>true</limit-serialization-classes>
+</deployment-descriptor>

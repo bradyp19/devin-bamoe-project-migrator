@@ -1,0 +1,36 @@
+package com.fictionalbank.deposits.rules;
+
+import com.fictionalbank.model.TreasuryPayment0050;
+
+// Fictional deposits rules (synthetic pilot fixture)
+
+rule "Deposits R0087 High Value"
+    ruleflow-group "deposits-rules-0087"
+    salience 10
+when
+    $o : TreasuryPayment0050(amount > 1800, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+end
+
+rule "Deposits R0087 Low Score"
+    ruleflow-group "deposits-rules-0087"
+    salience 5
+when
+    $o : TreasuryPayment0050(score < 600, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Deposits R0087 Standard"
+    ruleflow-group "deposits-rules-0087"
+    salience 1
+when
+    $o : TreasuryPayment0050(amount <= 1800, score >= 600, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

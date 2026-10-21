@@ -1,0 +1,36 @@
+package com.fictionalbank.deposits.rules;
+
+import com.fictionalbank.model.KycCase0040;
+
+// Fictional deposits rules (synthetic pilot fixture)
+
+rule "Deposits R0062 High Value"
+    ruleflow-group "deposits-rules-0062"
+    salience 10
+when
+    $o : KycCase0040(amount > 3800, status == null)
+then
+    $o.setStatus("REFER");
+    $o.setValidated(true);
+end
+
+rule "Deposits R0062 Low Score"
+    ruleflow-group "deposits-rules-0062"
+    salience 5
+when
+    $o : KycCase0040(score < 650, status == null)
+then
+    $o.setStatus("DECLINE");
+    $o.setValidated(true);
+end
+
+rule "Deposits R0062 Standard"
+    ruleflow-group "deposits-rules-0062"
+    salience 1
+when
+    $o : KycCase0040(amount <= 3800, score >= 650, status == null)
+then
+    $o.setStatus("APPROVE");
+    $o.setValidated(true);
+end
+

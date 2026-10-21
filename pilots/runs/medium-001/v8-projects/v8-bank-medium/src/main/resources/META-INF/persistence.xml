@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <persistence-unit name="bank-domain" transaction-type="JTA">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <jta-data-source>java:jboss/datasources/FictionalBankDS</jta-data-source>
+    <class>com.fictionalbank.model.TreasuryCard0003</class>
+    <class>com.fictionalbank.model.CardsApplicant0006</class>
+    <class>com.fictionalbank.model.MortgageCard0009</class>
+    <class>com.fictionalbank.model.MortgageApplicant0012</class>
+    <class>com.fictionalbank.model.LoansCard0015</class>
+    <class>com.fictionalbank.model.TreasuryApplicant0018</class>
+    <class>com.fictionalbank.model.FraudCard0021</class>
+    <class>com.fictionalbank.model.TreasuryApplicant0024</class>
+    <class>com.fictionalbank.model.MortgageCard0027</class>
+    <class>com.fictionalbank.model.PaymentsApplicant0030</class>
+    <class>com.fictionalbank.model.CardsCard0033</class>
+    <class>com.fictionalbank.model.CardsApplicant0036</class>
+    <class>com.fictionalbank.model.TreasuryCard0039</class>
+    <class>com.fictionalbank.model.TreasuryApplicant0042</class>
+    <class>com.fictionalbank.model.DepositsCard0045</class>
+    <class>com.fictionalbank.model.FraudApplicant0048</class>
+    <class>com.fictionalbank.model.TreasuryCard0051</class>
+    <class>com.fictionalbank.model.LoansApplicant0054</class>
+    <class>com.fictionalbank.model.PaymentsCard0057</class>
+    <class>com.fictionalbank.model.DepositsApplicant0060</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+  </persistence-unit>
+</persistence>
