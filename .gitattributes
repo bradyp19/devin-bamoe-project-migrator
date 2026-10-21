@@ -1,0 +1,26 @@
+# Keep the "Download ZIP" / plugin upload payload minimal.
+# Anything marked export-ignore is left out of `git archive` output —
+# which is what GitHub uses for Code -> Download ZIP.
+# The full repo stays intact for development; only the shipped zip is slimmed.
+#
+# Kept on purpose: README.md, docs/engineers/, docs/tutorial-index.md —
+# AGENTS.md points the agent at tutorial-index.md during migration,
+# and the engineers' build appendix is referenced from the README.
+
+# Repo hygiene files — not needed by the plugin
+.gitattributes          export-ignore
+.gitignore              export-ignore
+
+# Dev-only planning / scratch files
+devin-migration-plan.md export-ignore
+.bob/                   export-ignore
+
+# README screenshots — only meaningful when viewing the repo on GitHub
+docs/images/            export-ignore
+readme-preview.html     export-ignore
+
+# Tutorial video tooling (Remotion project, script) — dev-only
+docs/tutorial/          export-ignore
+
+# Recorded demo videos
+demos/                  export-ignore

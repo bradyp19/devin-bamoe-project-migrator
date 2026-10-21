@@ -18,7 +18,7 @@ Shot-by-shot script for the end-to-end walkthrough video. Target audience: non-e
 ## Recording checklist
 
 - [ ] Window size: 1920×1080, browser at 100% zoom, hide bookmarks bar.
-- [ ] Sample project: zip `v8-projects/v8-app` and use that zip as the demo upload.
+- [ ] Sample project: zip a `v8-app` from `v8-to-v9-migration-samples/` (e.g. `tutorial-01-evaluation-process/v8-app`) and use that zip as the demo upload. The repo's own `v8-projects/` folder ships empty.
 - [ ] Blur / crop: IBM internal URLs, any names or emails in commit history, Devin account menu, secret values if the `BAMOE_MAVEN_REPO_URL` setting is shown.
 - [ ] Pre-stage a second repo tab with the finished `v9-projects/` output so the ending isn't time-lapsed through the full run.
 - [ ] Record narration separately; each shot is ≤ 30 seconds of screen time.

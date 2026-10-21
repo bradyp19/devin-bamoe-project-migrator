@@ -90,7 +90,7 @@ migrated, converted, or dropped. This surfaces blockers early and sizes the rema
 - List of raw `List` types and `javax.*` imports in domain classes.
 
 ### Todo List
-1. Run `find . -type f` on `v8-projects/v8-app/`; group files by extension and directory.
+1. Run `find . -type f` on `v8-projects/<project-name>/`; group files by extension and directory.
 2. For each BPMN file: note process IDs, Script Task languages, gateway expression languages
    (DROOLS vs Java), and any shared-KIE-session pattern (`insert()`, `retract()` called from BPMN).
 3. For each DRL file: flag rules using `insert()`/`retract()` in a `ruleflow-group` invoked from BPMN.
@@ -103,7 +103,8 @@ migrated, converted, or dropped. This surfaces blockers early and sizes the rema
 10. Record current `application.properties` keys (all `kieserver.*`, `drools.*`, `jbpm.*` properties
     will be replaced with `kogito.*`).
 11. Produce `migration-inventory.md` at the workspace root summarising findings.
-    - Record the v8 source path (`v8-projects/v8-app/`) and the v9 output path (`v9-projects/v9-app/`).
+    - Record the v8 source path (`v8-projects/<project-name>/`) and the v9 output path
+      (`v9-projects/<v9-name>/`).
 
 ### Knowledge Sources
 > Read these documents before running the audit. Every item in the inventory checklist maps to at
@@ -136,22 +137,22 @@ cleanly before any assets are migrated.
 - `mvn clean package` succeeds (even if assets are not yet migrated — they can be temporarily excluded).
 
 ### Todo List
-1. Create the v9 output directory at `v9-projects/v9-app/` (mirrors `v8-projects/v8-app/` with the
-   `v8-` prefix replaced by `v9-`).
+1. Create the v9 output directory at `v9-projects/<v9-name>/` (mirrors `v8-projects/<project-name>/`
+   with any `v8-` prefix replaced by `v9-`).
 2. Download the `pom.xml` from the branch of `https://github.com/IBM/bamoe-canvas-quarkus-accelerator`
-   matching the target v9.5 release as the base template; write it to `v9-projects/v9-app/pom.xml`.
+   matching the target v9.5 release as the base template; write it to `v9-projects/<v9-name>/pom.xml`.
 3. Merge project-specific `groupId`, `artifactId`, `version`, and any non-BAMOE dependencies from
-   `v8-projects/v8-app/pom.xml` into the new template.
+   `v8-projects/<project-name>/pom.xml` into the new template.
 4. Replace RHPAM/KIE BOM entries with the Kogito + Quarkus BOM equivalents from the BAMOE Maven repo;
    see `reference-guide/maven-repository-libraries.adoc`.
 5. Do **not** copy `kmodule.xml`, `kie-deployment-descriptor.xml`, `persistence.xml`,
    `project.repositories`, `project.imports`, or `package-names-white-list` into the v9 project.
-6. Create `v9-projects/v9-app/src/main/resources/application.properties` with the v9 skeleton
+6. Create `v9-projects/<v9-name>/src/main/resources/application.properties` with the v9 skeleton
    (HTTP port, log level, datasource if persistence is needed, `kogito.persistence.type=jdbc` if applicable).
 7. Add `org.drools:drools-decisiontables` dependency if XLS/XLSX decision tables are present (found
    in Sub-Task 1 inventory).
 8. Add `org.kie.kogito:kogito-scenario-simulation` if `.scesim` test scenarios are present.
-9. Run `mvn clean package -DskipTests` from `v9-projects/v9-app/`; resolve any compilation errors.
+9. Run `mvn clean package -DskipTests` from `v9-projects/<v9-name>/`; resolve any compilation errors.
 
 ### Knowledge Sources
 > All conversion steps in this sub-task must be grounded against the following official BAMOE 9.5.x
