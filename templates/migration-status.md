@@ -5,6 +5,10 @@
 **Date:** <YYYY-MM-DD>
 **Build mode:** Convert-only | Convert + verify
 
+Status values: `[x] done` | `[x] skipped (reason)` | `[ ] partial` — use `partial` whenever
+gaps or manual steps remain; never mark a sub-task `done` while it has known gaps.
+See `docs/migration-output-contract.md` for the full expected-output contract and checklist.
+
 | Sub-task | Status |
 |---|---|
 | Sub-Task 1 — Audit the v8 Project and Classify Assets | `[ ] pending` |
@@ -19,3 +23,13 @@
 | Sub-Task 10 — Runtime Deployment and Live-Data Strategy | `[ ] pending` |
 
 **Build:** not-run
+
+## Manual follow-ups / known gaps
+
+<!-- List every incomplete conversion and manual step still required. For each item record:
+     what is incomplete, why, and the exact action needed (e.g. "regenerate forms for
+     User Tasks X/Y in Developer Tools", "set quarkus.oidc.auth-server-url",
+     "provision new PostgreSQL instance — do not reuse v8 DB").
+     A sub-task with entries here must be marked `partial`, not `done`. -->
+
+- (none)

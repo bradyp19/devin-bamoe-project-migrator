@@ -124,6 +124,10 @@ All sample `v9-app` projects pin BAMOE `9.3.1` on Java 17. Use them for project 
 
 Use these as the base when creating a new `v9-projects/<name>/pom.xml`. Do not import the Quarkus platform BOM separately — `bamoe-quarkus-bom` already manages Quarkus transitively.
 
+## Expected-output contract
+
+`docs/migration-output-contract.md` defines what a completed migration must contain (required vs project-dependent files), what must be absent, a validation checklist, and the status-recording rules for `migration-status.md` (`done` / `skipped` / `partial` + a mandatory "Manual follow-ups / known gaps" section). Consult it before marking any sub-task `done`. Run the mechanical checks with `tools/validate-migration.sh <v9-dir> [v8-dir]` (or the `bamoe-validate-v9-output` skill) — it is report-only; record findings in `migration-status.md` yourself. `src/main/java` is **not** a required artifact — never create a dummy Java class; Kogito generates all runtime scaffolding at build time.
+
 ---
 
 ## Available skills
@@ -138,3 +142,4 @@ This plugin provides the following skills, invocable as slash commands. Skill de
 - `/bamoe-migrator:bamoe-migrate-forms` — Regenerates .frm forms using Developer Tools
 - `/bamoe-migrator:bamoe-migrate-security` — Migrates security from JAAS to OIDC
 - `/bamoe-migrator:bamoe-deploy-verify` — Deploys and verifies the migrated v9 service
+- `/bamoe-migrator:bamoe-validate-v9-output` — Validates a migrated v9 project against the output contract and records findings honestly

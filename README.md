@@ -191,6 +191,31 @@ while it runs.
 > files are still complete. For a verified build, see
 > [docs/engineers/local-maven-repo.md](docs/engineers/local-maven-repo.md).
 
+### Step 13. Check that the migration is correct
+
+Once you have a `v9-projects/<your-project-name>/` folder, ask Devin:
+
+```
+validate my project
+```
+
+Devin runs its built-in validation script in its own shell — no terminal needed
+from you. It checks that the migrated project has everything the v9.5 contract
+requires (and nothing v8 left behind), then reports the results and records any
+findings in `migration-status.md`.
+
+![Devin validating a migrated project](docs/images/setup/07-validate-my-project.png)
+
+- **Green PASS lines** mean the mechanical checks succeeded.
+- **WARN lines** are things worth confirming by hand (for example, "did we get a
+  new database?").
+- **FAIL lines** mean part of the migration is incomplete — Devin marks the
+  affected step `partial` in `migration-status.md` and lists the exact fix under
+  "Manual follow-ups / known gaps".
+
+The full contract Devin validates against lives in
+[`docs/migration-output-contract.md`](docs/migration-output-contract.md).
+
 ---
 
 ## Section 2 — Devin on the desktop
@@ -265,6 +290,13 @@ working folder — real files on your machine, nothing to download. Watch
 > On the desktop, `Build: not-run` is still the default unless your
 > administrator has set up the IBM Maven repository — see
 > [docs/engineers/local-maven-repo.md](docs/engineers/local-maven-repo.md).
+
+### Step 9. Check that the migration is correct
+
+Same as [Section 1, Step 13](#step-13-check-that-the-migration-is-correct): type
+`validate my project` in the session and Devin validates the `v9-projects/`
+output against the expected-output contract, reporting PASS/WARN/FAIL results
+and updating `migration-status.md` with any follow-ups.
 
 ---
 
@@ -553,6 +585,10 @@ The following skills live in `skills/` and are installed with the plugin (invoke
 | `bamoe-migrate-forms` | Regenerates .frm forms using Developer Tools | Sub-Task 8 |
 | `bamoe-migrate-security` | Migrates security from JAAS to OIDC | Sub-Task 7 |
 | `bamoe-deploy-verify` | Deploys and verifies the migrated v9 service | Sub-Task 10 |
+| `bamoe-validate-v9-output` | Validates a migrated v9 project against `docs/migration-output-contract.md` and records findings in `migration-status.md` | Any time |
+
+To check a finished migration, just ask Devin to "validate my project" — no terminal needed.
+The agent runs `tools/validate-migration.sh` for you and reports findings in plain language.
 
 ### References
 
