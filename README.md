@@ -411,9 +411,9 @@ On the Devin website Devin cannot run the IBM build tool, so `Build: not-run` is
 
 ## Video tutorial
 
-Watch the existing demo: [BAMOE Migrator on YouTube](https://www.youtube.com/watch?v=e5pNUnvGr9Y).
+Watch the end-to-end tutorial: [Migrate my project — BAMOE v8 → v9.5 on Devin](https://youtu.be/hioFbZQwGvo).
 
-A new end-to-end tutorial is in the works — see [docs/tutorial/video-script.md](docs/tutorial/video-script.md) for what it will cover.
+The video follows [docs/tutorial/video-script.md](docs/tutorial/video-script.md) and is produced with Remotion — see [docs/tutorial/remotion/](docs/tutorial/remotion/).
 
 ---
 ---
