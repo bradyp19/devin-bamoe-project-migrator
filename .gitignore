@@ -28,6 +28,9 @@ migration-workspace/
 # AI agent instruction files
 CLAUDE.md
 
+# Stray auth scratch file
+auth
+
 # Tutorial video project
 docs/tutorial/remotion/node_modules/
 docs/tutorial/remotion/out/
