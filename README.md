@@ -2,7 +2,7 @@
 
 Turns your old IBM BAMOE v8 project into a new BAMOE v9.5 project, automatically, using Devin.
 
-**▶ Watch the 2-minute demo:** [https://youtu.be/hioFbZQwGvo](https://youtu.be/hioFbZQwGvo)
+**▶ Watch the 5-minute demo:** [https://youtu.be/hioFbZQwGvo](https://youtu.be/hioFbZQwGvo)
 
 ---
 
