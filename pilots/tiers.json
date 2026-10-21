@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "generator_version": "1.0.0",
+  "seed": 20261021,
+  "max_call_chain_depth": 3,
+  "unit": {
+    "description": "One unit = 15 BPMN + 5 DMN + 10 DRL plus supporting assets. Tiers are whole multiples of the unit so the archetype/exception mix is identical in proportion.",
+    "bpmn_archetypes": {
+      "human-task": 3,
+      "gateway": 2,
+      "subprocess": 2,
+      "script": 2,
+      "rule-task": 2,
+      "decision-task": 2,
+      "service-handler": 2
+    },
+    "dmn": 5,
+    "drl": 10,
+    "support": {
+      "java_model": 6,
+      "java_listener": 2,
+      "java_security": 1
+    },
+    "derived_support": {
+      "java_handler": "one per service-handler process",
+      "wid": "one WorkDefinitions.wid per domain that owns at least one handler",
+      "form": "one .frm per human-task process",
+      "config": "fixed per project: pom.xml, kmodule.xml, kie-deployment-descriptor.xml, persistence.xml, project.imports, project.repositories, package-names-white-list"
+    },
+    "exceptions": {
+      "javascript-script": "first script process: Script Task uses the JavaScript script format (rule 3)",
+      "drools-gateway-dialect": "first gateway process: one sequence-flow condition uses the DROOLS dialect (rule 4)",
+      "dotted-hyphenated-process-id": "third human-task process: process id contains dots and hyphens and is the call target of a subprocess (rule 6)",
+      "shared-session-insert": "DRL referenced by the first rule-task: RHS calls insert() across the BPMN/DRL boundary (rule 5)",
+      "dmn-1-1-namespace": "fifth DMN: authored against the DMN 1.1 namespace"
+    }
+  },
+  "tiers": {
+    "small": {"units": 1, "business": {"bpmn": 15, "dmn": 5, "drl": 10}},
+    "medium": {"units": 10, "business": {"bpmn": 150, "dmn": 50, "drl": 100}},
+    "large": {"units": 50, "business": {"bpmn": 750, "dmn": 250, "drl": 500}}
+  },
+  "domains": ["loans", "cards", "deposits", "payments", "kyc", "mortgage", "fraud", "treasury"],
+  "expected_dispositions": {
+    "migrate": "asset must be present in v9 output under the same identity",
+    "migrate-with-update": "asset must be present in v9 output (identity may be remapped via dispositions.json) after a required v9 change",
+    "replace": "v8 construct has no direct v9 equivalent; requires a traceable v9 replacement or a documented manual disposition",
+    "regenerate": "form must be regenerated via Developer Tools, or recorded as a documented manual follow-up",
+    "remove": "v8-only file that must be absent from v9 output"
+  }
+}
