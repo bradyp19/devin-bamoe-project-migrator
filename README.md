@@ -20,34 +20,266 @@ as a Devin plugin so the same workflow can be installed and run from any project
 
 ---
 
-## Quick start: install as a Devin plugin
+## How to use this — step by step
 
-```
-devin plugins install bradyp19/devin-bamoe-project-migrator
-```
+This guide assumes nothing. If you can click a mouse and type a sentence, you can
+run a migration. Every step tells you exactly where to look and what to click.
 
-Then, in **any** folder on your machine:
+There are two ways to use this project. Pick **one**:
 
-1. Put your v8 project folder (or .zip) in `v8-projects/`.
-2. Open Devin there and run `/bamoe-migrator:bamoe-migrate` (or just say "Migrate my project").
+- **[Section 1 — Devin on the web](#section-1--devin-on-the-web)** — you use Devin in
+  your browser at `app.devin.ai`. *Start here if you're not sure.*
+- **[Section 2 — Devin on the desktop](#section-2--devin-on-the-desktop)** — you use
+  the Devin app installed on your computer.
 
-The migrated project appears in `v9-projects/<name>/` in that same folder — no need to clone this repo.
+Both sections do the same three big things:
 
-Working on the plugin itself? `devin plugins install --local .` from a checkout links it live.
+1. **Install the plugin** — this gives Devin the 8 "skills" (helpers) it needs.
+2. **Upload your old v8 project** — this is the thing Devin will migrate.
+3. **Say "Migrate my project"** — Devin does the rest.
+
+> **You do NOT need the command line for any of this.** No terminal, no `git`
+> commands, no typing weird commands into a black box. Everything below is clicks.
 
 ---
 
-## No install? Use this repository directly
+## Section 1 — Devin on the web
+
+### Step 1. Get the zip file
+
+A "zip file" is just a folder squashed into a single file — it ends in `.zip`.
+
+There are two ways you might have it:
+
+- **Someone sent you the zip already** (for example, in an email or a shared
+  drive). If you have a file like `devin-bamoe-project-migrator.zip`, you are
+  done with this step — skip to **Step 2**.
+- **You need to download it yourself.** Open the repository page on GitHub in
+  your browser, click the green **Code** button near the top-right of the file
+  list, click **Download ZIP** at the bottom of the menu, and wait for the file
+  to appear in your **Downloads** folder:
+
+![GitHub — Code → Download ZIP](docs/images/setup/00-github-download-zip.png)
+
+> **Important:** do *not* unzip the file. Devin wants the zip exactly as it is.
+
+### Step 2. Open Devin in your browser
+
+1. Go to `app.devin.ai`.
+2. Sign in the way your team normally does.
+
+### Step 3. Open the Customize panel
+
+Look at the **far-left edge of the screen**. There is a narrow column of buttons
+(New session, Automations, Security, Review, Wiki…). Find the one that says
+**Customize** and click it:
+
+![Left sidebar — click Customize](docs/images/setup/00-customize-sidebar.png)
+
+### Step 4. Open the Plugins tab
+
+Near the top of the screen you will see a row of tabs:
+**Plugins · Skills · MCPs · Hooks · Rules · Memory**.
+
+Click **Plugins**.
+
+You should now see the Plugins page. Since nothing is installed yet, the
+**Installed** list is empty — look for the **+ Add plugin** button in the
+top-right corner (highlighted here):
+
+![Plugins page, before install — click "+ Add plugin"](docs/images/setup/01-plugins-add-button.png)
+
+### Step 5. Install the plugin
+
+1. Click **+ Add plugin** (top-right corner).
+2. A file picker window opens. Find the zip file from Step 1 — probably in your
+   **Downloads** folder. Click the zip file once so it's highlighted, then click
+   **Upload** (or **Open** — the word depends on your computer):
+
+![Pick the plugin zip and click Upload](docs/images/setup/02b-upload-zip-dialog.png)
+
+### Step 6. Check that it worked
+
+Back on the Plugins page, you should now see a card that says
+**Bamoe Migrator** with a green **Installed** label:
+
+![Bamoe Migrator plugin — Installed](docs/images/setup/02-plugin-installed.png)
+
+If you see that green "Installed", the plugin is in. If you don't, stop here and
+ask your BAMOE administrator for help — nothing else will work until this shows
+"Installed".
+
+### Step 7. Check that all 8 skills arrived
+
+The plugin comes with **8 skills** — think of them as 8 little instruction
+booklets that teach Devin how to do each part of the migration.
+
+1. Click the **Skills** tab (same row of tabs as before, right next to Plugins).
+2. It should say **Installed 8** and show a **Bamoe Migrator** entry:
+
+![Skills page — Installed 8](docs/images/setup/03-skills-installed-8.png)
+
+3. Click the **Bamoe Migrator** row to open it. You should see all 8 skills:
+
+![The 8 bamoe-* skills](docs/images/setup/04-skills-expanded.png)
+
+They are: `bamoe-audit-v8-project`, `bamoe-configure-maven-repository`,
+`bamoe-deploy-verify`, `bamoe-migrate`, `bamoe-migrate-bpmn`,
+`bamoe-migrate-forms`, `bamoe-migrate-project-structure`, `bamoe-migrate-security`.
+
+### Step 8. Start a new session
+
+1. Click **New session** at the top of the left sidebar (or the **+** next to
+   "Sessions").
+2. A chat box opens in the middle of the screen — the one that says
+   *"Ask Devin to build features, fix bugs, or work on your code"*:
+
+![New Devin session — empty prompt box](docs/images/setup/05-new-session-prompt.png)
+
+### Step 9. Upload your v8 project
+
+1. In the chat box, click the **+** (plus) icon on the **bottom-left**.
+2. A small menu pops up — click **Upload Folder**:
+
+![+ menu → Upload Folder](docs/images/setup/05b-upload-folder-menu.png)
+3. Your computer's file window opens. Find the folder that holds your old v8
+   project (it might be called `v8-app`, or whatever your team named it).
+   Click that folder **once**, then click **Upload**:
+
+![Uploading the v8-app folder](docs/images/setup/06-upload-v8-app.png)
+
+> **What folder is the right one?** The right folder has a file called `pom.xml`
+> sitting at its top level, and a `src/` folder inside it. That's a v8 Business
+> Central project export — see [What goes in](#what-goes-in) below if you're not
+> sure.
+>
+> **Where should it go?** Ideally into the `v8-projects/` folder in the workspace.
+> If it lands somewhere else, don't worry — after you send your message in the
+> next step, Devin will move it into `v8-projects/` itself. You can also just
+> tell Devin *"move v8-app into v8-projects/"*.
+
+### Step 10. Say the magic words
+
+In the chat box, type exactly this and press **Enter**:
 
 ```
-1. Put your v8 project folder (or .zip) into  v8-projects/
-2. Open Devin on the web → choose this repository → New session
-3. Type:   Migrate my project
+Migrate my project
 ```
 
-That's it. Devin will do the rest and tell you when it's done.
+That's the entire instruction. Devin now works through 10 migration steps on its
+own — see [What you will see](#what-you-will-see) below for what it looks like
+while it runs.
 
-> **How do I "put a folder in"?** On GitHub, open the `v8-projects/` folder, click **Add file → Upload files**, drag your folder or .zip in, and click **Commit changes**. No command line needed.
+### Step 11. Wait for it to finish
+
+- Devin shows its work as it goes: which files it found, which it's converting,
+  and a checklist file called `migration-status.md` that ticks off each step.
+- When it's done, it posts a summary in the chat: what it found, what it
+  created, and the few things a human still needs to do.
+- The finished project lives in `v9-projects/<your-project-name>/` in the
+  session's workspace.
+
+### Step 12. Get your migrated project out
+
+- Ask Devin: *"zip up v9-projects/ so I can download it"* — it will produce a
+  downloadable zip in the session.
+- Or, if the session is attached to your repository, the new files can be
+  committed back to GitHub for you.
+
+> **Seeing `Build: not-run`?** That's normal on the web version — the IBM build
+> repository is private, so Devin can't compile the project there. The converted
+> files are still complete. For a verified build, see
+> [docs/engineers/local-maven-repo.md](docs/engineers/local-maven-repo.md).
+
+---
+
+## Section 2 — Devin on the desktop
+
+The desktop flow is the same journey — the buttons are just in the app instead
+of the browser. **No command line needed, ever.**
+
+### Step 1. Get the zip file
+
+Same as [Section 1, Step 1](#step-1-get-the-zip-file): either someone sent you
+`devin-bamoe-project-migrator.zip`, or you download it from the GitHub
+repository page with **Code → Download ZIP**. Keep it zipped.
+
+### Step 2. Open the Devin desktop app
+
+Launch the Devin app on your computer and sign in the way your team normally
+does.
+
+### Step 3. Install the plugin
+
+This is exactly the same as the web version — follow
+[Section 1, Steps 3–6](#step-3-open-the-customize-panel):
+
+1. Click **Customize** in the left sidebar.
+2. Click the **Plugins** tab.
+3. Click **+ Add plugin** (top-right).
+4. Pick the zip file and click **Upload**.
+5. Confirm you see **Bamoe Migrator** with a green **Installed** label
+   ([see the screenshot](#step-6-check-that-it-worked)).
+
+### Step 4. Check the 8 skills
+
+Click the **Skills** tab — it should say **Installed 8** and show all 8
+`bamoe-*` skills ([see the screenshots](#step-7-check-that-all-8-skills-arrived)).
+
+### Step 5. Open your working folder
+
+Open (or create) the folder where you want the migration to happen — for example,
+the cloned repository, or any empty folder on your computer. The plugin is
+installed for you, not for one folder, so any working folder works.
+
+### Step 6. Drop in your v8 project
+
+Using your file manager (Finder on Mac, Explorer on Windows):
+
+1. Inside your working folder, create a folder named `v8-projects` if it isn't
+   there already.
+2. Drag your exported v8 project folder into `v8-projects/`. It should end up as
+   `v8-projects/<your-project>/pom.xml`.
+
+Or, if you prefer, start a session and use the **+** → **Upload Folder** button
+in the chat box exactly as shown in
+[Section 1, Step 9](#step-9-upload-your-v8-project) — Devin will place it in
+`v8-projects/` for you.
+
+### Step 7. Say the magic words
+
+Open a **New session** in the desktop app, type exactly:
+
+```
+Migrate my project
+```
+
+and press **Enter**.
+
+### Step 8. Collect the result
+
+The migrated project appears at `v9-projects/<your-project-name>/` right in your
+working folder — real files on your machine, nothing to download. Watch
+`migration-status.md` inside it for the step-by-step checklist.
+
+> On the desktop, `Build: not-run` is still the default unless your
+> administrator has set up the IBM Maven repository — see
+> [docs/engineers/local-maven-repo.md](docs/engineers/local-maven-repo.md).
+
+---
+
+## Don't have a v8 export to practice with?
+
+The `v8-projects/` folder ships **empty on purpose** — you bring your own export.
+If you just want to try the migration end-to-end, copy a sample into place first,
+for example:
+
+```
+v8-to-v9-migration-samples/tutorial-01-evaluation-process/v8-app/  →  v8-projects/v8-app/
+```
+
+(To export your real project: in Business Central, open the project and use
+**Export** — or ask your BAMOE administrator for a zip of the project.)
 
 ---
 
@@ -138,6 +370,8 @@ On the Devin website Devin cannot run the IBM build tool, so `Build: not-run` is
 | "Build: not-run" | Expected on the Devin website — the IBM build repo is private | Nothing; the files are complete. See the engineers' appendix for a local verified build |
 | Forms look missing | `.frm` forms can't be converted automatically | Devin generates new ones you may need to open and tweak in BAMOE Developer Tools for VS Code |
 | Devin asks a question and waits | It only asks when it truly can't decide | Just answer in plain words |
+| No green "Installed" after uploading the plugin zip | The upload didn't finish, or the wrong file was picked | Re-do Section 1 Step 5 with the zip from Step 1 — don't unzip it first |
+| Skills tab shows fewer than 8 | The plugin didn't fully install | Remove and reinstall the plugin, then recheck |
 
 ---
 
@@ -153,6 +387,16 @@ A new end-to-end tutorial is in the works — see [docs/tutorial/video-script.md
 ## Details for engineers
 
 Everything below is the technical reference. Non-engineers can stop here.
+
+### Optional: install via the Devin CLI
+
+If you have the Devin CLI (not required — the steps above never need it):
+
+```
+devin plugins install bradyp19/devin-bamoe-project-migrator
+```
+
+Working on the plugin itself? `devin plugins install --local .` from a checkout links it live.
 
 ### The migration plan at a glance
 
@@ -203,15 +447,15 @@ Sub-Task 10    Runtime deployment and live-data cutover — deploy v9 service;
 ### Repository layout
 
 ```
-bamoe_project_migrator/
-├── v8-projects/                  # Your v8 exports go here (input)
+devin-bamoe-project-migrator/
+├── v8-projects/                  # Your v8 exports go here (input — ships empty)
 ├── v9-projects/                  # Migrated v9 projects appear here (output)
 │   └── <name>/
 │       ├── migration-inventory.md
 │       └── migration-status.md
 ├── v8-to-v9-migration-samples/   # Reference tutorials with working v8 + v9 pairs
 ├── docs/
-│   ├── images/                   # README diagrams
+│   ├── images/                   # README diagrams + setup screenshots
 │   ├── engineers/                # Local build / Maven repo appendix
 │   └── tutorial/                 # Video script for the walkthrough
 ├── templates/                    # settings.xml + migration-status.md templates
